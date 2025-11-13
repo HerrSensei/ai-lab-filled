@@ -157,3 +157,7 @@ local/
 # Gemini CLI specific ignores
 pat.md
 GEMINI.md
+
+# GitHub PAT Security
+*.token
+GITHUB_TOKEN

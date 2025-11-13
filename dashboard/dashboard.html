@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Lab Framework Dashboard</title>
+    <title>AI Lab Framework Dashboard - SQLite Edition</title>
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 20px; background: #f5f5f5; }
-        .dashboard { max-width: 1200px; margin: 0 auto; }
+        .dashboard { max-width: 1400px; margin: 0 auto; }
         .header { text-align: center; margin-bottom: 30px; }
         .header h1 { color: #333; margin-bottom: 10px; }
         .header p { color: #666; font-size: 18px; }
@@ -25,25 +25,41 @@
         .high { color: #dc3545; }
         .medium { color: #ffc107; }
         .low { color: #28a745; }
+        .component-list { margin-top: 15px; }
+        .component-item { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid #eee; }
+        .status-list { margin-top: 15px; }
+        .status-item { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid #eee; }
         .last-updated { text-align: center; color: #666; margin-top: 30px; }
+        .database-info { background: #e3f2fd; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+        .database-info h4 { margin: 0 0 10px 0; color: #1976d2; }
     </style>
 </head>
 <body>
     <div class="dashboard">
         <div class="header">
             <h1>🚀 AI Lab Framework Dashboard</h1>
-            <p>Real-time project monitoring and metrics</p>
+            <p>SQLite-powered project monitoring and metrics</p>
+        </div>
+        
+        <div class="database-info">
+            <h4>🗄️ Database Information</h4>
+            <div class="metric-label">
+                Total Records: 52 | 
+                Work Items: 41 | 
+                Ideas: 11 | 
+                Recent Activity: 41 items (7 days)
+            </div>
         </div>
         
         <div class="metrics">
             <div class="metric-card">
                 <h3>📋 Work Items</h3>
-                <div class="metric-value">45</div>
+                <div class="metric-value">41</div>
                 <div class="metric-label">Total work items</div>
                 <div class="progress-bar">
-                    <div class="progress-fill" style="width: 42.2%"></div>
+                    <div class="progress-fill" style="width: 43.9%"></div>
                 </div>
-                <div class="metric-label">19 of 45 completed (42.2%)</div>
+                <div class="metric-label">18 of 41 completed (43.9%)</div>
             </div>
             
             <div class="metric-card">
@@ -60,11 +76,11 @@
                 <h3>🎯 Priorities</h3>
                 <div class="priority-breakdown">
                     <div class="priority-item">
-                        <span class="priority-count high">33</span>
+                        <span class="priority-count high">30</span>
                         <span class="priority-label high">High</span>
                     </div>
                     <div class="priority-item">
-                        <span class="priority-count medium">11</span>
+                        <span class="priority-count medium">10</span>
                         <span class="priority-label medium">Medium</span>
                     </div>
                     <div class="priority-item">
@@ -79,10 +95,59 @@
                 <div class="metric-value">5</div>
                 <div class="metric-label">Currently in progress</div>
             </div>
+            
+            <div class="metric-card">
+                <h3>🏗️ Components</h3>
+                <div class="component-list">
+                    
+                <div class="component-item">
+                    <span>data-management</span>
+                    <span><strong>1</strong></span>
+                </div>
+            
+                </div>
+            </div>
+            
+            <div class="metric-card">
+                <h3>📈 Status Breakdown</h3>
+                <div class="status-list">
+                    
+                <div class="status-item">
+                    <span>done</span>
+                    <span><strong>18</strong></span>
+                </div>
+            
+                <div class="status-item">
+                    <span>todo</span>
+                    <span><strong>8</strong></span>
+                </div>
+            
+                <div class="status-item">
+                    <span>open</span>
+                    <span><strong>7</strong></span>
+                </div>
+            
+                <div class="status-item">
+                    <span>in_progress</span>
+                    <span><strong>5</strong></span>
+                </div>
+            
+                <div class="status-item">
+                    <span>completed</span>
+                    <span><strong>2</strong></span>
+                </div>
+            
+                <div class="status-item">
+                    <span>cancelled</span>
+                    <span><strong>1</strong></span>
+                </div>
+            
+                </div>
+            </div>
         </div>
         
         <div class="last-updated">
-            Last updated: 2025-11-13 22:15:03
+            Last updated: 2025-11-13 22:48:38 | Powered by SQLite
         </div>
     </div>
 </body>
