@@ -1,0 +1,50 @@
+{
+  "id": "IDEA-002",
+  "title": "Standalone Framework Version",
+  "description": "Entwicklung einer eigenständigen Version des AI Lab Frameworks, die von der aktuellen Datenstruktur entkoppelt ist. Ziel ist es, die Entwicklung und Tests des Frameworks unabhängig vom aktuellen Datenbestand zu ermöglichen und eine saubere Trennung zwischen Framework-Logik und projektspezifischen Daten zu schaffen.",
+  "status": "converted",
+  "priority": "high",
+  "category": "development",
+  "tags": [
+    "framework",
+    "decoupling",
+    "architecture",
+    "development",
+    "testing"
+  ],
+  "created_date": "2025-11-10T01:23:11.461128Z",
+  "updated_date": "2025-11-10T00:00:00Z",
+  "author": "jns",
+  "estimated_effort": "4-6 weeks",
+  "dependencies": [],
+  "acceptance_criteria": [
+    "Framework kann ohne Zugriff auf projektspezifische Daten gestartet und getestet werden.",
+    "Datenzugriffsschicht ist klar vom Framework getrennt und austauschbar.",
+    "Mock-Daten oder Test-Daten können einfach in das Framework injiziert werden.",
+    "Änderungen am Framework haben keine unbeabsichtigten Auswirkungen auf bestehende Projektdaten.",
+    "Dokumentation der neuen Architektur und Schnittstellen ist vorhanden."
+  ],
+  "notes": "Diese Idee ist entscheidend für die langfristige Wartbarkeit und Testbarkeit des AI Lab Frameworks. Sie ermöglicht eine schnellere und sicherere Entwicklung neuer Features und Refactorings.",
+  "open_questions": [
+    "Welche Abstraktionsebene ist für die Datenzugriffsschicht am besten geeignet?",
+    "Wie werden Mock-Daten für verschiedene Szenarien generiert und verwaltet?",
+    "Welche Auswirkungen hat dies auf bestehende Projekte und deren Migration?"
+  ],
+  "next_steps": [
+    "Detaillierte Architekturspezifikation erstellen.",
+    "Auswirkungen auf bestehende Projekte analysieren.",
+    "Prototyp einer entkoppelten Datenzugriffsschicht entwickeln.",
+    "In ein Projekt konvertieren."
+  ],
+  "target_audience": "AI Lab Framework Entwickler",
+  "benefits": [
+    "Verbesserte Testbarkeit und Wartbarkeit des Frameworks.",
+    "Schnellere und sicherere Entwicklung von Framework-Features.",
+    "Reduzierung von Seiteneffekten bei Framework-Änderungen.",
+    "Einfachere Integration neuer Datenquellen oder -formate."
+  ],
+  "prerequisites": [
+    "Klares Verständnis der aktuellen Datenstruktur und -nutzung im Framework."
+  ],
+  "related_project": "PRJ-004"
+}

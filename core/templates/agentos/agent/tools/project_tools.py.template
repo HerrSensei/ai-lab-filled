@@ -1,0 +1,406 @@
+#!/usr/bin/env python3
+"""
+{{ project_name }} - AgentOS Project Tools
+
+This module contains project-specific tools for the AgentOS agent.
+Provides functionality for project management, development assistance,
+and documentation generation.
+"""
+
+import os
+import json
+import subprocess
+from datetime import datetime
+from pathlib import Path
+from typing import Dict, List, Optional
+
+class {{ project_name|title }}AgentTools:
+    """AgentOS tools for {{ project_name }} project management."""
+
+    def __init__(self, project_root: str):
+        self.project_root = Path(project_root)
+        self.agent_dir = self.project_root / "agent"
+        self.context_dir = self.agent_dir / "context"
+        self.logs_dir = self.agent_dir / "logs"
+
+    def create_work_item(self, title: str, description: str, priority: str = "medium") -> str:
+        """Create a new work item for the project."""
+        work_item_id = f"{{ project_name|upper }}-{datetime.now().strftime('%Y%m%d')}-{len(os.listdir(self.project_root / 'work_items')) + 1:03d}"
+
+        work_item_content = f"""## Titel: {title}
+
+**ID:** {work_item_id}
+**Status:** 📝 ToDo
+**Priorität:** {'🔴 Hoch' if priority == 'high' else '🟡 Mittel' if priority == 'medium' else '🟢 Niedrig'}
+**Kategorie:** 🏗️ Entwicklung
+**Geschätzter Aufwand:** TBD
+**Erstellt am:** {datetime.now().strftime('%Y-%m-%d')}
+
+---
+
+### 🎯 Ziel & Warum
+
+{description}
+
+---
+
+### 📋 Anforderungen
+
+*   [ ] Anforderungen definieren
+*   [ ] Implementierung planen
+*   [ ] Tests schreiben
+*   [ ] Dokumentation erstellen
+
+---
+
+### ✅ Fertig-Kriterien
+
+*   [ ] Funktion implementiert
+*   [ ] Tests bestehen
+*   [ ] Dokumentation aktualisiert
+*   [ ] Code Review bestanden
+
+---
+
+### 📝 Notizen
+
+Erstellt von AgentOS am {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+
+---
+
+### 🏁 Abschluss
+
+**Erledigt am:** [Datum eintragen]
+**Ergebnis:** [Ergebnis beschreiben]
+**Nächste Schritte:** [Nächste Schritte]
+"""
+
+        work_item_path = self.project_root / "work_items" / f"{work_item_id.split('-')[-1]}_{title.lower().replace(' ', '_')}.md"
+        work_item_path.write_text(work_item_content)
+
+        # Log the action
+        self.log_agent_action("create_work_item", {
+            "work_item_id": work_item_id,
+            "title": title,
+            "description": description,
+            "priority": priority,
+            "file_path": str(work_item_path)
+        })
+
+        return work_item_id
+
+    def update_project_status(self, status: str, progress: int = None) -> bool:
+        """Update the overall project status."""
+        overview_path = self.project_root / "PROJECT_OVERVIEW.md"
+
+        if overview_path.exists():
+            content = overview_path.read_text()
+            # Update status
+            content = content.replace(
+                "**Status:** 🟢 Planung",
+                f"**Status:** {status}"
+            )
+
+            if progress is not None:
+                content = content.replace(
+                    "**Fortschritt:** 0%",
+                    f"**Fortschritt:** {progress}%"
+                )
+
+            overview_path.write_text(content)
+
+            # Log the action
+            self.log_agent_action("update_project_status", {
+                "status": status,
+                "progress": progress
+            })
+
+            return True
+        return False
+
+    def generate_documentation(self, doc_type: str, content: str = None) -> str:
+        """Generate project documentation."""
+        docs_dir = self.project_root / "docs"
+
+        if doc_type == "api":
+            doc_path = docs_dir / "API_DOCS.md"
+            if not content:
+                content = self._generate_api_docs()
+        elif doc_type == "deployment":
+            doc_path = docs_dir / "DEPLOYMENT.md"
+            if not content:
+                content = self._generate_deployment_docs()
+        elif doc_type == "troubleshooting":
+            doc_path = docs_dir / "TROUBLESHOOTING.md"
+            if not content:
+                content = self._generate_troubleshooting_docs()
+        else:
+            doc_path = docs_dir / f"{doc_type.upper()}.md"
+
+        doc_path.write_text(content)
+
+        # Log the action
+        self.log_agent_action("generate_documentation", {
+            "doc_type": doc_type,
+            "file_path": str(doc_path)
+        })
+
+        return str(doc_path)
+
+    def run_tests(self, test_type: str = "all") -> Dict[str, any]:
+        """Run project tests and return results."""
+        try:
+            if test_type == "all":
+                result = subprocess.run(
+                    ["python", "-m", "pytest", "tests/", "-v"],
+                    cwd=self.project_root,
+                    capture_output=True,
+                    text=True
+                )
+            elif test_type == "unit":
+                result = subprocess.run(
+                    ["python", "-m", "pytest", "tests/unit/", "-v"],
+                    cwd=self.project_root,
+                    capture_output=True,
+                    text=True
+                )
+            else:
+                result = subprocess.run(
+                    ["python", "-m", "pytest", f"tests/{test_type}/", "-v"],
+                    cwd=self.project_root,
+                    capture_output=True,
+                    text=True
+                )
+
+            test_results = {
+                "returncode": result.returncode,
+                "stdout": result.stdout,
+                "stderr": result.stderr,
+                "success": result.returncode == 0
+            }
+
+            # Log the action
+            self.log_agent_action("run_tests", {
+                "test_type": test_type,
+                "success": test_results["success"],
+                "returncode": result.returncode
+            })
+
+            return test_results
+
+        except Exception as e:
+            return {
+                "success": False,
+                "error": str(e)
+            }
+
+    def log_agent_action(self, action: str, details: Dict) -> None:
+        """Log agent actions for audit trail."""
+        log_entry = {
+            "timestamp": datetime.now().isoformat(),
+            "action": action,
+            "details": details
+        }
+
+        # Ensure logs directory exists
+        changes_log = self.logs_dir / "changes" / "agent_actions.jsonl"
+        changes_log.parent.mkdir(parents=True, exist_ok=True)
+
+        with open(changes_log, "a") as f:
+            f.write(json.dumps(log_entry) + "\n")
+
+    def _generate_api_docs(self) -> str:
+        """Generate API documentation template."""
+        return """# {{ project_name }} - API Documentation
+
+## Overview
+
+This document describes the API endpoints for {{ project_name }}.
+
+## Authentication
+
+*Authentication details to be added*
+
+## Endpoints
+
+### GET /health
+Health check endpoint.
+
+**Response:**
+```json
+{
+  "status": "healthy",
+  "timestamp": "2024-01-01T00:00:00Z"
+}
+```
+
+### GET /api/v1/status
+Get application status.
+
+**Response:**
+```json
+{
+  "status": "running",
+  "version": "1.0.0"
+}
+```
+
+*More endpoints to be added as they are implemented*
+
+---
+
+*Generated by AgentOS on {{ current_date }}*
+"""
+
+    def _generate_deployment_docs(self) -> str:
+        """Generate deployment documentation template."""
+        return """# {{ project_name }} - Deployment Guide
+
+## Overview
+
+This guide describes how to deploy {{ project_name }}.
+
+## Prerequisites
+
+- Docker and Docker Compose
+- Python 3.11+
+- Environment variables configured
+
+## Local Development
+
+```bash
+# Clone the repository
+git clone <repository-url>
+cd {{ project_name }}
+
+# Set up environment
+cp .env.example .env
+# Edit .env with your configuration
+
+# Install dependencies
+pip install -e .
+
+# Run the application
+make dev
+```
+
+## Production Deployment
+
+### Using Docker Compose
+
+```bash
+# Build and start services
+docker-compose up -d
+
+# Check status
+docker-compose ps
+
+# View logs
+docker-compose logs -f
+```
+
+### Environment Variables
+
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `DATABASE_URL` | Database connection string | Yes |
+| `API_KEY` | API authentication key | Yes |
+| `LOG_LEVEL` | Logging level | No |
+
+---
+
+*Generated by AgentOS on {{ current_date }}*
+"""
+
+    def _generate_troubleshooting_docs(self) -> str:
+        """Generate troubleshooting documentation template."""
+        return """# {{ project_name }} - Troubleshooting Guide
+
+## Common Issues
+
+### Application Won't Start
+
+**Symptoms:** Application fails to start with error messages.
+
+**Solutions:**
+1. Check environment variables:
+   ```bash
+   cat .env
+   ```
+
+2. Verify dependencies:
+   ```bash
+   pip install -e .
+   ```
+
+3. Check database connection:
+   ```bash
+   python -c "from src.core.config import get_db; print(get_db())"
+   ```
+
+### Database Connection Issues
+
+**Symptoms:** Database connection errors.
+
+**Solutions:**
+1. Verify database is running
+2. Check connection string in .env
+3. Ensure database credentials are correct
+
+### Performance Issues
+
+**Symptoms:** Slow response times.
+
+**Solutions:**
+1. Check system resources:
+   ```bash
+   top
+   df -h
+   ```
+
+2. Review application logs:
+   ```bash
+   tail -f logs/application.log
+   ```
+
+3. Monitor database performance
+
+## Getting Help
+
+If you encounter issues not covered here:
+
+1. Check the [API Documentation](API_DOCS.md)
+2. Review the [Deployment Guide](DEPLOYMENT.md)
+3. Check application logs in `logs/`
+4. Create an issue in the project repository
+
+## Debug Mode
+
+Enable debug mode for detailed error information:
+
+```bash
+export DEBUG=true
+make dev
+```
+
+---
+
+*Generated by AgentOS on {{ current_date }}*
+"""
+
+# Example usage
+if __name__ == "__main__":
+    # Initialize tools for current directory
+    tools = {{ project_name|title }}AgentTools(".")
+
+    # Example: Create a work item
+    work_item_id = tools.create_work_item(
+        title="Implement User Authentication",
+        description="Add user authentication with JWT tokens",
+        priority="high"
+    )
+    print(f"Created work item: {work_item_id}")
+
+    # Example: Update project status
+    tools.update_project_status("🟡 Entwicklung", 25)
+    print("Updated project status")

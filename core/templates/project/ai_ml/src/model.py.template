@@ -1,0 +1,26 @@
+# src/model.py
+import numpy as np
+
+class SimpleModel:
+    def __init__(self):
+        self.weights = None
+
+    def train(self, X, y):
+        # Placeholder for a simple training logic
+        self.weights = np.random.rand(X.shape[1])
+        print("Model trained with random weights.")
+
+    def predict(self, X):
+        if self.weights is None:
+            raise ValueError("Model not trained yet.")
+        # Placeholder for a simple prediction logic
+        return np.dot(X, self.weights)
+
+if __name__ == "__main__":
+    # Example usage
+    model = SimpleModel()
+    X_train = np.array([[1, 2], [3, 4], [5, 6]])
+    y_train = np.array([10, 20, 30])
+    model.train(X_train, y_train)
+    predictions = model.predict(np.array([[7, 8]]))
+    print(f"Prediction for [7, 8]: {predictions}")

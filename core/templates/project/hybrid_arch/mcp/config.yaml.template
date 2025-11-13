@@ -1,0 +1,35 @@
+# mcp/config.yaml
+# MCP (Multi-Component Platform) Configuration Template
+
+components:
+  - name: {{ project_name }}-component-1
+    type: python_script
+    path: src/components/component1.py
+    config:
+      log_level: INFO
+      # Add component-specific configuration here
+
+  - name: {{ project_name }}-component-2
+    type: docker_container
+    image: my-custom-image:latest
+    ports:
+      - "8080:80"
+    environment:
+      VAR1: value1
+
+# Define communication channels between components
+communication:
+  - type: http
+    port: 5000
+    # Add API endpoints and routing rules
+
+# Define monitoring and logging settings
+monitoring:
+  prometheus_enabled: true
+  grafana_dashboard: {{ project_name }}-dashboard
+
+logging:
+  file_path: logs/mcp.log
+  level: INFO
+
+# For more advanced configurations, refer to MCP documentation.

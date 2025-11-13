@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-11-13T22:15:03.795729",
+  "metrics": {
+    "work_items": {
+      "total": 45,
+      "completed": 19,
+      "in_progress": 5,
+      "completion_rate": 42.2
+    },
+    "ideas": {
+      "total": 11,
+      "implemented": 2,
+      "implementation_rate": 18.2
+    },
+    "priorities": {
+      "high": 33,
+      "medium": 11,
+      "low": 0
+    }
+  },
+  "framework_version": "2.0.0",
+  "last_updated": "2025-11-13 22:15:03"
+}

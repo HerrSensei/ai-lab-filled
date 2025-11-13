@@ -1,0 +1,146 @@
+"""
+Main FastAPI application for {{ project_name }}.
+
+This module initializes the FastAPI application with all necessary
+middleware, routes, and configuration.
+"""
+
+from fastapi import FastAPI, Request, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.trustedhost import TrustedHostMiddleware
+from fastapi.responses import JSONResponse
+import structlog
+import time
+import uvicorn
+
+from src.core.config import settings
+from src.core.logging import setup_logging
+from src.api.routes import api_router
+from src.core.exceptions import AppException
+
+# Setup structured logging
+setup_logging()
+logger = structlog.get_logger()
+
+# Create FastAPI application
+app = FastAPI(
+    title=settings.APP_NAME,
+    version=settings.APP_VERSION,
+    description="{{ description }}",
+    docs_url="/docs" if settings.DEBUG else None,
+    redoc_url="/redoc" if settings.DEBUG else None,
+)
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.ALLOWED_ORIGINS,
+    allow_credentials=settings.CORS_CREDENTIALS,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Add trusted host middleware for production
+if not settings.DEBUG:
+    app.add_middleware(
+        TrustedHostMiddleware,
+        allowed_hosts=["*"]  # Configure based on your deployment
+    )
+
+
+@app.middleware("http")
+async def add_process_time_header(request: Request, call_next):
+    """Add request processing time to response headers."""
+    start_time = time.time()
+    response = await call_next(request)
+    process_time = time.time() - start_time
+    response.headers["X-Process-Time"] = str(process_time)
+
+    # Log request
+    logger.info(
+        "request_processed",
+        method=request.method,
+        url=str(request.url),
+        status_code=response.status_code,
+        process_time=process_time,
+    )
+
+    return response
+
+
+@app.exception_handler(AppException)
+async def app_exception_handler(request: Request, exc: AppException):
+    """Handle custom application exceptions."""
+    logger.error(
+        "application_error",
+        error_code=exc.error_code,
+        message=exc.message,
+        details=exc.details,
+        url=str(request.url),
+    )
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={
+            "error": {
+                "code": exc.error_code,
+                "message": exc.message,
+                "details": exc.details,
+            }
+        },
+    )
+
+
+@app.exception_handler(Exception)
+async def general_exception_handler(request: Request, exc: Exception):
+    """Handle unexpected exceptions."""
+    logger.error(
+        "unexpected_error",
+        error=str(exc),
+        error_type=type(exc).__name__,
+        url=str(request.url),
+    )
+    return JSONResponse(
+        status_code=500,
+        content={
+            "error": {
+                "code": "INTERNAL_SERVER_ERROR",
+                "message": "An unexpected error occurred",
+            }
+        },
+    )
+
+
+# Include API routes
+app.include_router(api_router, prefix="/api/v1")
+
+
+@app.get("/health")
+async def health_check():
+    """Health check endpoint."""
+    return {
+        "status": "healthy",
+        "timestamp": time.time(),
+        "version": settings.APP_VERSION,
+        "environment": settings.ENVIRONMENT,
+    }
+
+
+@app.get("/")
+async def root():
+    """Root endpoint."""
+    return {
+        "message": f"Welcome to {settings.APP_NAME}",
+        "version": settings.APP_VERSION,
+        "docs": "/docs" if settings.DEBUG else "Documentation not available in production",
+    }
+
+
+if __name__ == "__main__":
+    uvicorn.run(
+        "src.main:app",
+        host=settings.HOST,
+        port=settings.PORT,
+        reload=settings.RELOAD,
+        workers=settings.WORKERS if not settings.RELOAD else 1,
+        log_level=settings.LOG_LEVEL.lower(),
+    )

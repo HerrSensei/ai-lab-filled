@@ -1,0 +1,16 @@
+"""
+API routes for the application.
+
+This module contains all API route definitions organized
+by functional area.
+"""
+
+from fastapi import APIRouter
+from src.api.routes import chat, health
+
+# Create main API router
+api_router = APIRouter()
+
+# Include sub-routers
+api_router.include_router(health.router, prefix="/health", tags=["Health"])
+api_router.include_router(chat.router, prefix="/chat", tags=["Chat"])

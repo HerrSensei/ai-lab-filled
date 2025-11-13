@@ -1,0 +1,9 @@
+# Fritz!Box MCP Server Requirements
+
+## MCP Dependencies
+mcp>=1.0.0
+
+## Core Dependencies (already in requirements.txt)
+fritzconnection>=1.15.0
+cryptography>=41.0.0
+structlog>=23.0.0

@@ -1,0 +1,152 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AI Lab Projects Database",
+  "description": "Central database for all projects in the AI Lab",
+  "type": "object",
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "version": {"type": "string"},
+        "last_updated": {"type": "string", "format": "date-time"},
+        "total_projects": {"type": "integer"},
+        "next_id": {"type": "integer"}
+      }
+    },
+    "projects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^PRJ-\\d{3}$",
+            "description": "Unique project identifier"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Project name"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Detailed description of the project"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["planning", "active", "on_hold", "completed", "archived"],
+            "description": "Current status of the project"
+          },
+          "priority": {
+            "type": "string",
+            "enum": ["low", "medium", "high", "critical"],
+            "description": "Priority level"
+          },
+          "category": {
+            "type": "string",
+            "enum": ["infrastructure", "automation", "development", "research", "optimization"],
+            "description": "Category of the project"
+          },
+          "tags": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Tags for categorization"
+          },
+          "created_date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Creation timestamp"
+          },
+          "updated_date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Last update timestamp"
+          },
+          "author": {
+            "type": "string",
+            "description": "Project author/lead"
+          },
+          "team": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Team members"
+          },
+          "path": {
+            "type": "string",
+            "description": "Relative path to project directory"
+          },
+          "source_idea": {
+            "type": "string",
+            "description": "Source idea ID if converted from idea"
+          },
+          "vision": {
+            "type": "string",
+            "description": "Project vision and goals"
+          },
+          "objectives": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Project objectives"
+          },
+          "deliverables": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Expected deliverables"
+          },
+          "timeline": {
+            "type": "object",
+            "properties": {
+              "start_date": {"type": "string", "format": "date"},
+              "end_date": {"type": "string", "format": "date"},
+              "estimated_duration": {"type": "string"}
+            }
+          },
+          "dependencies": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Dependencies on other projects"
+          },
+          "technologies": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Technologies used"
+          },
+          "acceptance_criteria": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Acceptance criteria"
+          },
+          "risks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "description": {"type": "string"},
+                "probability": {"type": "string", "enum": ["low", "medium", "high"]},
+                "impact": {"type": "string", "enum": ["low", "medium", "high"]},
+                "mitigation": {"type": "string"}
+              }
+            }
+          },
+          "progress": {
+            "type": "object",
+            "properties": {
+              "percentage": {"type": "integer", "minimum": 0, "maximum": 100},
+              "completed_tasks": {"type": "integer"},
+              "total_tasks": {"type": "integer"},
+              "last_milestone": {"type": "string"},
+              "next_milestone": {"type": "string"}
+            }
+          },
+          "notes": {
+            "type": "string",
+            "description": "Additional notes"
+          }
+        },
+        "required": ["id", "name", "description", "status", "priority", "category", "created_date", "updated_date", "author", "path"]
+      }
+    }
+  },
+  "required": ["metadata", "projects"]
+}

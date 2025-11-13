@@ -1,0 +1,44 @@
+{
+  "id": "IDEA-001",
+  "title": "Test Idee für das Ideen-Management System",
+  "description": "Entwicklung eines intelligenten Ideen-Management-Systems zur strukturierten Erfassung, Verfeinerung und Priorisierung von Projektideen mit KI-Unterstützung. Manuelle Ideenverwaltung ist ineffizient, unstrukturiert und führt zu verlorenen Potenzialen. Fehlende Standardisierung macht Vergleichbarkeit und Priorisierung schwierig.",
+  "status": "implemented",
+  "priority": "high",
+  "category": "development",
+  "tags": [
+    "ideas",
+    "management",
+    "automation",
+    "ai",
+    "framework"
+  ],
+  "created_date": "2025-11-07T00:00:00Z",
+  "updated_date": "2025-11-07T00:00:00Z",
+  "estimated_effort": "6-8 weeks",
+  "dependencies": [],
+  "acceptance_criteria": [
+    "Web-basiertes Dashboard ist implementiert",
+    "RESTful API ist verfügbar",
+    "KI-Integration funktioniert",
+    "Markdown-Struktur ist kompatibel"
+  ],
+  "notes": "Web-Technologie statt Desktop-App für bessere Skalierbarkeit und Wartung. Integration statt Replacement für Akzeptanz und Migration. KI-gestützte Priorisierung für objektivere Entscheidungen.",
+  "author": "jns",
+  "open_questions": [],
+  "next_steps": [
+    "Stakeholder Feedback einholen",
+    "MVP-Spezifikation erstellen",
+    "Zu Projekt konvertieren"
+  ],
+  "target_audience": "Projektmanager, Team Leads, Innovationsmanager, Entwickler, Product Owner, Stakeholder",
+  "benefits": [
+    "40% schnellere Ideenverarbeitung durch Automatisierung",
+    "Bessere Entscheidungsqualität durch strukturierte Daten",
+    "Reduzierung verpasster Chancen durch systematisches Tracking",
+    "Skalierbare Innovationsprozesse"
+  ],
+  "prerequisites": [
+    "Bestehendes Projektmanagement-System",
+    "Dashboard-Generator"
+  ]
+}

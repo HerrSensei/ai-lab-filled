@@ -1,0 +1,144 @@
+# Makefile für {{ project_name }}
+
+.PHONY: help install dev test lint format clean docker-build docker-dev security
+
+# Default
+help:
+	@echo "🚀 {{ project_name }} Commands:"
+	@echo "  install         Install dependencies"
+	@echo "  dev             Start development server"
+	@echo "  test            Run tests"
+	@echo "  test-coverage   Run tests with coverage"
+	@echo "  lint            Check code quality"
+	@echo "  format          Format code"
+	@echo "  type-check      Run type checking"
+	@echo "  security        Run security scan"
+	@echo "  clean           Clean cache files"
+	@echo "  docker-build    Build Docker image"
+	@echo "  docker-dev      Run with Docker"
+
+# Development
+install:
+	@echo "📦 Installing dependencies..."
+	@echo "⚠️  Make sure you've configured pyproject.toml first!"
+	@echo "   Only uncomment dependencies you actually use (KISS principle)"
+	poetry install --with dev
+
+dev:
+	@if command -v uvicorn >/dev/null 2>&1; then \
+		poetry run uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload; \
+	else \
+		echo "❌ uvicorn not found. Did you uncomment FastAPI in pyproject.toml?"; \
+		echo "   Run 'make install' after configuring your dependencies."; \
+	fi
+
+# Testing
+test:
+	poetry run pytest -v
+
+test-coverage:
+	poetry run pytest --cov=src --cov-report=html --cov-report=term
+
+test-watch:
+	poetry run ptw --runner "python -m pytest"
+
+# Code Quality
+lint:
+	@if command -v ruff >/dev/null 2>&1; then \
+		poetry run ruff check src tests; \
+	else \
+		echo "❌ ruff not found. Did you run 'make install'?"; \
+	fi
+
+format:
+	@if command -v black >/dev/null 2>&1; then \
+		poetry run black src tests; \
+		poetry run ruff format src tests; \
+	else \
+		echo "❌ black/ruff not found. Did you run 'make install'?"; \
+	fi
+
+type-check:
+	@if command -v mypy >/dev/null 2>&1; then \
+		poetry run mypy src; \
+	else \
+		echo "❌ mypy not found. Did you run 'make install'?"; \
+	fi
+
+security:
+	@if command -v bandit >/dev/null 2>&1; then \
+		poetry run bandit -r src; \
+		poetry run safety check; \
+	else \
+		echo "❌ bandit/safety not found. Did you run 'make install'?"; \
+	fi
+
+# Maintenance
+clean:
+	find . -type d -name "__pycache__" -delete
+	find . -type f -name "*.pyc" -delete
+	rm -rf .pytest_cache
+	rm -rf .coverage
+	rm -rf htmlcov
+	rm -rf dist
+	rm -rf build
+
+# Docker
+docker-build:
+	docker build -t {{ project_name }} .
+
+docker-dev:
+	docker-compose up --build
+
+# AI/ML Specific (NUR wenn AI Dependencies installiert!)
+train:
+	@if [ -f "scripts/train.py" ]; then \
+		@echo "🤖 Training model..."; \
+		poetry run python scripts/train.py; \
+	else \
+		echo "❌ scripts/train.py not found. Create it first if you need training."; \
+		echo "   Also make sure you have AI dependencies installed (pyproject.toml)."; \
+	fi
+
+evaluate:
+	@if [ -f "scripts/evaluate.py" ]; then \
+		@echo "📊 Evaluating model..."; \
+		poetry run python scripts/evaluate.py; \
+	else \
+		echo "❌ scripts/evaluate.py not found. Create it first if you need evaluation."; \
+		echo "   Also make sure you have AI dependencies installed (pyproject.toml)."; \
+	fi
+
+# Database (NUR wenn Database Dependencies installiert!)
+db-migrate:
+	@if command -v alembic >/dev/null 2>&1; then \
+		@echo "🗄️ Running migrations..."; \
+		poetry run alembic upgrade head; \
+	else \
+		echo "❌ alembic not found. Did you uncomment database dependencies in pyproject.toml?"; \
+		echo "   Uncomment: sqlalchemy, alembic, and your database driver."; \
+	fi
+
+db-reset:
+	@if command -v alembic >/dev/null 2>&1; then \
+		@echo "🗄️ Resetting database..."; \
+		poetry run alembic downgrade base; \
+		poetry run alembic upgrade head; \
+	else \
+		echo "❌ alembic not found. Did you uncomment database dependencies in pyproject.toml?"; \
+	fi
+
+# Pre-commit
+setup-pre-commit:
+	poetry run pre-commit install
+
+check-pre-commit:
+	poetry run pre-commit run --all-files
+
+# Logs
+logs:
+	tail -f logs/app.log
+
+# All checks before commit
+check: lint type-check security test
+	@echo "✅ All checks passed!"

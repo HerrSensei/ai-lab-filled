@@ -1,0 +1,65 @@
+# AgentOS Context Management
+context:
+  # Project Context
+  project:
+    name: {{ project_name }}
+    type: {{ project_type }}
+    description: {{ project_description }}
+    goal: {{ project_goal }}
+    tech_stack: {{ tech_stack }}
+    target_users: {{ target_users }}
+    effort_estimate: {{ effort_estimate }}
+
+  # Development Context
+  development:
+    current_phase: planning
+    active_tasks: []
+    completed_features: []
+    known_issues: []
+    dependencies: []
+
+  # Team Context
+  team:
+    members: []
+    roles: {}
+    communication_channels: []
+
+  # Environment Context
+  environment:
+    development: {}
+    staging: {}
+    production: {}
+
+# Knowledge Base Structure
+knowledge_base:
+  # Project Documentation
+  project_docs:
+    - "PROJECT_OVERVIEW.md"
+    - "README.md"
+    - "ARCHITECTURE.md"
+
+  # Technical Documentation
+  technical_docs:
+    - "API_DOCS.md"
+    - "DEPLOYMENT.md"
+    - "TROUBLESHOOTING.md"
+
+  # Process Documentation
+  process_docs:
+    - "WORKFLOW.md"
+    - "CODE_REVIEW.md"
+    - "RELEASE_PROCESS.md"
+
+  # Historical Data
+  history:
+    decisions: []
+    changes: []
+    lessons_learned: []
+
+# Context Updates
+update_triggers:
+  - project_file_changes
+  - task_completion
+  - milestone_reached
+  - issue_reported
+  - deployment_completed

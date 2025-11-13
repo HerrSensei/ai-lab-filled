@@ -1,0 +1,129 @@
+# 🔄 AI Change Request Template
+
+**CR-ID:** {{ cr_id }}
+**Titel:** {{ change_title }}
+**Status:** 📝 Proposed | 🚧 In Progress | ✅ Implemented | ❌ Rejected
+**Priorität:** 🔴 Hoch | 🟡 Mittel | 🟢 Niedrig
+**Datum:** {{ change_date }}
+
+---
+
+## 🤖 KI-Agent Information
+
+**Agent:** {{ ai_agent }}
+**Session:** {{ session_id }}
+**Confidence:** {{ confidence_level }}%
+**Reasoning:** {{ reasoning }}
+
+---
+
+## 🎯 Change Request
+
+### Was soll geändert werden?
+
+{{ change_description }}
+
+### Warum ist diese Änderung notwendig?
+
+{{ change_necessity }}
+
+### Was ist das erwartete Ergebnis?
+
+{{ expected_outcome }}
+
+---
+
+## 📋 Technische Details
+
+### Änderungen an der Struktur
+{{ structural_changes }}
+
+### Änderungen an Templates
+{{ template_changes }}
+
+### Workflow Integration
+{{ workflow_integration }}
+
+---
+
+## ⚖️ Impact Analysis
+
+### Positive Auswirkungen
+{% for positive_impact in positive_impacts %}
+- ✅ **{{ positive_impact.title }}:** {{ positive_impact.description }}
+{% endfor %}
+
+### Negative Auswirkungen
+{% for negative_impact in negative_impacts %}
+- ⚠️ **{{ negative_impact.title }}:** {{ negative_impact.description }}
+{% endfor %}
+
+### Risiken
+{% for risk in risks %}
+- {{ risk.severity }} **{{ risk.title }}:** {{ risk.description }}
+{% endfor %}
+
+### Mitigationsstrategien
+{% for mitigation in mitigations %}
+- {{ mitigation.strategy }}
+{% endfor %}
+
+---
+
+## 🔄 Dependencies
+
+| Abhängigkeit | Typ | Status | Notizen |
+|--------------|-----|--------|---------|
+{% for dependency in dependencies %}
+| {{ dependency.name }} | {{ dependency.type }} | {{ dependency.status }} | {{ dependency.notes }} |
+{% endfor %}
+
+---
+
+## 📊 Metrics & Success Criteria
+
+### Success Metrics
+{% for metric in success_metrics %}
+- **{{ metric.name }}:** {{ metric.target }} - {{ metric.measurement }}
+{% endfor %}
+
+### KPIs
+| KPI | Ziel | Messung |
+|-----|------|---------|
+{% for kpi in kpis %}
+| {{ kpi.name }} | {{ kpi.target }} | {{ kpi.measurement }} |
+{% endfor %}
+
+---
+
+## 🗳️ Approval Process
+
+### Review Checklist
+{% for checklist_item in review_checklist %}
+- [ ] {{ checklist_item }}
+{% endfor %}
+
+### Approval
+**KI-Agent:** {{ ai_approval }}
+**User:** {{ user_approval }}
+**Date:** {{ approval_date }}
+
+---
+
+## 🏁 Implementation Plan
+
+### Phase {{ phase_number }}: {{ phase_title }} ({{ phase_timeline }})
+{% for task in phase_tasks %}
+- [ ] {{ task }}
+{% endfor %}
+
+---
+
+## 📝 Notizen
+
+{{ notes }}
+
+---
+
+*Status: {{ current_status }}*
+*Next Update: {{ next_update }}*

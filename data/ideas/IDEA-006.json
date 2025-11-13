@@ -1,0 +1,52 @@
+{
+  "id": "IDEA-006",
+  "title": "Globaler Techstack für Hardware- und Infrastruktur-Management",
+  "description": "Erweiterung des AI Lab Frameworks um einen globalen Techstack zur zentralen Erfassung aller Hardware und Infrastruktur-Software. Übersicht über alle technischen Ressourcen schaffen, um bessere Planungs- und Management-Entscheidungen treffen zu können.",
+  "status": "backlog",
+  "priority": "medium",
+  "category": "development",
+  "tags": [
+    "framework",
+    "techstack",
+    "hardware",
+    "infrastructure",
+    "inventory",
+    "management"
+  ],
+  "created_date": "2025-11-07T00:00:00Z",
+  "updated_date": "2025-11-09T06:14:13Z",
+  "estimated_effort": "1-2 weeks",
+  "dependencies": [],
+  "acceptance_criteria": [
+    "Hardware-Datenbank ist implementiert",
+    "Cloud-Ressourcen sind integriert",
+    "Metadaten sind vollständig erfasst",
+    "Dashboard zeigt alle Ressourcen an"
+  ],
+  "notes": "Mögliche Komponenten: Hardware-DB mit Spezifikationen, Cloud-Ressourcen-Tracker, Software-Inventory, Kosten-Tracking, Wartungs-Planung. Integration mit bestehenden Dashboard-Generator.",
+  "author": "jns",
+  "open_questions": [
+    "Welche Datenstruktur für Hardware-Erfassung?",
+    "Wie werden virtuelle/Cloud-Ressourcen integriert?",
+    "Welche Metadaten sind relevant (Spezifikationen, Kosten, etc.)?",
+    "Wie wird die Aktualität der Daten sichergestellt?"
+  ],
+  "next_steps": [
+    "Idee mit KI-Assistent verfeinern",
+    "Offene Fragen klären",
+    "Machbarkeit prüfen",
+    "Priorisierung festlegen"
+  ],
+  "target_audience": "Ich selbst (jns) als Systemadministrator und Infrastructure Manager",
+  "benefits": [
+    "Zentrale Übersicht",
+    "Bessere Ressourcenplanung",
+    "Kostenkontrolle",
+    "Wartungs-Management"
+  ],
+  "prerequisites": [
+    "Bestehendes Framework",
+    "Datenbank-Erweiterung",
+    "Hardware-Inventarisierung"
+  ]
+}

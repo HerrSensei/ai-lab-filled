@@ -1,0 +1,44 @@
+# agentos/agent.yaml
+# AgentOS Agent Configuration Template
+
+agent:
+  name: {{ project_name }}-agent
+  description: An AgentOS agent for the {{ project_name }} hybrid architecture project.
+  version: "0.1.0"
+  author: {{ author_name }} <{{ author_email }}>
+
+  # Define the agent's capabilities and tools
+  capabilities:
+    - name: project_management
+      description: Manages project tasks and work items.
+      tools:
+        - name: create_work_item
+          description: Creates a new work item.
+          schema:
+            type: object
+            properties:
+              title: {type: string, description: "Title of the work item"}
+              description: {type: string, description: "Description of the work item"}
+              priority: {type: string, enum: ["low", "medium", "high"], default: "medium"}
+        - name: update_work_item_status
+          description: Updates the status of an existing work item.
+          schema:
+            type: object
+            properties:
+              id: {type: string, description: "ID of the work item"}
+              status: {type: string, enum: ["todo", "in_progress", "done"], description: "New status"}
+
+  # Define the agent's memory and context management
+  memory:
+    type: long_term
+    storage:
+      type: json_file
+      path: agentos/context/knowledge_base/memory.json
+
+  # Define the agent's communication channels
+  communication:
+    - type: cli
+    - type: http_api
+      port: 8000
+
+# For more advanced configurations, refer to AgentOS documentation.

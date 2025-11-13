@@ -1,0 +1,46 @@
+# src/train.py
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
+import numpy as np
+import os
+
+# Placeholder for data loading and preprocessing
+def load_data(filepath="data/processed/processed_data.csv"):
+    if not os.path.exists(filepath):
+        print(f"Warning: Data file not found at {filepath}. Creating dummy data.")
+        # Create dummy data if file doesn't exist
+        data = pd.DataFrame({
+            'feature1': np.random.rand(100),
+            'feature2': np.random.rand(100),
+            'target': np.random.rand(100) * 100
+        })
+        os.makedirs(os.path.dirname(filepath), exist_ok=True)
+        data.to_csv(filepath, index=False)
+    return pd.read_csv(filepath)
+
+def train_model():
+    print("Starting model training...")
+    data = load_data()
+
+    X = data[['feature1', 'feature2']]
+    y = data['target']
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+    model = LinearRegression()
+    model.fit(X_train, y_train)
+
+    predictions = model.predict(X_test)
+    mse = mean_squared_error(y_test, predictions)
+
+    print(f"Model trained. Mean Squared Error on test set: {mse:.2f}")
+
+    # In a real scenario, you would save the trained model
+    # import joblib
+    # joblib.dump(model, 'models/trained_model.pkl')
+    print("Training complete. Model not saved in this template.")
+
+if __name__ == "__main__":
+    train_model()

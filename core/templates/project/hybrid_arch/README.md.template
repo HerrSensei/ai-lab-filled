@@ -1,0 +1,38 @@
+# {{ project_name }} - Hybrid Architecture Project
+
+## 🎯 Project Overview
+This is a hybrid architecture project focused on `{{ description }}`. It integrates multiple systems and technologies (e.g., AgentOS, n8n, MCP) to create a cohesive and automated ecosystem.
+
+## 융 Hybrid Architecture Stack
+*   **Agent Orchestration**: AgentOS
+*   **Workflow Automation**: n8n
+*   **Runtime Control**: MCP (Multi-Component Platform)
+*   **Core Language**: Python
+
+## 🚀 Getting Started
+1.  **Setup Environment**:
+    *   Ensure AgentOS, n8n, and MCP instances are running and accessible.
+    *   Configure API keys and connection details in `.env`.
+2.  **AgentOS Configuration**:
+    *   Review and customize `agentos/agent.yaml`.
+    *   Develop custom tools for AgentOS in `agentos/tools/`.
+3.  **n8n Workflow Development**:
+    *   Import and configure workflows from `n8n/workflows/`.
+    *   Ensure n8n is connected to relevant services.
+4.  **MCP Integration**:
+    *   Configure MCP modules in `mcp/config.yaml`.
+    *   Develop custom MCP components in `mcp/components/`.
+
+## 📁 Project Structure
+*   `agentos/`: AgentOS configurations, tools, and context.
+*   `n8n/`: n8n workflow definitions and related files.
+*   `mcp/`: MCP configurations and custom components.
+*   `src/`: Core logic and shared libraries for the hybrid architecture.
+*   `docs/`: Architecture diagrams, integration guides, and documentation.
+*   `scripts/`: Automation scripts for deployment, monitoring, and maintenance.
+
+## 📋 Next Steps
+*   Define the overall hybrid architecture and data flow.
+*   Configure initial AgentOS agents and their capabilities.
+*   Develop core n8n workflows for automation tasks.
+*   Integrate MCP for runtime control and system interactions.

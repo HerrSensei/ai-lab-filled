@@ -1,0 +1,70 @@
+# {{ project_name }} - Project Context
+
+## 📋 Project Overview
+
+**Name:** {{ project_name }}
+**Type:** {{ project_type }}
+**Description:** {{ project_description }}
+**Goal:** {{ project_goal }}
+**Tech Stack:** {{ tech_stack }}
+**Target Users:** {{ target_users }}
+**Effort Estimate:** {{ effort_estimate }}
+
+---
+
+## 🎯 Current Status
+
+**Phase:** Planning
+**Progress:** 0%
+**Next Milestone:** Architecture Planning
+
+---
+
+## 🛠️ Technical Context
+
+### Architecture
+- Framework: TBD
+- Database: TBD
+- Deployment: TBD
+- Monitoring: TBD
+
+### Dependencies
+- External APIs: TBD
+- Libraries: TBD
+- Services: TBD
+
+---
+
+## 👥 Team Context
+
+**Current Members:**
+- Project Lead: TBD
+- Developers: TBD
+- DevOps: TBD
+- QA: TBD
+
+---
+
+## 📊 Project Metrics
+
+**Tasks Created:** 0
+**Tasks Completed:** 0
+**Issues Open:** 0
+**Issues Resolved:** 0
+
+---
+
+## 🔄 Recent Changes
+
+*Initial project setup - no changes yet*
+
+---
+
+## 📝 Notes
+
+*This context file is maintained by the AgentOS agent and updated automatically as the project progresses.*
+
+---
+
+*Last Updated: {{ current_date }}*
+*Updated By: AgentOS*

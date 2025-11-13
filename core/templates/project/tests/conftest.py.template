@@ -1,0 +1,99 @@
+"""
+Test configuration and fixtures.
+
+This module provides shared test configuration and fixtures
+for the test suite.
+"""
+
+import pytest
+import asyncio
+from typing import Generator, AsyncGenerator
+from fastapi.testclient import TestClient
+from httpx import AsyncClient
+
+from src.main import app
+from src.core.config import settings
+
+
+@pytest.fixture(scope="session")
+def event_loop() -> Generator:
+    """Create an instance of the default event loop for the test session."""
+    loop = asyncio.get_event_loop_policy().new_event_loop()
+    yield loop
+    loop.close()
+
+
+@pytest.fixture
+def client() -> Generator[TestClient, None, None]:
+    """Create a test client for the FastAPI app."""
+    with TestClient(app) as test_client:
+        yield test_client
+
+
+@pytest.fixture
+async def async_client() -> AsyncGenerator[AsyncClient, None]:
+    """Create an async test client for the FastAPI app."""
+    async with AsyncClient(app=app, base_url="http://test") as async_test_client:
+        yield async_test_client
+
+
+@pytest.fixture
+def mock_settings():
+    """Mock settings for testing."""
+    original_settings = settings.copy()
+
+    # Override settings for testing
+    settings.OPENAI_API_KEY = "test-key"
+    settings.DEBUG = True
+    settings.LOG_LEVEL = "DEBUG"
+
+    yield settings
+
+    # Restore original settings
+    for key, value in original_settings.items():
+        setattr(settings, key, value)
+
+
+@pytest.fixture
+def sample_chat_request():
+    """Sample chat request for testing."""
+    return {
+        "message": "Hello, how are you?",
+        "model": "gpt-3.5-turbo",
+        "temperature": 0.7,
+        "max_tokens": 100,
+    }
+
+
+@pytest.fixture
+def sample_chat_response():
+    """Sample chat response for testing."""
+    return {
+        "message": "I'm doing well, thank you for asking!",
+        "model": "gpt-3.5-turbo",
+        "tokens_used": 15,
+        "cost": 0.0000225,
+        "temperature": 0.7,
+        "response_time_ms": 500,
+    }
+
+
+@pytest.fixture
+def mock_openai_response():
+    """Mock OpenAI API response."""
+    class MockChoice:
+        def __init__(self):
+            self.message = type('Message', (), {'content': "Test response"})()
+
+    class MockUsage:
+        def __init__(self):
+            self.total_tokens = 10
+            self.prompt_tokens = 5
+            self.completion_tokens = 5
+
+    class MockResponse:
+        def __init__(self):
+            self.choices = [MockChoice()]
+            self.usage = MockUsage()
+
+    return MockResponse()

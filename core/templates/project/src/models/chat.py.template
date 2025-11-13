@@ -1,0 +1,88 @@
+"""
+Data models for chat functionality.
+
+This module defines Pydantic models for chat requests
+and responses with proper validation.
+"""
+
+from typing import Optional, Dict, Any
+from pydantic import BaseModel, validator, Field
+
+
+class ChatRequest(BaseModel):
+    """Model for chat requests."""
+
+    message: str = Field(..., min_length=1, max_length=10000, description="The message to send")
+    model: Optional[str] = Field("gpt-3.5-turbo", description="AI model to use")
+    temperature: Optional[float] = Field(0.7, ge=0.0, le=2.0, description="Sampling temperature")
+    max_tokens: Optional[int] = Field(1000, ge=1, le=4000, description="Maximum tokens to generate")
+
+    @validator('message')
+    def validate_message(cls, v):
+        """Validate message content."""
+        if not v.strip():
+            raise ValueError("Message cannot be empty or whitespace only")
+
+        # Basic injection prevention
+        forbidden_patterns = ['<script>', 'javascript:', 'data:']
+        message_lower = v.lower()
+        for pattern in forbidden_patterns:
+            if pattern in message_lower:
+                raise ValueError(f"Message contains forbidden pattern: {pattern}")
+
+        return v.strip()
+
+
+class ChatResponse(BaseModel):
+    """Model for chat responses."""
+
+    message: str = Field(..., description="AI response message")
+    model: str = Field(..., description="Model used for generation")
+    tokens_used: int = Field(..., ge=0, description="Total tokens used")
+    cost: float = Field(..., ge=0, description="Cost of the request")
+    temperature: float = Field(..., ge=0.0, le=2.0, description="Temperature used")
+    response_time_ms: Optional[int] = Field(None, ge=0, description="Response time in milliseconds")
+
+    class Config:
+        """Pydantic configuration."""
+        schema_extra = {
+            "example": {
+                "message": "Hello! How can I help you today?",
+                "model": "gpt-3.5-turbo",
+                "tokens_used": 25,
+                "cost": 0.0000375,
+                "temperature": 0.7,
+                "response_time_ms": 1250,
+            }
+        }
+
+
+class ChatHistory(BaseModel):
+    """Model for chat history entries."""
+
+    id: str = Field(..., description="Unique identifier for the message")
+    timestamp: str = Field(..., description="ISO timestamp of the message")
+    role: str = Field(..., description="Role (user/assistant/system)")
+    message: str = Field(..., description="Message content")
+    model: Optional[str] = Field(None, description="Model used (for assistant messages)")
+    tokens_used: Optional[int] = Field(None, ge=0, description="Tokens used (for assistant messages)")
+    cost: Optional[float] = Field(None, ge=0, description="Cost (for assistant messages)")
+
+    @validator('role')
+    def validate_role(cls, v):
+        """Validate role."""
+        allowed_roles = ['user', 'assistant', 'system']
+        if v not in allowed_roles:
+            raise ValueError(f"Role must be one of {allowed_roles}")
+        return v
+
+
+class ModelInfo(BaseModel):
+    """Model for AI model information."""
+
+    id: str = Field(..., description="Model identifier")
+    name: str = Field(..., description="Human-readable model name")
+    description: str = Field(..., description="Model description")
+    max_tokens: int = Field(..., ge=1, description="Maximum tokens supported")
+    cost_per_token: float = Field(..., ge=0, description="Cost per token")
+    capabilities: Optional[Dict[str, Any]] = Field(None, description="Model capabilities")

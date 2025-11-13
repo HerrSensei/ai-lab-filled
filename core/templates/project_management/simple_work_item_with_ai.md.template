@@ -1,0 +1,92 @@
+## Titel: [Titel der Aufgabe]
+
+**ID:** {{ work_item_id }}
+**Status:** 📝 ToDo | 🚧 InProgress | ✅ Done | 🚫 Blocked
+**Priorität:** 🔴 Hoch | 🟡 Mittel | 🟢 Niedrig
+**Kategorie:** 🏗️ Infrastruktur | 🤖 AI/ML | 🐛 Bugfix | ✨ Feature | 📚 Lernen
+**Geschätzter Aufwand:** {{ effort_hours }}h
+
+---
+
+### 🎯 Ziel & Warum
+
+{{ Was soll erreicht werden und warum ist es wichtig? }}
+
+---
+
+### 📋 Anforderungen
+
+*   {{ anforderung_1 }}
+*   {{ anforderung_2 }}
+
+---
+
+### ✅ Fertig-Kriterien (Definition of Done)
+
+*   [ ] Code geschrieben und getestet
+*   [ ] Dokumentation aktualisiert (falls nötig)
+*   [ ] Funktioniert wie erwartet
+*   [ ] {{ spezifisches_kriterium_1 }}
+
+---
+
+### ⚠️ Risiko/Blocker
+
+{{ Was könnte schief gehen oder was blockiert dich? }}
+
+---
+
+### 🔗 Abhängigkeiten
+
+*   {{ abhängigkeit_1 }} (Status: {{ abhängigkeit_1_status }})
+*   {{ abhängigkeit_2 }} (Status: {{ abhängigkeit_2_status }})
+
+---
+
+### 🤖 AI Changes & Assistance
+
+**Letzte KI-Interaktion:** {{ last_ai_interaction_date }}
+
+#### KI-vorgeschlagene Änderungen
+{% if ai_changes %}
+{% for change in ai_changes %}
+*   **{{ change.date }}:** {{ change.description }} ([Session]({{ change.session_link }}))
+    - **Status:** {{ change.status }}
+    - **Impact:** {{ change.impact }}
+{% endfor %}
+{% else %}
+*   Noch keine KI-Änderungen dokumentiert
+{% endif %}
+
+#### KI-Unterstützung
+*   **Analyse:** {{ ai_analysis }}
+*   **Empfehlungen:** {{ ai_recommendations }}
+*   **Automatisierung:** {{ ai_automation }}
+
+#### Verknüpfte AI-Aktivitäten
+*   **Session:** [{{ session_id }}]({{ session_link }})
+*   **Change Request:** [{{ cr_id }}]({{ cr_link }})
+*   **Implementation:** [{{ imp_id }}]({{ imp_link }})
+
+---
+
+### 📝 Notizen / Lernpunkte
+
+{{ Was hast du gelernt? Wichtige Infos für später? }}
+
+---
+
+### 🏁 Abschluss
+
+**Erledigt am:** {{ completion_date }}
+**Ergebnis:** {{ ergebnis }}
+**Nächste Schritte:** {{ naechste_schritte }}
+
+---
+
+### 🤖 AI Impact Summary
+
+**AI Contribution:** {{ ai_contribution_percentage }}%
+**Time Saved:** {{ time_saved_hours }}h
+**Quality Improvement:** {{ quality_improvement }}
+**Lessons Learned for AI:** {{ ai_lessons_learned }}

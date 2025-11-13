@@ -1,0 +1,52 @@
+# Custom Scripts Directory
+
+This directory contains custom scripts and utilities for the {{ project_name }} project.
+
+## 📁 Script Categories
+
+### Setup Scripts
+- Installation and configuration scripts
+- Environment setup utilities
+- Dependency management tools
+
+### Deployment Scripts
+- Build and deployment automation
+- Database migration scripts
+- Service management utilities
+
+### Maintenance Scripts
+- Backup and restore utilities
+- Log rotation and cleanup
+- Health check scripts
+
+### Development Scripts
+- Code generation tools
+- Testing automation
+- Documentation generators
+
+## 🚀 Adding New Scripts
+
+1. Create script in appropriate subdirectory
+2. Make it executable: `chmod +x script_name.sh`
+3. Add documentation header
+4. Update this README with description
+5. Test thoroughly before committing
+
+## 📋 Script Guidelines
+
+- Use descriptive names
+- Include proper error handling
+- Add usage documentation
+- Follow project coding standards
+- Test in development environment first
+
+## 🔧 Maintenance
+
+- Review scripts regularly
+- Update dependencies as needed
+- Remove deprecated scripts
+- Keep documentation current
+
+---
+
+*Managed by AgentOS for {{ project_name }}*

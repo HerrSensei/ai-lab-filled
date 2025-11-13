@@ -1,0 +1,336 @@
+# {{ project_name }}
+
+## 🚀 Quick Start
+
+```bash
+# Klonen & Setup
+git clone <repo-url>
+cd {{ project_name }}
+
+# WICHTIG: pyproject.toml zuerst anpassen!
+# Nur Dependencies einkommentieren, die du wirklich brauchst (KISS-Prinzip)
+# Siehe Abschnitt "Dependencies Management" unten
+
+# Dependencies installieren (nachdem du pyproject.toml angepasst hast)
+poetry install
+
+# Environment setup (falls benötigt)
+cp .env.example .env
+# .env bearbeiten mit deinen Keys
+
+# Development starten
+make dev
+```
+
+---
+
+## 📋 Projekt-Info
+
+**Beschreibung:** {{ description }}
+**Typ:** {{ project_type }} (AI/ML, Web-App, CLI-Tool, etc.)
+**Status:** {{ status }}
+
+---
+
+## 🛠️ Tech Stack
+
+| Kategorie | Technologie |
+|-----------|-------------|
+| **Language** | Python {{ python_version }} |
+| **Framework** | {{ framework }} |
+| **AI/ML** | {{ ai_stack }} |
+| **Database** | {{ database }} |
+| **Deployment** | {{ deployment }} |
+
+---
+
+## 📦 Dependencies Management (WICHTIG!)
+
+**KISS-Prinzip: Nur installieren was wirklich verwendet wird!**
+
+### 1. Projekt-Setup
+```bash
+# 1. pyproject.toml öffnen und ALLE Dependencies auskommentiert lassen
+# 2. NUR die einkommentieren, die du tatsächlich brauchst
+# 3. Beispiel: Wenn du nur ein einfaches Skript brauchst, brauchst du kein FastAPI!
+```
+
+### 2. Minimalbeispiele
+```toml
+# Nur CLI-Tool:
+[tool.poetry.dependencies]
+python = "^3.11"
+click = "^8.1.0"  # CLI Framework
+
+# Nur Web-API:
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.104.1"
+uvicorn = {extras = ["standard"], version = "^0.24.0"}
+
+# Nur AI-Integration:
+[tool.poetry.dependencies]
+python = "^3.11"
+openai = "^1.3.0"
+```
+
+### 3. Common Mistakes - NICHT tun:
+❌ "Vielleicht brauche ich später eine Database" → sqlalchemy installieren
+❌ "Alle Projekte brauchen Logging" → structlog installieren
+❌ "KI-Projekt braucht alle AI Libraries" → openai + anthropic + langchain installieren
+
+### 4. Richtiger Ansatz:
+✅ "Ich brauche jetzt eine Web-API" → fastapi + uvicorn installieren
+✅ "Ich brauche jetzt OpenAI" → openai installieren
+✅ "Später kommt Database dazu" → dann sqlalchemy hinzufügen
+
+---
+
+## 📁 Projektstruktur
+
+```mermaid
+graph TD
+    A[{{ project_name }}/] --> B[src/]
+    A --> C[tests/]
+    A --> D[prompts/]
+    A --> E[data/]
+    A --> F[models/]
+    A --> G[docs/]
+    A --> H[scripts/]
+    A --> I[deployment/]
+
+    B --> J[api/]
+    B --> K[core/]
+    B --> L[models/]
+    B --> M[services/]
+    B --> N[main.py]
+
+    J --> O[routes/]
+    K --> P[config.py]
+    K --> Q[logging.py]
+    K --> R[exceptions.py]
+
+    style A fill:#e1f5fe
+    style B fill:#f3e5f5
+    style C fill:#e8f5e8
+    style D fill:#fff3e0
+    style E fill:#fce4ec
+    style F fill:#f1f8e9
+    style G fill:#e0f2f1
+    style H fill:#fff8e1
+    style I fill:#e8eaf6
+```
+
+**Verzeichnis-Beschreibung:**
+```
+{{ project_name }}/
+├── src/                    # Quellcode
+│   ├── api/               # API Routes (FastAPI)
+│   ├── core/              # Core Funktionen (Config, Logging)
+│   ├── models/            # Datenmodelle
+│   ├── services/          # Business Logic
+│   └── main.py            # Entry Point
+├── tests/                 # Tests
+├── prompts/               # AI Prompt Templates
+├── data/                  # Daten (raw, processed)
+├── models/                # Trainierte Modelle
+├── docs/                  # Dokumentation
+├── scripts/               # Hilfsskripte
+└── deployment/            # Deployment-Konfigs
+```
+
+---
+
+## 🎯 Hauptfunktionen
+
+*   {{ feature_1 }}
+*   {{ feature_2 }}
+*   {{ feature_3 }}
+
+---
+
+## 🧪 Development
+
+```bash
+# Tests
+make test              # Alle Tests
+make test-coverage     # Mit Coverage
+
+# Code Quality
+make lint              # Linting
+make format            # Code formatieren
+make type-check        # Type checking
+
+# Docker
+make docker-dev        # Development mit Docker
+make docker-build      # Image bauen
+```
+
+### 🔄 Development Workflow (Mermaid.js)
+
+```mermaid
+graph LR
+    A[Code schreiben] --> B[Tests ausführen]
+    B --> C{Tests OK?}
+    C -->|Nein| D[Bugs fixen]
+    C -->|Ja| E[Linting]
+    D --> A
+    E --> F{Lint OK?}
+    F -->|Nein| G[Code formatieren]
+    F -->|Ja| H[Type Check]
+    G --> A
+    H --> I{Types OK?}
+    I -->|Nein| A
+    I -->|Ja| J[Commit]
+    J --> K[Push]
+    K --> L[CI/CD Pipeline]
+```
+
+### 🏗️ Deployment Architecture (d2)
+
+```d2
+# {{ project_name }} - Deployment Architecture
+direction: right
+
+# Development Environment
+dev: Development {
+  shape: rectangle
+  style: fill: #e8f5e8
+}
+
+local_dev: Local Dev {
+  shape: rectangle
+  style: fill: #f1f8e9
+}
+
+# CI/CD Pipeline
+ci_cd: CI/CD Pipeline {
+  shape: rectangle
+  style: fill: #fff3e0
+}
+
+# Staging Environment
+staging: Staging {
+  shape: rectangle
+  style: fill: #e3f2fd
+}
+
+# Production Environment
+prod: Production {
+  shape: rectangle
+  style: fill: #ffebee
+}
+
+# Infrastructure Components
+k8s: Kubernetes {
+  shape: cloud
+  style: fill: #e8eaf6
+}
+
+monitoring: Monitoring {
+  shape: rectangle
+  style: fill: #fce4ec
+}
+
+# Connections
+local_dev -> dev
+dev -> ci_cd
+ci_cd -> staging
+staging -> prod
+prod -> k8s
+k8s -> monitoring
+```
+
+---
+
+## 🔧 Environment
+
+**Benötigte Environment Variables:**
+
+```bash
+# AI Services
+OPENAI_API_KEY=your_key_here
+ANTHROPIC_API_KEY=your_key_here
+
+# Database
+DATABASE_URL=postgresql://user:pass@localhost/db
+
+# App Settings
+LOG_LEVEL=INFO
+DEBUG=false
+```
+
+---
+
+## 📊 Monitoring
+
+*   **Health Check:** `GET /health`
+*   **API Docs:** `GET /docs` (Swagger UI)
+*   **Logs:** `logs/app.log`
+*   **Metrics:** `GET /metrics` (falls aktiviert)
+
+---
+
+## 🚀 Deployment
+
+### Staging
+```bash
+make deploy-staging
+```
+
+### Production
+```bash
+make deploy-production
+```
+
+---
+
+## 🤖 AI/ML Spezifisches
+
+{% if ai_features %}
+**Modelle:**
+*   {{ model_1 }}
+*   {{ model_2 }}
+
+**Prompt Management:**
+*   Templates in `prompts/`
+*   Versionierung mit Git
+
+**Training:**
+*   Skripte in `scripts/training/`
+*   Modelle in `models/checkpoints/`
+{% endif %}
+
+---
+
+## 📚 Dokumentation
+
+*   **API:** `docs/api.md`
+*   **Architecture:** `docs/architecture.md`
+*   **Contributing:** `CONTRIBUTING.md`
+
+---
+
+## 🐛 Troubleshooting
+
+**Häufige Probleme:**
+
+1. **Module nicht gefunden:** `poetry install` ausführen
+2. **Permission Fehler:** Docker-Rechte prüfen
+3. **API Keys falsch:** `.env` Datei prüfen
+
+---
+
+## 🔄 Changelog
+
+Siehe `CHANGELOG.md` für Version History.
+
+---
+
+## 📄 Lizenz
+
+{{ license }}
+
+---
+
+*Zuletzt aktualisiert: {{ last_updated }}*

@@ -1,0 +1,29 @@
+# k3s/cluster.yaml
+# Basic k3s cluster configuration template
+# This file can be used to define agents, servers, and other k3s specific settings.
+
+apiVersion: k3s.cattle.io/v1
+kind: K3sConfig
+metadata:
+  name: {{ project_name }}-cluster
+spec:
+  # Example: Define server configuration
+  server:
+    - hostname: {{ project_name }}-server-1
+      # ip: 192.168.1.100 # Example IP
+      # node-ip: 192.168.1.100
+      # taints:
+      #   - "CriticalAddonsOnly=true:NoExecute"
+      #   - "node-role.kubernetes.io/master=true:NoSchedule"
+      # extra-args:
+      #   - "kube-apiserver-arg=--feature-gates=EphemeralContainers=true"
+  # Example: Define agent configuration
+  agent:
+    - hostname: {{ project_name }}-agent-1
+      # ip: 192.168.1.101 # Example IP
+      # node-ip: 192.168.1.101
+      # extra-args:
+      #   - "kubelet-arg=--feature-gates=EphemeralContainers=true"
+
+# For more advanced configurations, refer to k3s documentation:
+# https://docs.k3s.io/installation/configuration

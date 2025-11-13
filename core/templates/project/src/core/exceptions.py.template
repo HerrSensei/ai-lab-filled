@@ -1,0 +1,104 @@
+"""
+Custom exception classes for the application.
+
+This module defines custom exceptions that can be handled
+globally by the FastAPI exception handlers.
+"""
+
+from typing import Any, Dict, Optional
+
+
+class AppException(Exception):
+    """Base application exception."""
+
+    def __init__(
+        self,
+        message: str,
+        error_code: str = "APP_ERROR",
+        status_code: int = 500,
+        details: Optional[Dict[str, Any]] = None,
+    ):
+        self.message = message
+        self.error_code = error_code
+        self.status_code = status_code
+        self.details = details or {}
+        super().__init__(self.message)
+
+
+class ValidationError(AppException):
+    """Exception raised for validation errors."""
+
+    def __init__(self, message: str, details: Optional[Dict[str, Any]] = None):
+        super().__init__(
+            message=message,
+            error_code="VALIDATION_ERROR",
+            status_code=400,
+            details=details,
+        )
+
+
+class AuthenticationError(AppException):
+    """Exception raised for authentication errors."""
+
+    def __init__(self, message: str = "Authentication failed"):
+        super().__init__(
+            message=message,
+            error_code="AUTHENTICATION_ERROR",
+            status_code=401,
+        )
+
+
+class AuthorizationError(AppException):
+    """Exception raised for authorization errors."""
+
+    def __init__(self, message: str = "Access denied"):
+        super().__init__(
+            message=message,
+            error_code="AUTHORIZATION_ERROR",
+            status_code=403,
+        )
+
+
+class NotFoundError(AppException):
+    """Exception raised when a resource is not found."""
+
+    def __init__(self, message: str = "Resource not found"):
+        super().__init__(
+            message=message,
+            error_code="NOT_FOUND",
+            status_code=404,
+        )
+
+
+class RateLimitError(AppException):
+    """Exception raised when rate limit is exceeded."""
+
+    def __init__(self, message: str = "Rate limit exceeded"):
+        super().__init__(
+            message=message,
+            error_code="RATE_LIMIT_EXCEEDED",
+            status_code=429,
+        )
+
+
+class CostLimitError(AppException):
+    """Exception raised when cost limit is exceeded."""
+
+    def __init__(self, message: str = "Cost limit exceeded"):
+        super().__init__(
+            message=message,
+            error_code="COST_LIMIT_EXCEEDED",
+            status_code=429,
+        )
+
+
+class AIServiceError(AppException):
+    """Exception raised for AI service errors."""
+
+    def __init__(self, message: str, details: Optional[Dict[str, Any]] = None):
+        super().__init__(
+            message=message,
+            error_code="AI_SERVICE_ERROR",
+            status_code=502,
+            details=details,
+        )

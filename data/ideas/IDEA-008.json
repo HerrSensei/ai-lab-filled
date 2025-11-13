@@ -1,0 +1,54 @@
+{
+  "id": "IDEA-008",
+  "title": "Homeserver Vision Infrastructure Projekt",
+  "description": "Aufbau einer modernen, skalierbaren Infrastruktur für den Homeserver mit Container-Orchestrierung. Zukunftsweisende Infrastruktur mit automatisierter Verwaltung, Monitoring und Skalierbarkeit.",
+  "status": "converted",
+  "priority": "medium",
+  "category": "infrastructure",
+  "tags": [
+    "homeserver",
+    "infrastructure",
+    "containers",
+    "orchestration",
+    "automation"
+  ],
+  "created_date": "2025-11-07T00:00:00Z",
+  "updated_date": "2025-11-09T06:14:13Z",
+  "estimated_effort": "2-3 weeks",
+  "dependencies": [
+    "IDEA-002",
+    "IDEA-003"
+  ],
+  "acceptance_criteria": [
+    "Container-Orchestrierung ist implementiert",
+    "Monitoring ist eingerichtet",
+    "Backup-Strategie ist aktiv",
+    "Security ist konfiguriert"
+  ],
+  "notes": "Bestehende Work Items (HS-001 bis HS-005) können als Grundlage dienen. K3s-POC bereits geplant. Fokus auf produktiven Cluster-Betrieb.",
+  "author": "jns",
+  "open_questions": [
+    "Welche Container-Orchestrierung (K3s, Docker Swarm, etc.)?",
+    "Wie wird Monitoring implementiert?",
+    "Welche Backup-Strategie für die Infrastruktur?",
+    "Wie wird Security gehandhabt?"
+  ],
+  "next_steps": [
+    "Idee mit KI-Assistent verfeinern",
+    "Offene Fragen klären",
+    "Machbarkeit prüfen",
+    "Priorisierung festlegen"
+  ],
+  "target_audience": "Ich selbst (jns) als Infrastructure Engineer",
+  "benefits": [
+    "Automatisierung",
+    "Skalierbarkeit",
+    "Wartungsarmut",
+    "Moderne Technologien"
+  ],
+  "prerequisites": [
+    "Hardware-Grundlage",
+    "Container-Technologie",
+    "Netzwerk-Setup"
+  ]
+}

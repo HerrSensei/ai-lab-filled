@@ -1,0 +1,320 @@
+# Enhanced Project Management Template
+
+**ID:** {{ project_id }}
+**Name:** {{ project_name }}
+**Status:** 🟢 Planung | 🟡 In Arbeit | 🔩 Testing | 🚀 Live | ⏸️ Pausiert | ❌ Abgebrochen
+**Priorität:** 🔴 Hoch | 🟡 Mittel | 🟢 Niedrig
+**Typ:** 🤖 AI/ML | 🌐 Web-App | 🛠️ Tool | 🏗️ Infrastruktur | 📚 Lernprojekt
+
+---
+
+## 🎯 Vision & Ziel
+
+**Warum dieses Projekt?**
+{{ projekt_vision }}
+
+**Konkretes Ziel:**
+{{ konkretes_ziel }}
+
+**Erfolgskriterium:**
+{{ erfolgskriterium }}
+
+---
+
+## 📊 Fortschritt
+
+| Phase | Status | Fertig | Notes |
+|-------|--------|--------|-------|
+| 🧭 Planung | {{ planung_status }} | {{ planung_date }} | {{ planung_notes }} |
+| 🏗️ Setup | {{ setup_status }} | {{ setup_date }} | {{ setup_notes }} |
+| 💻 Entwicklung | {{ entwicklung_status }} | {{ entwicklung_date }} | {{ entwicklung_notes }} |
+| 🧪 Testing | {{ testing_status }} | {{ testing_date }} | {{ testing_notes }} |
+| 🚀 Deployment | {{ deployment_status }} | {{ deployment_date }} | {{ deployment_notes }} |
+
+**Gesamtfortschritt:** {{ gesamt_fortschritt }}%
+
+### 📈 Projekt-Timeline (Mermaid.js)
+
+```mermaid
+gantt
+    title {{ project_name }} - Projekt-Timeline
+    dateFormat  YYYY-MM-DD
+    section Planung
+    Konzept           :done,    plan1, 2024-01-01, 7d
+    Architektur       :done,    plan2, after plan1, 5d
+    section Setup
+    Environment       :active,  setup1, 2024-01-13, 3d
+    CI/CD Pipeline    :         setup2, after setup1, 4d
+    section Entwicklung
+    Core Features     :         dev1, 2024-01-20, 14d
+    AI Integration    :         dev2, after dev1, 10d
+    section Testing
+    Unit Tests        :         test1, after dev2, 7d
+    Integration Tests :         test2, after test1, 5d
+    section Deployment
+    Staging           :         deploy1, after test2, 3d
+    Production        :         deploy2, after deploy1, 2d
+```
+
+---
+
+## 📋 Aktuelle Tasks (nächste 7 Tage)
+
+| ID | Task | Status | Fällig | Prio |
+|----|------|--------|--------|------|
+| {{ task_1_id }} | {{ task_1_titel }} | {{ task_1_status }} | {{ task_1_faellig }} | {{ task_1_prio }} |
+| {{ task_2_id }} | {{ task_2_titel }} | {{ task_2_status }} | {{ task_2_faellig }} | {{ task_2_prio }} |
+| {{ task_3_id }} | {{ task_3_titel }} | {{ task_3_status }} | {{ task_3_faellig }} | {{ task_3_prio }} |
+
+---
+
+## 🛠️ Tech Stack & Architektur
+
+**Core Technologies:**
+*   **Backend:** {{ backend_tech }}
+*   **Frontend:** {{ frontend_tech }}
+*   **AI/ML:** {{ ai_ml_tech }}
+*   **Database:** {{ database_tech }}
+*   **Deployment:** {{ deployment_tech }}
+
+**Architektur-Entscheidungen:**
+{{ architektur_entscheidungen }}
+
+### 📊 Architektur-Diagramm (Mermaid.js)
+
+```mermaid
+graph TB
+    subgraph "Frontend"
+        A[{{ frontend_tech }}]
+    end
+
+    subgraph "Backend"
+        B[{{ backend_tech }}]
+        C[API Gateway]
+    end
+
+    subgraph "AI/ML Layer"
+        D[{{ ai_ml_tech }}]
+        E[Model Serving]
+    end
+
+    subgraph "Data Layer"
+        F[{{ database_tech }}]
+        G[Cache]
+    end
+
+    subgraph "Infrastructure"
+        H[{{ deployment_tech }}]
+        I[Monitoring]
+    end
+
+    A --> C
+    C --> B
+    B --> D
+    B --> F
+    D --> E
+    F --> G
+    H --> I
+```
+
+### 🏗️ System-Architektur (d2)
+
+```d2
+# {{ project_name }} - System Architecture
+direction: right
+
+# Frontend Layer
+frontend: {{ frontend_tech }} {
+  shape: rectangle
+  style: fill: #e3f2fd
+}
+
+# Backend Layer
+backend: {{ backend_tech }} {
+  shape: rectangle
+  style: fill: #f3e5f5
+}
+
+api_gateway: API Gateway {
+  shape: rectangle
+  style: fill: #e8f5e8
+}
+
+# AI/ML Layer
+ai_service: {{ ai_ml_tech }} {
+  shape: rectangle
+  style: fill: #fff3e0
+}
+
+model_serving: Model Serving {
+  shape: rectangle
+  style: fill: #fce4ec
+}
+
+# Data Layer
+database: {{ database_tech }} {
+  shape: cylinder
+  style: fill: #f1f8e9
+}
+
+cache: Cache {
+  shape: rectangle
+  style: fill: #e0f2f1
+}
+
+# Infrastructure
+deployment: {{ deployment_tech }} {
+  shape: cloud
+  style: fill: #fff8e1
+}
+
+monitoring: Monitoring {
+  shape: rectangle
+  style: fill: #e8eaf6
+}
+
+# Connections
+frontend -> api_gateway
+api_gateway -> backend
+backend -> ai_service
+backend -> database
+ai_service -> model_serving
+database -> cache
+deployment -> monitoring
+```
+
+---
+
+## 📂 Wichtige Dateien & Links
+
+*   **Repo:** `{{ repo_url }}`
+*   **Doku:** `{{ docs_url }}`
+*   **Main Config:** `{{ main_config }}`
+*   **Environment:** `.env.example`
+
+---
+
+## 🚨 Aktuelle Blocker & Risiken
+
+| Blocker/Risiko | Auswirkung | Lösung | Status |
+|----------------|------------|--------|--------|
+| {{ blocker_1 }} | {{ blocker_1_auswirkung }} | {{ blocker_1_loesung }} | {{ blocker_1_status }} |
+
+---
+
+## 📚 Lernpunkte & Ressourcen
+
+**Was gelernt:**
+*   {{ lernpunkt_1 }}
+*   {{ lernpunkt_2 }}
+
+**Nützliche Ressourcen:**
+*   {{ resource_1 }}
+*   {{ resource_2 }}
+
+**Offene Fragen:**
+*   {{ frage_1 }}
+*   {{ frage_2 }}
+
+---
+
+## 📈 Metrics & KPIs
+
+| Metric | Ziel | Aktuell | Status |
+|--------|------|---------|--------|
+| {{ metric_1 }} | {{ metric_1_ziel }} | {{ metric_1_aktuell }} | {{ metric_1_status }} |
+
+---
+
+## 🔄 Nächste Meilensteine
+
+*   [ ] {{ meilenstein_1 }} - {{ meilenstein_1_date }}
+*   [ ] {{ meilenstein_2 }} - {{ meilenstein_2_date }}
+*   [ ] {{ meilenstein_3 }} - {{ meilenstein_3_date }}
+
+---
+
+## 💡 Ideen & Backlog
+
+**Future Features:**
+*   {{ idea_1 }}
+*   {{ idea_2 }}
+
+**Technische Schulden:**
+*   {{ tech_debt_1 }}
+*   {{ tech_debt_2 }}
+
+---
+
+## 📝 Notizen
+
+{{ projekt_notizen }}
+
+---
+
+## 🤖 AI Activity Dashboard
+
+**Letzte KI-Session:** {{ last_ai_session_date }}
+**Aktive Change Requests:** {{ active_change_requests }}
+**AI-Contributions:** {{ ai_contributions_count }}
+
+### Recent AI Changes
+{% for ai_change in recent_ai_changes %}
+*   **{{ ai_change.date }}:** {{ ai_change.description }} ([{{ ai_change.type }}]({{ ai_change.link }}))
+    - **Impact:** {{ ai_change.impact }}
+    - **Status:** {{ ai_change.status }}
+{% endfor %}
+
+### AI Performance Metrics
+| Metric | Wert | Ziel |
+|--------|------|------|
+| AI Contribution Rate | {{ ai_contribution_rate }}% | >30% |
+| Time Saved by AI | {{ time_saved_hours }}h | +10h/Monat |
+| AI Change Quality | {{ ai_change_quality }}/5 | >4.0 |
+
+### AI Learning & Evolution
+**Was die KI gelernt hat:**
+*   {{ ai_learning_point_1 }}
+*   {{ ai_learning_point_2 }}
+
+**KI-Kompetenzen entwickelt:**
+*   {{ ai_skill_1 }}
+*   {{ ai_skill_2 }}
+
+---
+
+## 🤖 AI Integration Status
+
+### Vision II Alignment
+**Proaktiver Digitaler Assistent:** {{ vision_2_progress }}%
+**Automatisierungsgrad:** {{ automation_level }}%
+**Selbstständigkeit:** {{ autonomy_level }}/5
+
+### AI-Workflow Integration
+- [x] **Session Logging:** Alle KI-Interaktionen protokolliert
+- [x] **Change Management:** Strukturierter CR-Prozess
+- [x] **Impact Tracking:** Auswirkungen gemessen
+- [ ] **Learning Loop:** KI lernt aus Vergangenheit
+- [ ] **Proactive Changes:** KI schlägt eigenständig Änderungen vor
+
+---
+
+## 🏁 Projekt-Abschluss (wenn fertig)
+
+**Abgeschlossen am:** {{ abschluss_date }}
+**Ergebnis:** {{ ergebnis }}
+**Erfolgreich?** {{ erfolg }}
+**Lessons Learned:** {{ lessons_learned }}
+**Nächste Schritte:** {{ naechste_schritte }}
+
+### 🤖 AI Contribution Summary
+**Total AI Sessions:** {{ total_ai_sessions }}
+**Total Change Requests:** {{ total_change_requests }}
+**AI Success Rate:** {{ ai_success_rate }}%
+**Time Saved:** {{ total_time_saved }}h
+**Quality Improvement:** {{ quality_improvement }}
+
+---
+
+*Letzte Aktualisierung: {{ last_update }}*
+*Letzte KI-Aktivität: {{ last_ai_activity }}*

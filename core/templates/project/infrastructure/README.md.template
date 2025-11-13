@@ -1,0 +1,33 @@
+# {{ project_name }} - Infrastructure Project
+
+## 🎯 Project Overview
+This is an infrastructure project focused on `{{ description }}`. It aims to define, deploy, and manage the underlying systems and services.
+
+## 🏗️ Infrastructure Stack
+*   **Orchestration**: Kubernetes (k3s)
+*   **IaC (Infrastructure as Code)**: Terraform
+*   **Cloud Provider**: (Specify if applicable, e.g., AWS, Azure, GCP, or On-Premise)
+
+## 🚀 Getting Started
+1.  **Setup Environment**:
+    *   Ensure `kubectl`, `terraform`, and `k3s` (if local) are installed and configured.
+2.  **k3s Cluster Management**:
+    *   To start/stop k3s: `sudo systemctl (start|stop) k3s`
+    *   To check cluster status: `kubectl get nodes`
+3.  **Terraform Deployment**:
+    *   Initialize Terraform: `terraform init`
+    *   Plan changes: `terraform plan`
+    *   Apply changes: `terraform apply`
+
+## 📁 Project Structure
+*   `k3s/`: Kubernetes manifests and configurations for k3s.
+*   `terraform/`: Terraform configurations for infrastructure provisioning.
+*   `ansible/`: Ansible playbooks for configuration management (if used).
+*   `docs/`: Infrastructure documentation, diagrams, and runbooks.
+*   `scripts/`: Automation scripts for deployment, backup, and maintenance.
+
+## 📋 Next Steps
+*   Define specific infrastructure requirements and architecture.
+*   Implement initial Terraform configurations for core resources.
+*   Deploy and configure k3s cluster.
+*   Set up monitoring and logging for infrastructure components.

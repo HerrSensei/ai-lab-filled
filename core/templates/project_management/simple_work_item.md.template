@@ -1,0 +1,118 @@
+## Titel: [Titel der Aufgabe]
+
+**ID:** {{ work_item_id }}
+**Status:** 📝 ToDo | 🚧 InProgress | ✅ Done | 🚫 Blocked
+**Priorität:** 🔴 Hoch | 🟡 Mittel | 🟢 Niedrig
+**Kategorie:** 🏗️ Infrastruktur | 🤖 AI/ML | 🐛 Bugfix | ✨ Feature | 📚 Lernen
+**Geschätzter Aufwand:** {{ effort_hours }}h
+
+---
+
+### 🎯 Ziel & Warum
+
+{{ Was soll erreicht werden und warum ist es wichtig? }}
+
+---
+
+### 📋 Anforderungen
+
+*   {{ anforderung_1 }}
+*   {{ anforderung_2 }}
+
+---
+
+### ✅ Fertig-Kriterien (Definition of Done)
+
+*   [ ] Code geschrieben und getestet
+*   [ ] Dokumentation aktualisiert (falls nötig)
+*   [ ] Funktioniert wie erwartet
+*   [ ] {{ spezifisches_kriterium_1 }}
+
+---
+
+### ⚠️ Risiko/Blocker
+
+{{ Was könnte schief gehen oder was blockiert dich? }}
+
+---
+
+### 🔗 Abhängigkeiten
+
+*   {{ abhängigkeit_1 }} (Status: {{ abhängigkeit_1_status }})
+*   {{ abhängigkeit_2 }} (Status: {{ abhängigkeit_2_status }})
+
+### 📊 Task-Flow (Mermaid.js)
+
+```mermaid
+flowchart TD
+    A[Start: {{ work_item_id }}] --> B{Anforderungen klar?}
+    B -->|Nein| C[Requirements klären]
+    B -->|Ja| D[Implementierung starten]
+    C --> D
+    D --> E[Code schreiben]
+    E --> F[Tests durchführen]
+    F --> G{Tests OK?}
+    G -->|Nein| H[Bugs fixen]
+    G -->|Ja| I[Review]
+    H --> F
+    I --> J{Review OK?}
+    J -->|Nein| K[Änderungen vornehmen]
+    J -->|Ja| L[Deployment]
+    K --> E
+    L --> M[Task abgeschlossen]
+```
+
+### 🔄 Task-Dependencies (d2)
+
+```d2
+# Task Dependencies - {{ work_item_id }}
+direction: down
+
+# Current Task
+current_task: "{{ work_item_id }}" {
+  shape: rectangle
+  style: fill: #ffeb3b, stroke: #f57c00
+}
+
+# Dependencies
+dep1: "{{ abhängigkeit_1 }}" {
+  shape: rectangle
+  style: fill: #e3f2fd
+}
+
+dep2: "{{ abhängigkeit_2 }}" {
+  shape: rectangle
+  style: fill: #e3f2fd
+}
+
+# Status indicators
+status_1: "{{ abhängigkeit_1_status }}" {
+  shape: circle
+  style: fill: {{ abhängigkeit_1_status == "Done" ? "#4caf50" : "#ff9800" }}
+}
+
+status_2: "{{ abhängigkeit_2_status }}" {
+  shape: circle
+  style: fill: {{ abhängigkeit_2_status == "Done" ? "#4caf50" : "#ff9800" }}
+}
+
+# Connections
+dep1 -> current_task
+dep2 -> current_task
+dep1 -> status_1
+dep2 -> status_2
+```
+
+---
+
+### 📝 Notizen / Lernpunkte
+
+{{ Was hast du gelernt? Wichtige Infos für später? }}
+
+---
+
+### 🏁 Abschluss
+
+**Erledigt am:** {{ completion_date }}
+**Ergebnis:** {{ ergebnis }}
+**Nächste Schritte:** {{ naechste_schritte }}

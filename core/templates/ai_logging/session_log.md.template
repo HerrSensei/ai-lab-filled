@@ -1,0 +1,97 @@
+# 🤖 AI Session Log Template
+
+**Session ID:** {{ session_id }}
+**Datum:** {{ session_date }}
+**KI-Agent:** {{ ai_agent }}
+**User:** {{ user_name }}
+**Dauer:** {{ session_duration }}
+
+---
+
+## 🎯 Session-Ziel
+
+{{ session_goal }}
+
+---
+
+## 📝 Anfrage des Users
+
+> {{ user_request }}
+
+---
+
+## 🤖 KI-Analyse & Planung
+
+### Problemverständnis
+{{ problem_understanding }}
+
+### Lösungsansätze
+{{ solution_approaches }}
+
+### Technische Umsetzung
+{{ technical_implementation }}
+
+---
+
+## 🔄 Vorgeschlagene Änderungen
+
+### 1. {{ change_1_title }}
+{{ change_1_description }}
+
+### 2. {{ change_2_title }}
+{{ change_2_description }}
+
+### 3. {{ change_3_title }}
+{{ change_3_description }}
+
+---
+
+## ✅ Umsetzung
+
+### Erstellte Dateien
+{% for file in created_files %}
+- [x] `{{ file.path }}` - {{ file.description }}
+{% endfor %}
+
+### Verlinkungen
+- Hauptvision: {{ vision_link }}
+- Projekt: {{ project_link }}
+- Templates: {{ templates_link }}
+
+---
+
+## 📊 Ergebnis & Impact
+
+### Direkte Ergebnisse
+{% for result in direct_results %}
+- ✅ {{ result }}
+{% endfor %}
+
+### Langfristiger Impact
+{% for impact in long_term_impacts %}
+- 🎯 {{ impact }}
+{% endfor %}
+
+### Metrics
+- **Neue Dateien:** {{ files_created_count }}
+- **Workflow-Schritte:** {{ workflow_steps }}
+- **Integration-Tiefe:** {{ integration_depth }}
+
+---
+
+## 🔄 Nächste Schritte
+
+{% for next_step in next_steps %}
+1. **{{ next_step.title }}** - {{ next_step.description }}
+{% endfor %}
+
+---
+
+## 📚 Lernpunkte
+
+{{ learning_points }}
+
+---
+
+*Session beendet: {{ session_end_time }}*
+*Nächste Session: {{ next_session_topic }}*

@@ -1,0 +1,146 @@
+# Enhanced Project Charter Template
+
+## Project Overview
+
+**Project Name:** {{ project_name }}
+**Project ID:** {{ project_id }}
+**Version:** 1.0
+**Date:** {{ creation_date }}
+**Status:** Planning | In Progress | Completed | On Hold | Cancelled
+
+### Executive Summary
+{{ executive_summary }}
+
+### Business Case
+{{ business_case }}
+
+## Project Governance
+
+### Project Sponsor
+**Name:** {{ sponsor_name }}
+**Role:** {{ sponsor_role }}
+**Contact:** {{ sponsor_contact }}
+
+### Project Manager
+**Name:** {{ pm_name }}
+**Contact:** {{ pm_contact }}
+
+### Core Team
+| Role | Name | Contact | Allocation |
+|------|------|---------|------------|
+| Tech Lead | {{ tech_lead_name }} | {{ tech_lead_contact }} | {{ tech_lead_allocation }}% |
+| Developer | {{ dev_name }} | {{ dev_contact }} | {{ dev_allocation }}% |
+| QA Engineer | {{ qa_name }} | {{ qa_contact }} | {{ qa_allocation }}% |
+
+### Stakeholders
+| Name | Role | Interest | Influence | Communication Strategy |
+|------|------|----------|-----------|------------------------|
+| {{ stakeholder1_name }} | {{ stakeholder1_role }} | {{ stakeholder1_interest }} | {{ stakeholder1_influence }} | {{ stakeholder1_communication }} |
+
+## Project Scope
+
+### In Scope
+- {{ scope_item1 }}
+- {{ scope_item2 }}
+- {{ scope_item3 }}
+
+### Out of Scope
+- {{ out_of_scope_item1 }}
+- {{ out_of_scope_item2 }}
+
+### Assumptions
+- {{ assumption1 }}
+- {{ assumption2 }}
+
+### Constraints
+- {{ constraint1 }}
+- {{ constraint2 }}
+
+## Project Objectives & Success Criteria
+
+### SMART Objectives
+1. **Objective:** {{ objective1 }}
+   - **Success Criteria:** {{ success_criteria1 }}
+   - **Measurement:** {{ measurement1 }}
+   - **Target:** {{ target1 }}
+
+2. **Objective:** {{ objective2 }}
+   - **Success Criteria:** {{ success_criteria2 }}
+   - **Measurement:** {{ measurement2 }}
+   - **Target:** {{ target2 }}
+
+### KPIs
+| KPI | Target | Measurement Frequency | Owner |
+|-----|--------|----------------------|-------|
+| {{ kpi1 }} | {{ kpi1_target }} | {{ kpi1_frequency }} | {{ kpi1_owner }} |
+
+## High-Level Timeline & Milestones
+
+| Phase | Start Date | End Date | Duration | Key Deliverables |
+|-------|------------|----------|----------|------------------|
+| Planning | {{ planning_start }} | {{ planning_end }} | {{ planning_duration }} | Project Charter, WBS |
+| Execution | {{ execution_start }} | {{ execution_end }} | {{ execution_duration }} | MVP, Testing |
+| Deployment | {{ deployment_start }} | {{ deployment_end }} | {{ deployment_duration }} | Production Release |
+
+## Budget & Resources
+
+### Financial Budget
+| Category | Budget | Actual | Variance |
+|----------|--------|--------|----------|
+| Personnel | {{ personnel_budget }} | | |
+| Infrastructure | {{ infra_budget }} | | |
+| Software/Licenses | {{ software_budget }} | | |
+| **Total** | **{{ total_budget }}** | | |
+
+### Resource Requirements
+- **Hardware:** {{ hardware_requirements }}
+- **Software:** {{ software_requirements }}
+- **External Services:** {{ external_services }}
+
+## Risk Management
+
+### Top Risks
+| Risk | Probability | Impact | Risk Score | Mitigation Strategy | Owner |
+|------|-------------|--------|------------|-------------------|-------|
+| {{ risk1 }} | {{ risk1_probability }} | {{ risk1_impact }} | {{ risk1_score }} | {{ risk1_mitigation }} | {{ risk1_owner }} |
+
+## Change Management
+
+### Change Control Process
+1. Change Request submitted
+2. Impact Analysis (2 business days)
+3. Change Board Review (weekly)
+4. Approval/Rejection
+5. Communication to stakeholders
+
+## Communication Plan
+
+| Communication Type | Frequency | Audience | Format | Owner |
+|-------------------|-----------|----------|--------|-------|
+| Status Report | Weekly | Core Team | Email | PM |
+| Stakeholder Update | Bi-weekly | All Stakeholders | Presentation | PM |
+
+## Quality Management
+
+### Quality Standards
+- Code Coverage: ≥ 80%
+- Performance: Response time < 200ms
+- Security: No critical vulnerabilities
+- Documentation: 100% API coverage
+
+### Quality Gates
+- [ ] Design Review Approved
+- [ ] Code Review Passed
+- [ ] Security Scan Passed
+- [ ] Performance Test Passed
+- [ ] UAT Signed Off
+
+## Approval
+
+This project charter has been reviewed and approved by:
+
+**Project Sponsor:** _________________________ Date: _________
+
+**Project Manager:** _________________________ Date: _________
+
+**Tech Lead:** _________________________ Date: _________
