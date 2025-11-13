@@ -1,0 +1,90 @@
+{
+  "id": "FRM-006",
+  "title": "Decouple and Package AI Lab Framework",
+  "description": "Initiative to decouple the AI Lab Framework from the live data directory, package it as a standalone, configurable application, and define a clear process for deployment and data migration.",
+  "status": "completed",
+  "priority": "critical",
+  "category": "refactoring",
+  "tags": ["framework", "decoupling", "architecture", "deployment"],
+  "created_date": "2025-11-11T00:00:00Z",
+  "updated_date": "2025-11-11T12:45:00Z",
+  "due_date": null,
+  "estimated_hours": 42,
+  "actual_hours": 0,
+  "dependencies": [],
+  "acceptance_criteria": [
+    "Framework can be run with a configurable data path.",
+    "A deployment script exists to create new, clean instances of the framework.",
+    "Data migration path is confirmed to be a simple file copy.",
+    "The standalone framework is fully tested and validated against the original."
+  ],
+  "sub_tasks": [
+    {
+      "id": "FRM-006-1",
+      "title": "Phase 1: Finalize Decoupling & Configuration",
+      "description": "Make the data source fully configurable by reading the data path from application settings.",
+      "status": "completed",
+      "priority": "critical",
+      "estimated_hours": 8,
+      "acceptance_criteria": [
+        "JsonFile repositories read their data path from core.config settings.",
+        "A DATA_ROOT_PATH setting is added to core/config.py."
+      ]
+    },
+    {
+      "id": "FRM-006-2",
+      "title": "Phase 2: Create a Packaged 'Deployment'",
+      "description": "Create a simple, repeatable process to 'deploy' a clean instance of the framework.",
+      "status": "completed",
+      "priority": "high",
+      "estimated_hours": 12,
+      "acceptance_criteria": [
+        "A 'make deploy' target exists in the Makefile.",
+        "The deployment script successfully creates a new, runnable instance with its own data folder and .env file."
+      ]
+    },
+    {
+      "id": "FRM-006-3",
+      "title": "Phase 3: Validation, Testing, and Migration",
+      "description": "Verify the decoupled framework and confirm the data migration path is simple.",
+      "status": "completed",
+      "priority": "high",
+      "estimated_hours": 20,
+      "acceptance_criteria": [
+        "Automated tests pass when running the framework against a copy of the real data.",
+        "Unit tests using the Mock Repositories are successful.",
+        "The data migration process is documented in the README."
+      ]
+    },
+    {
+      "id": "FRM-006-3-1",
+      "title": "Create Anonymized Test Data Set and Strategy",
+      "description": "Develop a strategy for creating and using abstracted, anonymized test data. Implement a script to generate this data and integrate its use into the deployment and testing workflow.",
+      "status": "completed",
+      "priority": "high",
+      "estimated_hours": 8,
+      "acceptance_criteria": [
+        "A dedicated 'test_data' directory exists within the standalone project.",
+        "A script is available to generate anonymized test data for ideas, projects, and work items.",
+        "The 'make deploy' target can optionally copy this test data into a new instance.",
+        "Tests are configured to use this anonymized test data."
+      ]
+    },
+    {
+      "id": "FRM-006-4",
+      "title": "Phase 4: Identify and Document Framework Files for Future Relocation",
+      "description": "Identify all remaining framework-related files and folders in the root directory that *could* eventually be moved into the standalone project. Document their purpose and dependencies. The actual relocation will be a separate, later decision, dependent on the maturity and robustness of the standalone framework.",
+      "status": "completed",
+      "priority": "medium",
+      "estimated_hours": 2,
+      "acceptance_criteria": [
+        "A comprehensive list of framework-related files/folders in the root is documented.",
+        "Each item's purpose and dependencies are described.",
+        "A clear recommendation for future relocation is provided."
+      ]
+    }
+  ],
+  "blockers": [],
+  "notes": "This work item tracks the strategic initiative to make the AI Lab Framework a truly independent and deployable piece of software.",
+  "file_path": "data/work-items/FRM-006.json"
+}

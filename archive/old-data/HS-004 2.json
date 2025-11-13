@@ -1,0 +1,26 @@
+{
+  "id": "HS-004",
+  "title": "GitOps mit Argo CD einrichten",
+  "description": "GitOps mit Argo CD einrichten, um die Vision I 'Unsichtbare Infrastruktur' vollständig automatisieren zu können.",
+  "status": "todo",
+  "priority": "medium",
+  "type": "infrastructure",
+  "project": "homeserver-vision-infrastructure",
+  "assignee": "DevOps Team",
+  "tags": ["gitops", "argo-cd", "automation"],
+  "created_date": "2025-11-09T00:00:00Z",
+  "updated_date": "2025-11-09T00:00:00Z",
+  "due_date": null,
+  "estimated_hours": 6,
+  "actual_hours": 0,
+  "dependencies": ["HS-003"],
+  "acceptance_criteria": [
+    "Argo CD ist installiert und konfiguriert",
+    "Erste Anwendung wird automatisch deployed",
+    "Git-Änderungen lösen automatische Deployments aus"
+  ],
+  "sub_tasks": [],
+  "blockers": [],
+  "notes": "Argo CD: De-facto Standard für Kubernetes GitOps. Git als Single Source of Truth.",
+  "file_path": "/Users/jns/Documents/1 | Projekte/ai-lab/archive/work-items/HS-004_gitops-mit-argo-cd.md"
+}

@@ -1,0 +1,115 @@
+{
+  "id": "FRM-002",
+  "title": "AI Lab Framework - Verzeichnisbereinigung",
+  "description": "Dieses Vorhaben schließt an die 'AI Lab Framework Improvement Initiative' (FRM-001) an und konzentriert sich auf die Bereinigung und Konsolidierung der Verzeichnisstruktur und Dokumentationsinhalte.",
+  "status": "todo",
+  "priority": "medium",
+  "type": "infrastructure",
+  "project": "PRJ-005",
+  "assignee": "AI Lab Framework Team",
+  "tags": [
+    "cleanup",
+    "refactoring",
+    "maintenance"
+  ],
+  "created_date": "2025-11-09T00:00:00Z",
+  "updated_date": "2025-11-09T00:00:00Z",
+  "due_date": null,
+  "estimated_hours": 37,
+  "actual_hours": 7,
+  "dependencies": [
+    "FRM-001"
+  ],
+  "acceptance_criteria": [
+    "Alle identifizierten redundanten Dokumente sind konsolidiert oder entfernt",
+    "Keine leeren oder ungenutzten Verzeichnisse im `core/` Bereich",
+    "Ein zentrales Archiv für abgeschlossene/kritische Dokumente existiert und ist dokumentiert",
+    "Die Verzeichnisstruktur ist logisch und leicht verständlich"
+  ],
+  "sub_tasks": [
+    {
+      "id": "FRM-002-1",
+      "title": "Redundante Inhalte identifizieren",
+      "status": "done",
+      "estimated_hours": 3,
+      "sub_tasks": [
+        {
+          "id": "FRM-002-1.1",
+          "title": "Analyse der Root-Dokumentation",
+          "status": "done",
+          "estimated_hours": 1
+        },
+        {
+          "id": "FRM-002-1.2",
+          "title": "Analyse der `core`-Dokumentation",
+          "status": "done",
+          "estimated_hours": 1
+        },
+        {
+          "id": "FRM-002-1.3",
+          "title": "Analyse der `docs`-Dokumentation",
+          "status": "done",
+          "estimated_hours": 0.5
+        },
+        {
+          "id": "FRM-002-1.4",
+          "title": "Analyse der Tool- und Projekt-Dokumentation",
+          "status": "done",
+          "estimated_hours": 0.5
+        },
+        {
+          "id": "FRM-002-1.5",
+          "title": "Konsolidierungsplan erstellen",
+          "status": "done",
+          "estimated_hours": 0
+        }
+      ],
+      "notes": "Analyse der Root-Dokumentation (README.md, GETTING_STARTED.md, DEVELOPER_GUIDE.md, AI_GUIDE.md, AGENTS.md, GEMINI.md, SCRIPT_ORGANIZATION.md, BACKUP_README.md) abgeschlossen. Es gibt signifikante Redundanzen in den 'Getting Started'-Sektionen und AI-bezogenen Richtlinien. Mehrere eigenständige Dokumente (AGENTS.md, SCRIPT_ORGANIZATION.md, BACKUP_README.md, GEMINI.md) könnten in zentralere Dokumentationsdateien konsolidiert werden.\nAnalyse der `core`-Dokumentation (core/docs/*, core/guidelines/*, core/MANUAL.md) abgeschlossen. Es gibt strukturelle Redundanzen, insbesondere mit `core/MANUAL.md` das Framework-Strukturinformationen aus `core/docs/FRAMEWORK_STRUCTURE.md` dupliziert. Auch `AI_GUIDE.md` und `ki-tool-guidelines.md` enthalten allgemeine Framework-Informationen, die idealerweise von `core/docs/PROJECT_CONTEXT.md` oder `core/guidelines/GUIDELINES.md` verlinkt statt dupliziert werden sollten. `DOCUMENTATION_MATRIX.md` ist ein nützliches Meta-Dokument.\nAnalyse der `docs`-Dokumentation (MkDocs-Site) abgeschlossen. Das `docs/`-Verzeichnis enthält signifikante Duplizierungen von Inhalten aus dem Root-Verzeichnis und dem `core/`-Verzeichnis, was das 'Single Source of Truth'-Prinzip verletzt. Veraltete Dokumente des alten Markdown-basierten Projektmanagements sind ebenfalls vorhanden.\nAnalyse der Tool- und Projekt-Dokumentation abgeschlossen. Das Hauptproblem ist die Duplizierung von `README.md` und `PROJECT_OVERVIEW.md` innerhalb jedes Projekts. Die projektspezifischen `README.md`-Dateien duplizieren auch allgemeine Entwicklungsinformationen aus dem Haupt-`DEVELOPER_GUIDE.md`.\nEin Konsolidierungsplan wurde in `core/docs/analysis/FRM-002-1.5_documentation_consolidation_strategy.md` erstellt. Die Strategie umfasst die Zusammenführung und Löschung redundanter Dateien, die Aktualisierung von Links zur SSoT und die Implementierung eines Synchronisationsskripts für die `docs/`-Dokumentation."
+    },
+    {
+      "id": "FRM-002-2",
+      "title": "Überflüssige Strukturen analysieren",
+      "status": "done",
+      "estimated_hours": 3
+    },
+    {
+      "id": "FRM-002-3",
+      "title": "Datenmanagement-Format analysieren",
+      "status": "done",
+      "estimated_hours": 4
+    },
+    {
+      "id": "FRM-002-4",
+      "title": "Archivierungsstrategie definieren",
+      "status": "done",
+      "estimated_hours": 2
+    },
+    {
+      "id": "FRM-002-5",
+      "title": "Dokumente konsolidieren & migrieren",
+      "status": "todo",
+      "estimated_hours": 10
+    },
+    {
+      "id": "FRM-002-6",
+      "title": "Datenmanagement-Migration durchführen",
+      "status": "todo",
+      "estimated_hours": 6
+    },
+    {
+      "id": "FRM-002-7",
+      "title": "Überflüssige Strukturen entfernen",
+      "status": "todo",
+      "estimated_hours": 8
+    },
+    {
+      "id": "FRM-002-8",
+      "title": "Archivierung durchführen",
+      "status": "done",
+      "estimated_hours": 1
+    }
+  ],
+  "blockers": [],
+  "notes": "Phase 1 (Analyse & Planung) ist zu 50% abgeschlossen. Phase 2 (Bereinigung & Konsolidierung) ist zu 25% abgeschlossen.\nDer Analyse-Workflow wurde als Template in `core/docs/templates/ANALYSIS_WORKFLOW_TEMPLATE.md` festgehalten.\nAnalyse überflüssiger Strukturen abgeschlossen. Es wurden zahlreiche leere Verzeichnisse und redundante/veraltete Dokumentationsdateien identifiziert, die im Konsolidierungsplan aus FRM-002-1.5 behandelt werden.\nDie Konsolidierungsstrategie wurde basierend auf Nutzerfeedback angepasst. `AGENTS.md` und `GEMINI.md` werden nicht gelöscht, sondern verweisen auf `AI_GUIDE.md`. Die Konsolidierung der Projektdokumentation (`PROJECT_OVERVIEW.md` in `README.md`) wird auf einen späteren Zeitpunkt verschoben.",
+  "file_path": "data/work-items/FRM-002.json"
+}

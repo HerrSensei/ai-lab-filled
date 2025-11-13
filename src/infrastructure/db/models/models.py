@@ -88,6 +88,7 @@ class Project(Base):
         String, default="healthy"
     )  # Enum: healthy, at_risk, critical
     repository_url = Column(String)
+    github_repo_id = Column(Integer)  # GitHub repository ID
     notes = Column(Text)
 
     # Relationships
@@ -135,6 +136,7 @@ class WorkItem(Base):
     repository_url = Column(String)
     github_issue_id = Column(Integer)  # GitHub issue number for sync
     github_synced_at = Column(DateTime)  # Last sync timestamp
+    github_repo_url = Column(String)  # GitHub repository URL
     is_draft = Column(Boolean, default=False)
     archived = Column(Boolean, default=False)
 

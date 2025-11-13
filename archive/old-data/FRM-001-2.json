@@ -1,0 +1,58 @@
+{
+  "id": "FRM-001-2",
+  "title": "Dokumentations-Dschungel aufräumen",
+  "description": "Obwohl das Framework eine 'Single Source of Truth' anstrebt, existiert eine erhebliche Menge an weiteren Dokumenten. Dies führt zu Verwirrung über welche Dokumentation aktuell oder relevant ist. Die schiere Menge an Informationen könnte neue Entwickler erschlagen.",
+  "status": "done",
+  "priority": "high",
+  "type": "documentation",
+  "project": "AI Lab Framework",
+  "assignee": "AI Lab Framework Team",
+  "tags": [
+    "documentation",
+    "refactoring",
+    "sprint-2025-45"
+  ],
+  "created_date": "2025-11-09T19:00:00Z",
+  "updated_date": "2025-11-09T22:00:00Z",
+  "due_date": null,
+  "estimated_hours": 8,
+  "actual_hours": 8,
+  "dependencies": [
+    "FRM-001"
+  ],
+  "acceptance_criteria": [
+    "MkDocs-Dokumentation ist vollständig und funktional",
+    "Dokumentations-Matrix ist erstellt und wird genutzt",
+    "KI-Agenten haben optimierte Kontext-Dateien",
+    "Neue Entwickler finden Informationen in <5 Minuten"
+  ],
+  "sub_tasks": [
+    {
+      "id": "FRM-001-2.1",
+      "title": "Bestandsaufnahme und Analyse",
+      "status": "done",
+      "estimated_hours": 2
+    },
+    {
+      "id": "FRM-001-2.2",
+      "title": "MkDocs-Infrastruktur einrichten",
+      "status": "done",
+      "estimated_hours": 3
+    },
+    {
+      "id": "FRM-001-2.3",
+      "title": "Dokumentations-Matrix erstellen",
+      "status": "done",
+      "estimated_hours": 2
+    },
+    {
+      "id": "FRM-001-2.4",
+      "title": "KI-Kontext-Snippets generieren",
+      "status": "done",
+      "estimated_hours": 1
+    }
+  ],
+  "blockers": [],
+  "notes": "COMPLETION REPORT: MkDocs-basierte zentrale Dokumentation eingerichtet. Automatisierte Doku-Synchronisation mit 'scripts/sync-docs.sh'. Klare Inhaltsorganisation in 'docs/content/'. Single Source of Truth etabliert. | Strategische Entscheidungen: MkDocs statt Docusaurus, schrittweise Migration, KI-First. Design-Prinzipien: Single Source of Truth, Kontext-sensitiv, Automatisierung.",
+  "file_path": "/Users/jns/Documents/1 | Projekte/ai-lab/archive/work-items/FRM-001-2_dokumentations-dschungel-aufräumen.md"
+}

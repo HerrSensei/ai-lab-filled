@@ -1,0 +1,26 @@
+{
+  "id": "HS-003",
+  "title": "Produktiver k3s-Cluster einrichten",
+  "description": "Basierend auf dem k3s PoC (HS-002) wird ein produktiver Kubernetes-Cluster für den HomeServer aufgebaut.",
+  "status": "todo",
+  "priority": "high",
+  "type": "infrastructure",
+  "project": "homeserver-vision-infrastructure",
+  "assignee": "Infrastructure Team",
+  "tags": ["k3s", "kubernetes", "production"],
+  "created_date": "2025-11-09T00:00:00Z",
+  "updated_date": "2025-11-09T00:00:00Z",
+  "due_date": null,
+  "estimated_hours": 8,
+  "actual_hours": 0,
+  "dependencies": ["HS-002"],
+  "acceptance_criteria": [
+    "Cluster ist produktionsreif und stabil",
+    "Monitoring und Logging sind eingerichtet",
+    "Backup-Strategie ist implementiert und getestet"
+  ],
+  "sub_tasks": [],
+  "blockers": [],
+  "notes": "k3s für Production: Ausgereift und stabil für Homelab. Longhorn für Storage. Argo CD für GitOps.",
+  "file_path": "/Users/jns/Documents/1 | Projekte/ai-lab/archive/work-items/HS-003_produktiver-k3s-cluster.md"
+}

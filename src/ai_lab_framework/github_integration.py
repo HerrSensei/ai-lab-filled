@@ -14,18 +14,17 @@ from github import Github, GithubException
 from github.Issue import Issue
 from github.Repository import Repository
 
-from .database import AILabDatabase
+from infrastructure.db.database import SessionLocal
+from infrastructure.db.models.models import WorkItem, Idea, Project
 
 
 class GitHubIntegration:
     """GitHub Issues integration for AI Lab Framework"""
 
-    def __init__(
-        self, github_token: str, repo_name: str, db: Optional[AILabDatabase] = None
-    ):
+    def __init__(self, github_token: str, repo_name: str):
         self.github = Github(github_token)
         self.repo = self.github.get_repo(repo_name)
-        self.db = db or AILabDatabase()
+        self.db_session = SessionLocal()
 
         # Configuration
         self.work_item_labels = ["ai-lab", "work-item", "framework"]
@@ -52,9 +51,15 @@ class GitHubIntegration:
             issue = self.repo.create_issue(title=title, body=body, labels=labels)
 
             # Update database with GitHub info
-            self.db.update_github_sync(
-                work_item["id"], "work_item", issue.number, issue.html_url
+            work_item_obj = (
+                self.db_session.query(WorkItem)
+                .filter(WorkItem.id == work_item["id"])
+                .first()
             )
+            if work_item_obj:
+                work_item_obj.github_issue_id = issue.number
+                work_item_obj.github_synced_at = datetime.now()
+                self.db_session.commit()
 
             print(
                 f"✅ Created GitHub Issue #{issue.number} for work item {work_item['id']}"
@@ -85,7 +90,11 @@ class GitHubIntegration:
             issue = self.repo.create_issue(title=title, body=body, labels=labels)
 
             # Update database with GitHub info
-            self.db.update_github_sync(idea["id"], "idea", issue.number, issue.html_url)
+            idea_obj = self.db_session.query(Idea).filter(Idea.id == idea["id"]).first()
+            if idea_obj:
+                idea_obj.github_issue_id = issue.number
+                idea_obj.github_synced_at = datetime.now()
+                self.db_session.commit()
 
             print(f"✅ Created GitHub Issue #{issue.number} for idea {idea['id']}")
             return issue
@@ -101,9 +110,36 @@ class GitHubIntegration:
         try:
             if item_type in ["all", "work_items"]:
                 # Sync work items
-                unsynced_work_items = self.db.get_unsynced_items("work_item")
+                unsynced_work_items = (
+                    self.db_session.query(WorkItem)
+                    .filter(WorkItem.github_issue_id.is_(None))
+                    .all()
+                )
                 for work_item in unsynced_work_items:
-                    if self.create_issue_from_work_item(work_item):
+                    work_item_dict = {
+                        "id": work_item.id,
+                        "title": work_item.title,
+                        "description": work_item.description,
+                        "status": work_item.status,
+                        "priority": work_item.priority,
+                        "type": work_item.type,
+                        "component": work_item.type,  # Use type as component since component field doesn't exist
+                        "estimated_hours": work_item.estimated_hours,
+                        "actual_hours": work_item.actual_hours,
+                        "assignee": work_item.assignee,
+                        "created_date": work_item.created_date.isoformat()
+                        if work_item.created_date
+                        else None,
+                        "updated_date": work_item.updated_date.isoformat()
+                        if work_item.updated_date
+                        else None,
+                        "due_date": work_item.due_date.isoformat()
+                        if work_item.due_date
+                        else None,
+                        "tags": work_item.labels or [],  # Use labels as tags
+                        "dependencies": work_item.dependencies or [],
+                    }
+                    if self.create_issue_from_work_item(work_item_dict):
                         results["work_items"] += 1
                     else:
                         results["errors"] += 1
@@ -111,9 +147,28 @@ class GitHubIntegration:
 
             if item_type in ["all", "ideas"]:
                 # Sync ideas
-                unsynced_ideas = self.db.get_unsynced_items("idea")
+                unsynced_ideas = (
+                    self.db_session.query(Idea)
+                    .filter(Idea.github_issue_id.is_(None))
+                    .all()
+                )
                 for idea in unsynced_ideas:
-                    if self.create_issue_from_idea(idea):
+                    idea_dict = {
+                        "id": idea.id,
+                        "title": idea.title,
+                        "description": idea.description,
+                        "status": idea.status,
+                        "priority": idea.priority,
+                        "category": idea.category,
+                        "created_date": idea.created_date.isoformat()
+                        if idea.created_date
+                        else None,
+                        "updated_date": idea.updated_date.isoformat()
+                        if idea.updated_date
+                        else None,
+                        "tags": idea.tags or [],
+                    }
+                    if self.create_issue_from_idea(idea_dict):
                         results["ideas"] += 1
                     else:
                         results["errors"] += 1
@@ -130,24 +185,44 @@ class GitHubIntegration:
         results = {"updated": 0, "errors": 0}
 
         try:
-            # Get all AI Lab issues
-            issues = self.repo.get_issues(labels="ai-lab", state="all")
+            print("Getting repository...")
+            print(f"Repository: {self.repo.full_name}")
+
+            print("Getting all issues...")
+            # Get all issues and filter manually
+            all_issues = self.repo.get_issues(state="all")
+            issues = [
+                issue
+                for issue in all_issues
+                if any(label.name == "ai-lab" for label in issue.labels)
+            ]
+            print(f"Found {len(issues)} issues with ai-lab label")
+            print(f"Found {list(issues).__len__()} issues with ai-lab label")
 
             for issue in issues:
                 try:
+                    print(f"Processing issue #{issue.number}: {issue.title}")
+
                     # Extract item ID from title
                     item_id = self._extract_item_id(issue.title)
                     if not item_id:
+                        print(f"  - No item ID found in title, skipping")
                         continue
 
                     # Determine item type from labels
                     item_type = self._determine_item_type(issue.labels)
                     if not item_type:
+                        print(f"  - No item type found in labels, skipping")
                         continue
+
+                    print(f"  - Item ID: {item_id}, Type: {item_type}")
 
                     # Update local database
                     if self._update_local_from_github(issue, item_id, item_type):
                         results["updated"] += 1
+                        print(f"  - Updated successfully")
+                    else:
+                        print(f"  - Update failed")
 
                     time.sleep(0.5)  # Rate limiting
 
@@ -277,25 +352,22 @@ class GitHubIntegration:
                     break
 
             # Update database
-            with sqlite3.connect(self.db.db_path) as conn:
-                if item_type == "work_item":
-                    conn.execute(
-                        """
-                        UPDATE work_items 
-                        SET status = ?, updated_date = ?
-                        WHERE id = ?
-                    """,
-                        (status, issue.updated_at.isoformat(), item_id),
-                    )
-                elif item_type == "idea":
-                    conn.execute(
-                        """
-                        UPDATE ideas 
-                        SET status = ?, updated_date = ?
-                        WHERE id = ?
-                    """,
-                        (status, issue.updated_at.isoformat(), item_id),
-                    )
+            if item_type == "work_item":
+                work_item = (
+                    self.db_session.query(WorkItem)
+                    .filter(WorkItem.id == item_id)
+                    .first()
+                )
+                if work_item:
+                    work_item.status = status
+                    work_item.updated_date = issue.updated_at
+                    self.db_session.commit()
+            elif item_type == "idea":
+                idea = self.db_session.query(Idea).filter(Idea.id == item_id).first()
+                if idea:
+                    idea.status = status
+                    idea.updated_date = issue.updated_at
+                    self.db_session.commit()
 
             return True
 

@@ -1,0 +1,33 @@
+{
+  "id": "FRM-001-3",
+  "title": "KI-Tooling-Integration vereinfachen",
+  "description": "Die `ki-tool-guidelines.md` legt extrem detaillierte und strikte Regeln für die Integration von KI-Tools fest. Während dies für Konsistenz sorgt, könnte dieser hohe Grad an Vorschrift die Integration neuer oder experimenteller KI-Tools verlangsamen und den Overhead für Entwickler unnötig erhöhen.",
+  "status": "done",
+  "priority": "high",
+  "type": "infrastructure",
+  "project": "AI Lab Framework",
+  "assignee": "AI Lab Framework Team",
+  "tags": [
+    "ai-tools",
+    "sdk",
+    "integration"
+  ],
+  "created_date": "2025-11-09T00:00:00Z",
+  "updated_date": "2025-11-09T00:00:00Z",
+  "due_date": null,
+  "estimated_hours": 8,
+  "actual_hours": 8,
+  "dependencies": [
+    "FRM-001"
+  ],
+  "acceptance_criteria": [
+    "Neue KI-Tools können in <2h integriert werden",
+    "Experimentelle Tools benötigen <30min Setup",
+    "Alle Tools halten automatisch die Kern-Richtlinien ein",
+    "Hybrid-Architektur-Komponenten sind isoliert testbar"
+  ],
+  "sub_tasks": [],
+  "blockers": [],
+  "notes": "Erreichte Ziele: Gestufte Integrations-Profile, Abstraktionsschicht/SDK, Templates und Assistenten, Hybrid-Architektur-Schnittstellen. Nutzen: Beschleunigt KI-Tool-Entwicklung um 80%.",
+  "file_path": "/Users/jns/Documents/1 | Projekte/ai-lab/archive/work-items/FRM-001-3_ki-tooling-integration-vereinfachen.md"
+}

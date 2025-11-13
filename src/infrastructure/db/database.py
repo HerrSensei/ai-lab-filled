@@ -43,9 +43,16 @@ def init_db():
         AutomationRule,
     )
 
+    # Import and setup auto-sync
+    from .auto_sync import setup_auto_sync
+
     # Create all tables
     Base.metadata.create_all(bind=engine)
     print("✅ Database initialized with new SQLAlchemy models")
+
+    # Setup automatic GitHub sync
+    setup_auto_sync()
+    print("✅ Auto-sync configured for GitHub integration")
 
 
 def drop_all_tables():

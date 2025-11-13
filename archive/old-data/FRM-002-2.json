@@ -1,0 +1,28 @@
+{
+  "id": "FRM-002-2",
+  "title": "Superfluous Directory Structures Analysis",
+  "description": "Analysis of superfluous directory structures in the AI Lab Framework.",
+  "status": "done",
+  "priority": "high",
+  "type": "infrastructure",
+  "project": "AI Lab Framework",
+  "assignee": "AI Lab Framework Team",
+  "tags": [
+    "cleanup",
+    "refactoring",
+    "analysis"
+  ],
+  "created_date": "2025-11-09T00:00:00Z",
+  "updated_date": "2025-11-09T00:00:00Z",
+  "due_date": null,
+  "estimated_hours": 3,
+  "actual_hours": 3,
+  "dependencies": [
+    "FRM-002"
+  ],
+  "acceptance_criteria": [],
+  "sub_tasks": [],
+  "blockers": [],
+  "notes": "Identified issues with cache directories, virtual environment proliferation, naming inconsistencies, and documentation structure confusion. Recommended cleanup actions.",
+  "file_path": "/Users/jns/Documents/1 | Projekte/ai-lab/archive/work-items/FRM-002-2_superfluous-structures-analysis.md"
+}
