@@ -3,15 +3,15 @@ Homelab Agent OS Framework - API Server
 REST API for managing agents and services
 """
 
-from fastapi import FastAPI, HTTPException, BackgroundTasks
+import logging
+from datetime import datetime
+from typing import Any
+
+from fastapi import BackgroundTasks, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
-from typing import Dict, List, Optional, Any
-from datetime import datetime
-import asyncio
-import logging
 
-from ..core.agent_manager import agent_manager, Agent, AgentType, AgentStatus
+from ..core.agent_manager import Agent, AgentStatus, AgentType, agent_manager
 
 
 # Pydantic models for API
@@ -20,7 +20,7 @@ class AgentConfig(BaseModel):
         default=30, description="Heartbeat interval in seconds"
     )
     check_interval: int = Field(default=60, description="Check interval in seconds")
-    service_config: Optional[Dict[str, Any]] = Field(
+    service_config: dict[str, Any] | None = Field(
         default=None, description="Service-specific configuration"
     )
 
@@ -36,23 +36,23 @@ class AgentResponse(BaseModel):
     name: str
     type: str
     status: str
-    config: Dict[str, Any]
+    config: dict[str, Any]
     created_at: str
     updated_at: str
-    last_heartbeat: Optional[str] = None
-    metadata: Optional[Dict[str, Any]] = None
+    last_heartbeat: str | None = None
+    metadata: dict[str, Any] | None = None
 
 
 class AgentUpdateRequest(BaseModel):
-    status: Optional[str] = None
-    config: Optional[Dict[str, Any]] = None
-    metadata: Optional[Dict[str, Any]] = None
+    status: str | None = None
+    config: dict[str, Any] | None = None
+    metadata: dict[str, Any] | None = None
 
 
 class SystemStatsResponse(BaseModel):
     total_agents: int
-    by_type: Dict[str, int]
-    by_status: Dict[str, int]
+    by_type: dict[str, int]
+    by_status: dict[str, int]
 
 
 # Initialize FastAPI app
@@ -84,9 +84,9 @@ def agent_to_response(agent: Agent) -> AgentResponse:
         config=agent.config,
         created_at=agent.created_at.isoformat(),
         updated_at=agent.updated_at.isoformat(),
-        last_heartbeat=agent.last_heartbeat.isoformat()
-        if agent.last_heartbeat
-        else None,
+        last_heartbeat=(
+            agent.last_heartbeat.isoformat() if agent.last_heartbeat else None
+        ),
         metadata=agent.metadata,
     )
 
@@ -126,7 +126,7 @@ async def create_agent(request: AgentCreateRequest, background_tasks: Background
         logger.info(f"Created agent: {agent.name} ({agent.id})")
         return agent_to_response(agent)
 
-    except ValueError as e:
+    except ValueError:
         raise HTTPException(
             status_code=400, detail=f"Invalid agent type: {request.type}"
         )
@@ -135,7 +135,7 @@ async def create_agent(request: AgentCreateRequest, background_tasks: Background
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@app.get("/agents", response_model=List[AgentResponse])
+@app.get("/agents", response_model=list[AgentResponse])
 async def list_agents():
     """List all agents"""
     agents = agent_manager.registry.list_agents()
@@ -175,7 +175,7 @@ async def update_agent(agent_id: str, request: AgentUpdateRequest):
         logger.info(f"Updated agent: {agent.name} ({agent_id})")
         return agent_to_response(agent)
 
-    except ValueError as e:
+    except ValueError:
         raise HTTPException(status_code=400, detail=f"Invalid status: {request.status}")
     except Exception as e:
         logger.error(f"Error updating agent: {e}")
@@ -208,7 +208,7 @@ async def stop_agent(agent_id: str):
     return {"message": "Agent stopped successfully"}
 
 
-@app.get("/agents/type/{agent_type}", response_model=List[AgentResponse])
+@app.get("/agents/type/{agent_type}", response_model=list[AgentResponse])
 async def get_agents_by_type(agent_type: str):
     """Get agents by type"""
     try:
@@ -219,7 +219,7 @@ async def get_agents_by_type(agent_type: str):
         raise HTTPException(status_code=400, detail=f"Invalid agent type: {agent_type}")
 
 
-@app.get("/agents/status/{status}", response_model=List[AgentResponse])
+@app.get("/agents/status/{status}", response_model=list[AgentResponse])
 async def get_agents_by_status(status: str):
     """Get agents by status"""
     try:

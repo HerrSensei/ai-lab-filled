@@ -17,6 +17,7 @@ The AI Logging System provides comprehensive tracking of AI agent activities, se
 ```
 ai-logs/
 ├── SYSTEM.md                           # This file - System documentation
+<<<<<<< HEAD
 ├── logs/                              # Active session logs (NEW)
 │   └── sessions/                     # Dual-format session logs
 │       ├── YYYY-MM-DD_session-XXX.log    # Human-readable format
@@ -24,6 +25,16 @@ ai-logs/
 ├── changelogs/                        # Change history tracking
 │   └── CHANGELOG.md                 # Main changelog (GitHub-style)
 └── archive/                           # Archived logs and old data
+=======
+├── logs/                              # Active session logs
+│   ├── session_YYYYMMDD_HHMMSS.log   # Human-readable session log
+│   └── session_YYYYMMDD_HHMMSS.json  # Machine-readable session metadata
+├── changelogs/                        # System change history
+│   └── CHANGELOG.md                   # Main changelog (GitHub-style)
+└── archive/                           # Historical logs
+    ├── sessions/                       # Old session logs (.md format)
+    └── change_log/                    # Old changelog files
+>>>>>>> ai-lab-filled-content
 ```
 
 ---
@@ -35,11 +46,12 @@ ai-logs/
 - **Content**: Logging standards, file formats, workflows
 - **Audience**: AI agents and human developers
 
-### change_log/CHANGELOG.md
+### changelogs/CHANGELOG.md
 - **Purpose**: Permanent record of all changes
 - **Format**: GitHub-style changelog
 - **Content**: Feature additions, bug fixes, improvements
 
+<<<<<<< HEAD
 ### logs/sessions/ Directory
 - **Purpose**: Individual session tracking with dual formats
 - **Naming**: `YYYY-MM-DD_session-XXX.log` + `.json`
@@ -53,6 +65,22 @@ ai-logs/
 ### archive/ Directory
 - **Purpose**: Historical logs and deprecated data
 - **Content**: Old session logs, archived work items
+=======
+### logs/session_*.log
+- **Purpose**: Human-readable session logs
+- **Format**: Structured text with clear sections
+- **Creation**: Automated via `scripts/create_session_log.py`
+
+### logs/session_*.json
+- **Purpose**: Machine-readable session metadata
+- **Format**: Structured JSON data
+- **Usage**: Dashboard integration, automation, analysis
+
+### archive/ Directory
+- **Purpose**: Historical logs in old format
+- **Content**: Previous session logs and changelogs
+- **Status**: Preserved for reference only
+>>>>>>> ai-lab-filled-content
 
 ---
 
