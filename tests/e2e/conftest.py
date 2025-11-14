@@ -12,7 +12,7 @@ import tempfile
 import shutil
 import sqlite3
 import json
-from datetime import datetime
+from datetime import datetime, UTC
 
 
 @pytest.fixture(scope="session")
@@ -128,7 +128,7 @@ class TestHelpers:
             INSERT INTO work_items (id, title, description, status, priority, type, created_date, updated_date)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         """,
-            (work_id, title, f"Test description for {title}", status, priority, type, datetime.utcnow(), datetime.utcnow()),
+            (work_id, title, f"Test description for {title}", status, priority, type, datetime.now(UTC), datetime.now(UTC)),
         )
 
         conn.commit()
@@ -151,7 +151,7 @@ class TestHelpers:
             INSERT INTO ideas (id, title, description, category, status, priority, created_date, updated_date)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         """,
-            (idea_id, title, f"Test idea description for {title}", category, "draft", priority, datetime.utcnow(), datetime.utcnow()),
+            (idea_id, title, f"Test idea description for {title}", category, "draft", priority, datetime.now(UTC), datetime.now(UTC)),
         )
 
         conn.commit()
