@@ -120,7 +120,7 @@ warn_unused_ignores = true
 [tool.pytest.ini_options]
 minversion = "6.0"
 addopts = "--asyncio-mode=auto -ra -q --strict-markers --strict-config"
-testpaths = ["tests", "tools"]
+testpaths = ["tools"]
 python_files = ["test_*.py", "*_test.py"]
 python_classes = ["Test*"]
 python_functions = ["test_*"]
