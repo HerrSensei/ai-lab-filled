@@ -1,0 +1,320 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Lab Framework - Real-Time Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .card { @apply bg-white rounded-lg shadow-md p-6 mb-6; }
+        .metric { @apply text-3xl font-bold text-blue-600; }
+        .status-completed { @apply bg-green-100 text-green-800; }
+        .status-in-progress { @apply bg-yellow-100 text-yellow-800; }
+        .status-todo { @apply bg-gray-100 text-gray-800; }
+        .priority-high { @apply bg-red-100 text-red-800; }
+        .priority-medium { @apply bg-orange-100 text-orange-800; }
+        .priority-low { @apply bg-blue-100 text-blue-800; }
+        .refresh-indicator { 
+            position: fixed; 
+            top: 20px; 
+            right: 20px; 
+            background: #10b981; 
+            color: white; 
+            padding: 8px 16px; 
+            border-radius: 20px; 
+            font-size: 12px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="refresh-indicator" id="refreshIndicator">
+        🔄 Auto-Refresh: 60s
+    </div>
+    
+    <div class="container mx-auto px-4 py-8">
+        <header class="mb-8">
+            <h1 class="text-4xl font-bold text-gray-800 mb-2">AI Lab Framework Dashboard</h1>
+            <p class="text-gray-600">Real-time project overview and metrics</p>
+            <p class="text-sm text-gray-500">Last updated: 2025-11-14T02:45:33.376146</p>
+        </header>
+
+        <!-- Key Metrics -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="card">
+                <h3 class="text-lg font-semibold mb-2">Work Items</h3>
+                <div class="metric">14</div>
+                <p class="text-sm text-gray-600">Completion Rate: 14.29%</p>
+            </div>
+            <div class="card">
+                <h3 class="text-lg font-semibold mb-2">Ideas</h3>
+                <div class="metric">6</div>
+                <p class="text-sm text-gray-600">Active ideas</p>
+            </div>
+            <div class="card">
+                <h3 class="text-lg font-semibold mb-2">Projects</h3>
+                <div class="metric">2</div>
+                <p class="text-sm text-gray-600">Active projects</p>
+            </div>
+            <div class="card">
+                <h3 class="text-lg font-semibold mb-2">Sessions</h3>
+                <div class="metric">2</div>
+                <p class="text-sm text-gray-600">Total sessions</p>
+            </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div class="card">
+                <h3 class="text-lg font-semibold mb-4">Work Items by Status</h3>
+                <canvas id="statusChart" width="400" height="200"></canvas>
+            </div>
+            <div class="card">
+                <h3 class="text-lg font-semibold mb-4">Ideas by Category</h3>
+                <canvas id="categoryChart" width="400" height="200"></canvas>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div class="card">
+                <h3 class="text-lg font-semibold mb-4">Recent Work Items</h3>
+                <div class="space-y-2">
+                    
+            <div class="flex justify-between items-center p-2 border rounded">
+                <div class="flex-1">
+                    <div class="font-medium">Develop Monitoring and Alerting Dashboard</div>
+                    <div class="text-xs text-gray-500">2025-11-13</div>
+                </div>
+                <div class="flex gap-2">
+                    <span class="px-2 py-1 text-xs rounded status-todo">todo</span>
+                    <span class="px-2 py-1 text-xs rounded priority-medium">medium</span>
+                </div>
+            </div>
+            
+            <div class="flex justify-between items-center p-2 border rounded">
+                <div class="flex-1">
+                    <div class="font-medium">Create Security and Access Control Framework</div>
+                    <div class="text-xs text-gray-500">2025-11-13</div>
+                </div>
+                <div class="flex gap-2">
+                    <span class="px-2 py-1 text-xs rounded status-todo">todo</span>
+                    <span class="px-2 py-1 text-xs rounded priority-high">high</span>
+                </div>
+            </div>
+            
+            <div class="flex justify-between items-center p-2 border rounded">
+                <div class="flex-1">
+                    <div class="font-medium">Implement Self-Healing Automation</div>
+                    <div class="text-xs text-gray-500">2025-11-13</div>
+                </div>
+                <div class="flex gap-2">
+                    <span class="px-2 py-1 text-xs rounded status-todo">todo</span>
+                    <span class="px-2 py-1 text-xs rounded priority-medium">medium</span>
+                </div>
+            </div>
+            
+            <div class="flex justify-between items-center p-2 border rounded">
+                <div class="flex-1">
+                    <div class="font-medium">Create Homeserver Deployment System</div>
+                    <div class="text-xs text-gray-500">2025-11-13</div>
+                </div>
+                <div class="flex gap-2">
+                    <span class="px-2 py-1 text-xs rounded status-todo">todo</span>
+                    <span class="px-2 py-1 text-xs rounded priority-medium">medium</span>
+                </div>
+            </div>
+            
+            <div class="flex justify-between items-center p-2 border rounded">
+                <div class="flex-1">
+                    <div class="font-medium">Setup Local Gemini-CLI Integration</div>
+                    <div class="text-xs text-gray-500">2025-11-13</div>
+                </div>
+                <div class="flex gap-2">
+                    <span class="px-2 py-1 text-xs rounded status-todo">todo</span>
+                    <span class="px-2 py-1 text-xs rounded priority-high">high</span>
+                </div>
+            </div>
+            
+                </div>
+            </div>
+            <div class="card">
+                <h3 class="text-lg font-semibold mb-4">Recent Ideas</h3>
+                <div class="space-y-2">
+                    
+            <div class="flex justify-between items-center p-2 border rounded">
+                <div class="flex-1">
+                    <div class="font-medium">Local Gemini-CLI/OpenCode Integration with Agent OS</div>
+                    <div class="text-xs text-gray-500">development • 2025-11-13</div>
+                </div>
+                <div class="px-2 py-1 text-xs rounded bg-purple-100 text-purple-800">
+                    backlog
+                </div>
+            </div>
+            
+            <div class="flex justify-between items-center p-2 border rounded">
+                <div class="flex-1">
+                    <div class="font-medium">Local Homeserver Deployment with Agent OS Integration</div>
+                    <div class="text-xs text-gray-500">infrastructure • 2025-11-13</div>
+                </div>
+                <div class="px-2 py-1 text-xs rounded bg-purple-100 text-purple-800">
+                    backlog
+                </div>
+            </div>
+            
+            <div class="flex justify-between items-center p-2 border rounded">
+                <div class="flex-1">
+                    <div class="font-medium">Advanced n8n VPS Integration with Agent OS</div>
+                    <div class="text-xs text-gray-500">automation • 2025-11-13</div>
+                </div>
+                <div class="px-2 py-1 text-xs rounded bg-purple-100 text-purple-800">
+                    backlog
+                </div>
+            </div>
+            
+            <div class="flex justify-between items-center p-2 border rounded">
+                <div class="flex-1">
+                    <div class="font-medium">Implement Homelab-Inspired Agent OS Framework</div>
+                    <div class="text-xs text-gray-500">infrastructure • 2025-11-13</div>
+                </div>
+                <div class="px-2 py-1 text-xs rounded bg-purple-100 text-purple-800">
+                    backlog
+                </div>
+            </div>
+            
+            <div class="flex justify-between items-center p-2 border rounded">
+                <div class="flex-1">
+                    <div class="font-medium">Implement Project-to-Repository Auto-Creation</div>
+                    <div class="text-xs text-gray-500">infrastructure • 2025-11-13</div>
+                </div>
+                <div class="px-2 py-1 text-xs rounded bg-purple-100 text-purple-800">
+                    backlog
+                </div>
+            </div>
+            
+                </div>
+            </div>
+        </div>
+
+        <!-- Quality Metrics -->
+        <div class="card mb-8">
+            <h3 class="text-lg font-semibold mb-4">Code Quality</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                
+            <div class="flex items-center justify-between p-3 border rounded">
+                <div class="flex items-center gap-2">
+                    <span style="color: #000000">■</span>
+                    <span class="font-medium">Black</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span>⚠️</span>
+                    <span class="text-sm">not_installed</span>
+                </div>
+            </div>
+            
+            <div class="flex items-center justify-between p-3 border rounded">
+                <div class="flex items-center gap-2">
+                    <span style="color: #f59e0b">■</span>
+                    <span class="font-medium">Ruff</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span>❌</span>
+                    <span class="text-sm">failed</span>
+                </div>
+            </div>
+            
+            <div class="flex items-center justify-between p-3 border rounded">
+                <div class="flex items-center gap-2">
+                    <span style="color: #3b82f6">■</span>
+                    <span class="font-medium">MyPy</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span>⚠️</span>
+                    <span class="text-sm">not_installed</span>
+                </div>
+            </div>
+            
+            </div>
+        </div>
+
+        <!-- System Info -->
+        <div class="card">
+            <h3 class="text-lg font-semibold mb-4">System Information</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                <div>
+                    <strong>Python Version:</strong> 3.14.0 (main, Oct  7 2025, 09:34:52) [Clang 17.0.0...
+                </div>
+                <div>
+                    <strong>Working Directory:</strong> /Users/jns/Documents/1 | Projekte/ai-lab-clean
+                </div>
+                <div>
+                    <strong>Current Branch:</strong> main
+                </div>
+                <div>
+                    <strong>Current Commit:</strong> 49debf95
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Auto-refresh
+        setInterval(() => {
+            location.reload();
+        }, 60000);
+
+        // Update refresh indicator
+        let refreshTime = 60;
+        setInterval(() => {
+            refreshTime--;
+            document.getElementById('refreshIndicator').textContent = `🔄 Auto-Refresh: ${refreshTime}s`;
+            if (refreshTime <= 0) refreshTime = 60;
+        }, 1000);
+
+        // Charts
+        const statusData = {"done": 2, "in_progress": 1, "review": 1, "todo": 10};
+        const categoryData = {"automation": 1, "development": 2, "infrastructure": 3};
+
+        // Status Chart
+        new Chart(document.getElementById('statusChart'), {
+            type: 'doughnut',
+            data: {
+                labels: Object.keys(statusData),
+                datasets: [{
+                    data: Object.values(statusData),
+                    backgroundColor: ['#10b981', '#f59e0b', '#6b7280', '#ef4444']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+
+        // Category Chart
+        new Chart(document.getElementById('categoryChart'), {
+            type: 'bar',
+            data: {
+                labels: Object.keys(categoryData),
+                datasets: [{
+                    label: 'Ideas by Category',
+                    data: Object.values(categoryData),
+                    backgroundColor: '#3b82f6'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+        

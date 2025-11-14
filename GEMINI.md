@@ -86,3 +86,24 @@ The project adheres to high standards of code quality and structured development
 *   **`projects/`**: An empty directory intended for generated projects, serving as a placeholder for new project scaffolding.
 *   **`pyproject.toml`**: Project configuration, dependencies, and script definitions.
 *   **`run.py`**: An interactive CLI script designed to execute `make` targets, acting as a central operational interface.
+
+## 🚨 Database Interaction (ALWAYS VERIFY)
+- ✅ **USE**: SQLAlchemy ORM (`src/infrastructure/db/models/`)
+- ❌ **AVOID**: Direct SQLite (`src/ai_lab_framework/database.py` - DEPRECATED)
+- ✅ **Database**: `data/ai_lab.db` (SQLite with SQLAlchemy ORM)
+- ✅ **Models**: `src/infrastructure/db/models/models.py`
+
+### Before Any Database Operation
+1. Check if using SQLAlchemy models
+2. Verify imports from `infrastructure.db`
+3. Never import from `ai_lab_framework.database`
+
+### Quick Test Before Coding
+```python
+# ✅ This is correct
+from src.infrastructure.db.database import SessionLocal
+from src.infrastructure.db.models.models import WorkItem
+
+# ❌ This is WRONG - deprecated
+from src.ai_lab_framework.database import AILabDatabase  # DO NOT USE!
+```

@@ -94,9 +94,9 @@ class RealTimeDashboard:
 
             # Recent items
             cursor.execute("""
-                SELECT id, title, status, priority, created_at, updated_at 
+                SELECT id, title, status, priority, created_date, updated_date 
                 FROM work_items 
-                ORDER BY updated_at DESC 
+                ORDER BY created_date DESC 
                 LIMIT 10
             """)
             recent_items = [
@@ -115,10 +115,10 @@ class RealTimeDashboard:
             thirty_days_ago = (datetime.now() - timedelta(days=30)).isoformat()
             cursor.execute(
                 """
-                SELECT DATE(updated_at) as date, COUNT(*) as count
+                SELECT DATE(updated_date) as date, COUNT(*) as count
                 FROM work_items 
-                WHERE status = 'completed' AND updated_at > ?
-                GROUP BY DATE(updated_at)
+                WHERE status = 'done' AND updated_date > ?
+                GROUP BY DATE(updated_date)
                 ORDER BY date
             """,
                 (thirty_days_ago,),
@@ -157,9 +157,9 @@ class RealTimeDashboard:
 
             # Recent ideas
             cursor.execute("""
-                SELECT id, title, category, status, created_at 
+                SELECT id, title, category, status, created_date 
                 FROM ideas 
-                ORDER BY created_at DESC 
+                ORDER BY created_date DESC 
                 LIMIT 10
             """)
             recent_ideas = [
@@ -358,7 +358,7 @@ class RealTimeDashboard:
             if total == 0:
                 return 0.0
 
-            cursor.execute("SELECT COUNT(*) FROM work_items WHERE status = 'completed'")
+            cursor.execute("SELECT COUNT(*) FROM work_items WHERE status = 'done'")
             completed = cursor.fetchone()[0]
 
             conn.close()

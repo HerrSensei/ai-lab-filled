@@ -163,3 +163,6 @@ GEMINI.md
 GITHUB_TOKEN
 .gemini/
 gha-creds-*.json
+
+# Nested git repositories
+projects/Homelab-Orchestrator/
