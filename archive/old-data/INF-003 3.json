@@ -1,0 +1,27 @@
+{
+  "id": "INF-003",
+  "title": "Deployment Automation",
+  "description": "Defines the deployment automation standards for the AI Lab framework, based on the first app deployment on k3s.",
+  "status": "todo",
+  "priority": "medium",
+  "type": "infrastructure",
+  "assignee": "DevOps Team",
+  "tags": ["deployment", "automation", "standards"],
+  "created_date": "2025-11-09T00:00:00Z",
+  "updated_date": "2025-11-10T00:00:00Z",
+  "due_date": null,
+  "estimated_hours": 4,
+  "actual_hours": 0,
+  "dependencies": ["INF-002"],
+  "acceptance_criteria": [
+    "Deployment process is documented",
+    "Template for future deployments is created",
+    "GitOps with Argo CD is the standard"
+  ],
+  "sub_tasks": [],
+  "blockers": [],
+  "notes": "Based on the learnings from deploying the first app (HS-005).",
+  "file_path": "/Users/jns/Documents/1 | Projekte/ai-lab/archive/work-items/INF-003_deployment-automation.md",
+  "project_id": "PRJ-002",
+  "project_name": "AI Lab Framework"
+}

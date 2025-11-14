@@ -1,0 +1,23 @@
+{
+  "id": "FRM-012",
+  "title": "Consolidate Tooling and Makefile",
+  "description": "The analysis from 2025-11-12 found that documented make commands are missing and multiple ways exist to run scripts. This task is to consolidate tooling by making the root Makefile the single entry point for all common tasks and fixing the missing 'dashboard-update' command.",
+  "status": "open",
+  "priority": "medium",
+  "category": "framework_maintenance",
+  "tags": ["makefile", "tooling", "cli", "developer-experience"],
+  "created_date": "2025-11-12T00:00:00Z",
+  "updated_date": "2025-11-12T00:00:00Z",
+  "due_date": null,
+  "estimated_hours": 6.0,
+  "actual_hours": 0.0,
+  "dependencies": [],
+  "acceptance_criteria": [
+    "A 'dashboard-update' target is added to the root Makefile, which correctly calls the './dashboard/update_dashboard.sh' script.",
+    "Other common script calls are unified under the Makefile.",
+    "The developer experience is simplified by having a single, reliable interface for tasks."
+  ],
+  "sub_tasks": [],
+  "blockers": [],
+  "notes": "This will improve the developer experience and reduce confusion."
+}

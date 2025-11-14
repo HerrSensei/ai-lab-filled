@@ -1,0 +1,314 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "last_updated": "2025-11-11T00:00:00Z",
+    "total_projects": 4,
+    "next_id": 6
+  },
+  "projects": [
+    {
+      "id": "PRJ-001",
+      "name": "Agent Control Plane & Homeserver Infrastructure",
+      "description": "MCP Server für Homeserver Steuerung mit Linux User Authentication, Proxmox VM/Container Management, Service Management und Real-time Monitoring. Das Projekt umfasst nun auch den Aufbau einer nachhaltigen, sicheren und skalierbaren Homeserver-Infrastruktur.",
+      "status": "active",
+      "priority": "high",
+      "category": "infrastructure",
+      "tags": [
+        "mcp",
+        "homeserver",
+        "automation",
+        "monitoring",
+        "sustainability",
+        "networking",
+        "tailscale",
+        "k3s",
+        "orchestration",
+        "security",
+        "documentation"
+      ],
+      "created_date": "2025-11-07T00:00:00Z",
+      "updated_date": "2025-11-13T00:00:00Z",
+      "author": "jns",
+      "team": [
+        "jns"
+      ],
+      "path": "projects/agent-control-plane",
+      "source_idea": null,
+      "vision": "Eine zentrale Steuerungsebene für alle Homeserver-Dienste, die auf einer nachhaltigen, sicher vernetzten, skalierbaren und umfassend dokumentierten Infrastruktur läuft, welche für die Wartung durch KI-Agenten optimiert ist.",
+      "objectives": [
+        "Einheitliche API für alle Homeserver-Dienste bereitstellen",
+        "Automatisierte Überwachung und Alerting implementieren",
+        "Sichere Authentifizierung und Autorisierung gewährleisten",
+        "Skalierbare Architektur für zukünftige Erweiterungen",
+        "Container-Orchestrierung mit K3s implementieren",
+        "Sichere und nahtlose Netzwerkverbindung via Tailscale einrichten",
+        "Energieeffizienten und wartungsarmen Betrieb sicherstellen",
+        "Eine umfassende, strukturierte Dokumentation für die KI-gestützte Wartung erstellen"
+      ],
+      "deliverables": [
+        "MCP Server mit REST API",
+        "Authentifizierungssystem",
+        "Proxmox Integration",
+        "Service Management Module",
+        "Monitoring Dashboard",
+        "API-Dokumentation",
+        "K3s-basiertes Container-Orchestrierungs-Setup",
+        "Sichere Netzwerk-Konfiguration mit Tailscale",
+        "Automatisierte Backup-Lösung",
+        "\"Lebende\" Wissensdatenbank der Homeserver-Infrastruktur"
+      ],
+      "timeline": {
+        "start_date": "2025-11-07",
+        "end_date": "2025-12-15",
+        "estimated_duration": "5-6 weeks"
+      },
+      "dependencies": [],
+      "technologies": [
+        "Python",
+        "FastAPI",
+        "Docker",
+        "Proxmox API",
+        "SQLite",
+        "K3s",
+        "Tailscale"
+      ],
+      "acceptance_criteria": [
+        "Alle Homeserver-Dienste können über API gesteuert werden",
+        "Authentifizierung funktioniert sicher und zuverlässig",
+        "Monitoring zeigt alle relevanten Metriken",
+        "API ist vollständig dokumentiert",
+        "System läuft stabil unter Last",
+        "Die gesamte Infrastruktur ist als Code (IaC) definiert und versioniert",
+        "Die Dokumentation ist aktuell und ermöglicht einem KI-Agenten, grundlegende Wartungsaufgaben durchzuführen"
+      ],
+      "risks": [
+        {
+          "description": "Komplexität der verschiedenen Dienste",
+          "probability": "medium",
+          "impact": "medium",
+          "mitigation": "Schrittweise Implementierung mit gründlichem Testing"
+        },
+        {
+          "description": "Sicherheitsrisiken bei zentraler Steuerung",
+          "probability": "low",
+          "impact": "high",
+          "mitigation": "Defense-in-Depth mit mehrfacher Absicherung"
+        }
+      ],
+      "progress": {
+        "percentage": 65,
+        "completed_tasks": 13,
+        "total_tasks": 20,
+        "last_milestone": "Basic API implemented",
+        "next_milestone": "Complete Proxmox integration"
+      },
+      "notes": "Kernkomponente für die gesamte Homeserver-Infrastruktur. Wurde am 2025-11-13 erweitert, um die Ziele aus den Ideen IDEA-003, IDEA-005, IDEA-007 und IDEA-008 zu integrieren und eine ganzheitliche Homeserver-Infrastruktur zu schaffen."
+    },
+    {
+      "id": "PRJ-002",
+      "name": "AI Lab Framework",
+      "description": "Intelligente Entwicklungsumgebung für strukturierte Projektarbeit mit Ideen-Management, Projekt-Generierung und Qualitäts-Sicherung. Entwicklung einer eigenständigen Version des AI Lab Frameworks, die von der aktuellen Datenstruktur entkoppelt ist, um die Entwicklung und Tests des Frameworks unabhängig vom aktuellen Datenbestand zu ermöglichen und eine saubere Trennung zwischen Framework-Logik und projektspezifischen Daten zu schaffen.",
+      "status": "active",
+      "priority": "critical",
+      "category": "development",
+      "tags": [
+        "framework",
+        "development",
+        "automation",
+        "quality",
+        "decoupling",
+        "architecture",
+        "testing"
+      ],
+      "created_date": "2025-11-07T00:00:00Z",
+      "updated_date": "2025-11-12T00:00:00Z",
+      "author": "jns",
+      "team": [
+        "jns"
+      ],
+      "path": "projects/standalone-framework-version",
+      "source_idea": null,
+      "vision": "Standardisierte, automatisierte Entwicklungsumgebung für maximale Produktivität und Qualität, die unabhängig von spezifischen Projektdaten entwickelt, getestet und gewartet werden kann, um maximale Flexibilität und Stabilität zu gewährleisten.",
+      "objectives": [
+        "Vereinfachte Projekterstellung und -verwaltung",
+        "Automatisierte Qualitätssicherung",
+        "Standardisierte Entwicklungsprozesse",
+        "Nahtlose Integration von KI-Tools",
+        "Entwicklung und Tests des Frameworks unabhängig vom aktuellen Datenbestand ermöglichen.",
+        "Saubere Trennung zwischen Framework-Logik und projektspezifischen Daten schaffen.",
+        "Wartbarkeit und Testbarkeit des Frameworks verbessern.",
+        "Schnellere und sicherere Entwicklung neuer Features und Refactorings ermöglichen."
+      ],
+      "deliverables": [
+        "Projekt-Generator",
+        "Ideen-Management-System",
+        "Qualitäts-Sicherungs-Agent",
+        "Dashboard für Projektübersicht",
+        "CI/CD Integration",
+        "Dokumentation und Templates",
+        "Entkoppelte Datenzugriffsschicht.",
+        "Dokumentation der neuen Architektur und Schnittstellen.",
+        "Beispielimplementierungen für Mock-Daten.",
+        "Aktualisierte Teststrategie für das entkoppelte Framework."
+      ],
+      "timeline": {
+        "start_date": "2025-11-07",
+        "end_date": "2025-12-31",
+        "estimated_duration": "7-8 weeks"
+      },
+      "dependencies": [],
+      "technologies": [
+        "Python",
+        "JSON Schema",
+        "Make",
+        "Git",
+        "Docker",
+        "Poetry"
+      ],
+      "acceptance_criteria": [
+        "Neue Projekte können mit einem Befehl erstellt werden",
+        "Ideen-Management ist vollständig JSON-basiert",
+        "Qualitäts-Sicherung läuft automatisch",
+        "Dashboard zeigt alle relevanten Informationen",
+        "Entwickler können produktiv arbeiten",
+        "Framework kann ohne Zugriff auf projektspezifische Daten gestartet und getestet werden.",
+        "Datenzugriffsschicht ist klar vom Framework getrennt und austauschbar.",
+        "Mock-Daten oder Test-Daten können einfach in das Framework injiziert werden.",
+        "Änderungen am Framework haben keine unbeabsichtigten Auswirkungen auf bestehende Projektdaten.",
+        "Dokumentation der neuen Architektur und Schnittstellen ist vorhanden."
+      ],
+      "risks": [
+        {
+          "description": "Komplexität der Framework-Architektur",
+          "probability": "medium",
+          "impact": "medium",
+          "mitigation": "Modularer Aufbau mit klaren Schnittstellen"
+        },
+        {
+          "description": "Komplexität der Entkopplung bestehender Datenstrukturen.",
+          "probability": "medium",
+          "impact": "medium",
+          "mitigation": "Schrittweise Refaktorierung, klare Schnittstellendefinition, umfassende Tests."
+        },
+        {
+          "description": "Performance-Einbußen durch zusätzliche Abstraktionsschicht.",
+          "probability": "low",
+          "impact": "low",
+          "mitigation": "Performance-Tests, Optimierung der Datenzugriffsschicht."
+        }
+      ],
+      "progress": {
+        "percentage": 90,
+        "completed_tasks": 18,
+        "total_tasks": 20,
+        "last_milestone": "Implemented Core Functional Components (models, repositories, API, tests)",
+        "next_milestone": "Integrate with existing framework components and address Pydantic/asyncio warnings"
+      },
+      "notes": "Foundation für alle zukünftigen Entwicklungsprojekte. Enthält nun auch die architektonischen Verbesserungen der Standalone Framework Version. Completed decoupling of 'file_path' from data models and resolved all associated quality issues (linting, type checking, tests). Implemented core functional components (models, repositories, API, tests)."
+    },
+    {
+      "id": "PRJ-003",
+      "name": "Homeserver Vision Infrastructure",
+      "description": "Umfassende Infrastruktur für Homeserver mit Docker, Monitoring, Backup und automatisierter Verwaltung",
+      "status": "archived",
+      "priority": "medium",
+      "category": "infrastructure",
+      "tags": [
+        "homeserver",
+        "docker",
+        "infrastructure",
+        "monitoring"
+      ],
+      "created_date": "2025-11-07T00:00:00Z",
+      "updated_date": "2025-11-09T06:14:13Z",
+      "author": "jns",
+      "team": [
+        "jns"
+      ],
+      "path": "projects/archived/homeserver-vision-infrastructure",
+      "source_idea": "IDEA-008",
+      "vision": "Robuste, skalierbare Homeserver-Infrastruktur mit automatisierter Verwaltung und Überwachung",
+      "objectives": [
+        "Standardisierte Docker-Umgebung",
+        "Zentrales Monitoring",
+        "Automatisierte Backups",
+        "Einfache Verwaltung"
+      ],
+      "deliverables": [
+        "Docker Compose Konfiguration",
+        "Monitoring Stack",
+        "Backup-Skripte",
+        "Dokumentation"
+      ],
+      "timeline": {
+        "start_date": "2025-11-07",
+        "end_date": "2025-11-20",
+        "estimated_duration": "2 weeks"
+      },
+      "dependencies": [],
+      "technologies": [
+        "Docker",
+        "Docker Compose",
+        "Grafana",
+        "Prometheus",
+        "Bash"
+      ],
+      "acceptance_criteria": [
+        "Alle Dienste laufen in Docker",
+        "Monitoring funktioniert",
+        "Backups werden automatisch erstellt",
+        "Dokumentation ist vollständig"
+      ],
+      "risks": [],
+      "progress": {
+        "percentage": 100,
+        "completed_tasks": 10,
+        "total_tasks": 10,
+        "last_milestone": "Project completed",
+        "next_milestone": ""
+      },
+      "notes": "Archived - functionality moved to Agent Control Plane"
+    },
+    {
+      "id": "PRJ-005",
+      "name": "Entwicklungs- und Heimnetz-Verbesserungen",
+      "description": "Aktuelle Maßnahmen zur Verbesserung der Entwicklungsumgebung und des Heimnetzes.",
+      "status": "active",
+      "priority": "high",
+      "category": "operations",
+      "tags": [
+        "development-environment",
+        "home-network",
+        "optimization"
+      ],
+      "created_date": "2025-11-10T00:00:00Z",
+      "updated_date": "2025-11-11T00:00:00Z",
+      "author": "jns",
+      "team": [
+        "jns"
+      ],
+      "path": "projects/ai-lab-deployment-operations",
+      "source_idea": null,
+      "vision": "",
+      "objectives": [],
+      "deliverables": [],
+      "timeline": {
+        "start_date": "2025-11-10",
+        "end_date": null,
+        "estimated_duration": "unknown"
+      },
+      "dependencies": [],
+      "technologies": [],
+      "acceptance_criteria": [],
+      "risks": [],
+      "progress": {
+        "percentage": 0,
+        "completed_tasks": 0,
+        "total_tasks": 0,
+        "last_milestone": "",
+        "next_milestone": ""
+      },
+      "notes": "Scope changed to focus on improving the development environment and home network."
+    }
+  ]
+}

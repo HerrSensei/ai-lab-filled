@@ -1,0 +1,26 @@
+{
+  "id": "HS-002",
+  "title": "k3s Proof of Concept auf HomeServer",
+  "description": "Erster k3s-Cluster auf dem HomeServer als Grundlage für die 'Unsichtbare Infrastruktur'.",
+  "status": "todo",
+  "priority": "high",
+  "type": "infrastructure",
+  "project": "homeserver-vision-infrastructure",
+  "assignee": "Infrastructure Team",
+  "tags": ["k3s", "kubernetes", "poc"],
+  "created_date": "2025-11-09T00:00:00Z",
+  "updated_date": "2025-11-09T00:00:00Z",
+  "due_date": null,
+  "estimated_hours": 6,
+  "actual_hours": 0,
+  "dependencies": ["HS-001"],
+  "acceptance_criteria": [
+    "`kubectl get nodes` zeigt Node als 'Ready'",
+    "Erster Test-Deployment (nginx) funktioniert",
+    "Persistent Storage ist konfiguriert"
+  ],
+  "sub_tasks": [],
+  "blockers": [],
+  "notes": "k3s ist lightweight Kubernetes-Variante für Edge/IoT. Wichtig: Storage-Class für persistent data einrichten.",
+  "file_path": "/Users/jns/Documents/1 | Projekte/ai-lab/archive/work-items/HS-002_k3s-proof-of-concept.md"
+}

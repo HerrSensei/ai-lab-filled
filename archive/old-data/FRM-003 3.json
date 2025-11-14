@@ -1,0 +1,27 @@
+{
+  "id": "FRM-003",
+  "title": "FRM-003 Deep Directory Analysis & Cleanup",
+  "description": "Comprehensive analysis of root directory and subdirectories (1-2 levels deep) to identify unnecessary, outdated, or redundant documents, scripts, and files.",
+  "status": "done",
+  "priority": "high",
+  "type": "infrastructure",
+  "project": "AI Lab Framework",
+  "assignee": "AI Lab Framework Team",
+  "tags": ["analysis", "cleanup", "refactoring"],
+  "created_date": "2025-11-09T00:00:00Z",
+  "updated_date": "2025-11-09T00:00:00Z",
+  "due_date": null,
+  "estimated_hours": 4.5,
+  "actual_hours": 4.5,
+  "dependencies": [],
+  "acceptance_criteria": [
+    "Reduce root directory clutter by 50%",
+    "Eliminate duplicate files completely",
+    "Archive outdated content properly",
+    "Organize scattered files logically"
+  ],
+  "sub_tasks": [],
+  "blockers": [],
+  "notes": "Analysis complete. Ready for execution.",
+  "file_path": "/Users/jns/Documents/1 | Projekte/ai-lab/archive/work-items/FRM-003_deep-directory-analysis.md"
+}

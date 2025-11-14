@@ -1,0 +1,23 @@
+{
+  "id": "FRM-011",
+  "title": "Fix Progress Metric Logic",
+  "description": "The analysis from 2025-11-12 revealed that the project progress metric is misleading. This task is to refactor 'dashboard/dashboard_generator.py' to calculate progress based on a reliable source, such as the number of completed vs. open work items, instead of file existence.",
+  "status": "open",
+  "priority": "high",
+  "category": "framework_quality",
+  "tags": ["dashboard", "metrics", "bugfix", "quality"],
+  "created_date": "2025-11-12T00:00:00Z",
+  "updated_date": "2025-11-12T00:00:00Z",
+  "due_date": null,
+  "estimated_hours": 8.0,
+  "actual_hours": 0.0,
+  "dependencies": ["FRM-010"],
+  "acceptance_criteria": [
+    "The 'dashboard_generator.py' script is refactored to use a reliable data source for progress calculation.",
+    "The dashboard accurately reflects the true state of project progress.",
+    "The '100% complete but planned' anomaly is resolved."
+  ],
+  "sub_tasks": [],
+  "blockers": [],
+  "notes": "A reliable dashboard is crucial for accurate project management and decision-making."
+}
