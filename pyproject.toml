@@ -124,7 +124,7 @@ testpaths = ["tests", "tools"]
 python_files = ["test_*.py", "*_test.py"]
 python_classes = ["Test*"]
 python_functions = ["test_*"]
-norecursedirs = ["tests/e2e"]
+
 
 [tool.coverage.run]
 source = ["src"]
