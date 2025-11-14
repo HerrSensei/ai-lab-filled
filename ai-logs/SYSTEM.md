@@ -17,10 +17,13 @@ The AI Logging System provides comprehensive tracking of AI agent activities, se
 ```
 ai-logs/
 ├── SYSTEM.md                           # This file - System documentation
-├── change_log/                        # Change history tracking
+├── logs/                              # Active session logs (NEW)
+│   └── sessions/                     # Dual-format session logs
+│       ├── YYYY-MM-DD_session-XXX.log    # Human-readable format
+│       └── YYYY-MM-DD_session-XXX.json   # Machine-readable format
+├── changelogs/                        # Change history tracking
 │   └── CHANGELOG.md                 # Main changelog (GitHub-style)
-└── sessions/                          # Session logs
-    └── YYYY-MM-DD_session-XXX.md    # Individual session files
+└── archive/                           # Archived logs and old data
 ```
 
 ---
@@ -37,10 +40,19 @@ ai-logs/
 - **Format**: GitHub-style changelog
 - **Content**: Feature additions, bug fixes, improvements
 
-### sessions/ Directory
-- **Purpose**: Individual session tracking
-- **Naming**: `YYYY-MM-DD_session-XXX.md`
+### logs/sessions/ Directory
+- **Purpose**: Individual session tracking with dual formats
+- **Naming**: `YYYY-MM-DD_session-XXX.log` + `.json`
 - **Content**: Session objectives, work completed, next steps
+- **NEW**: Machine-readable JSON for automation and analytics
+
+### changelogs/ Directory  
+- **Purpose**: Project changelogs and change history
+- **Content**: GitHub-style changelog with version tracking
+
+### archive/ Directory
+- **Purpose**: Historical logs and deprecated data
+- **Content**: Old session logs, archived work items
 
 ---
 
@@ -191,10 +203,13 @@ All AI agents **MUST** follow this workflow:
 
 ### Session File Creation
 ```bash
-# Create new session file
+# Automated dual-format session creation (RECOMMENDED)
+python scripts/create_session_log.py --session-type work
+
+# Manual session file creation (legacy)
 SESSION_DATE=$(date +%Y-%m-%d)
-SESSION_NUM=$(ls ai-logs/sessions/ | grep "session" | wc -l | tr -d ' ')
-SESSION_FILE="ai-logs/sessions/${SESSION_DATE}_session-$((${SESSION_NUM}+1)).md"
+SESSION_NUM=$(ls ai-logs/logs/sessions/ | grep "session" | wc -l | tr -d ' ')
+SESSION_FILE="ai-logs/logs/sessions/${SESSION_DATE}_session-$((${SESSION_NUM}+1)).md"
 touch "$SESSION_FILE"
 echo "Created session file: $SESSION_FILE"
 ```
@@ -202,9 +217,9 @@ echo "Created session file: $SESSION_FILE"
 ### Change Logging
 ```bash
 # Update changelog for significant changes
-echo "## $(date +%Y-%m-%d) - Framework Update" >> ai-logs/change_log/CHANGELOG.md
-echo "### Added" >> ai-logs/change_log/CHANGELOG.md
-echo "- Framework improvement description" >> ai-logs/change_log/CHANGELOG.md
+echo "## $(date +%Y-%m-%d) - Framework Update" >> ai-logs/changelogs/CHANGELOG.md
+echo "### Added" >> ai-logs/changelogs/CHANGELOG.md
+echo "- Framework improvement description" >> ai-logs/changelogs/CHANGELOG.md
 ```
 
 ---
@@ -232,9 +247,12 @@ echo "- Framework improvement description" >> ai-logs/change_log/CHANGELOG.md
 
 ### Starting New Session
 ```bash
-# AI Agent creates session
+# AI Agent creates session (NEW AUTOMATED WAY)
+python scripts/create_session_log.py --session-type work
+
+# Legacy manual session creation
 SESSION_DATE=$(date +%Y-%m-%d)
-SESSION_FILE="ai-logs/sessions/${SESSION_DATE}_session-001.md"
+SESSION_FILE="ai-logs/logs/sessions/${SESSION_DATE}_session-001.md"
 cp ai-logs/SESSION_TEMPLATE.md "$SESSION_FILE"
 ```
 
@@ -253,6 +271,25 @@ echo "## 📈 Session Metrics" >> "$SESSION_FILE"
 echo "- **Duration:** 2 hours" >> "$SESSION_FILE"
 echo "- **Success Rate:** 95%" >> "$SESSION_FILE"
 ```
+
+---
+
+## 🚀 **New Features (v1.1)**
+
+### Dual-Format Logging
+- **Human-readable**: `.log` files with structured markdown
+- **Machine-readable**: `.json` files for automation and analytics
+- **Automated Creation**: `scripts/create_session_log.py` handles both formats
+
+### Enhanced Automation
+- **Session Analytics**: JSON data enables metrics and reporting
+- **Git Integration**: Automatic branch and commit tracking
+- **Environment Context**: Python version and working directory capture
+
+### Improved Directory Structure
+- **logs/sessions/**: Active session logs with dual formats
+- **changelogs/**: Project change history
+- **archive/**: Historical data and old logs
 
 ---
 
