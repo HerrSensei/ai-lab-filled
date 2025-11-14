@@ -4,13 +4,12 @@ Provides the foundational agent management system
 """
 
 import asyncio
-import json
 import logging
+import uuid
+from dataclasses import asdict, dataclass
 from datetime import datetime
 from enum import Enum
-from typing import Dict, List, Optional, Any
-from dataclasses import dataclass, asdict
-import uuid
+from typing import Any
 
 
 class AgentStatus(Enum):
@@ -34,13 +33,13 @@ class Agent:
     name: str
     type: AgentType
     status: AgentStatus
-    config: Dict[str, Any]
+    config: dict[str, Any]
     created_at: datetime
     updated_at: datetime
-    last_heartbeat: Optional[datetime] = None
-    metadata: Optional[Dict[str, Any]] = None
+    last_heartbeat: datetime | None = None
+    metadata: dict[str, Any] | None = None
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         data = asdict(self)
         data["type"] = self.type.value
         data["status"] = self.status.value
@@ -51,7 +50,7 @@ class Agent:
         return data
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> "Agent":
+    def from_dict(cls, data: dict[str, Any]) -> "Agent":
         data["type"] = AgentType(data["type"])
         data["status"] = AgentStatus(data["status"])
         data["created_at"] = datetime.fromisoformat(data["created_at"])
@@ -65,7 +64,7 @@ class AgentRegistry:
     """Central registry for managing agents"""
 
     def __init__(self):
-        self.agents: Dict[str, Agent] = {}
+        self.agents: dict[str, Agent] = {}
         self.logger = logging.getLogger(__name__)
 
     def register_agent(self, agent: Agent) -> bool:
@@ -88,20 +87,20 @@ class AgentRegistry:
         self.logger.info(f"Unregistered agent: {agent_name} ({agent_id})")
         return True
 
-    def get_agent(self, agent_id: str) -> Optional[Agent]:
+    def get_agent(self, agent_id: str) -> Agent | None:
         """Get agent by ID"""
         return self.agents.get(agent_id)
 
-    def get_agents_by_type(self, agent_type: AgentType) -> List[Agent]:
+    def get_agents_by_type(self, agent_type: AgentType) -> list[Agent]:
         """Get all agents of a specific type"""
         return [agent for agent in self.agents.values() if agent.type == agent_type]
 
-    def get_agents_by_status(self, status: AgentStatus) -> List[Agent]:
+    def get_agents_by_status(self, status: AgentStatus) -> list[Agent]:
         """Get all agents with a specific status"""
         return [agent for agent in self.agents.values() if agent.status == status]
 
     def update_agent_status(
-        self, agent_id: str, status: AgentStatus, heartbeat: Optional[datetime] = None
+        self, agent_id: str, status: AgentStatus, heartbeat: datetime | None = None
     ) -> bool:
         """Update agent status and optionally heartbeat"""
         if agent_id not in self.agents:
@@ -118,11 +117,11 @@ class AgentRegistry:
         self.logger.info(f"Updated agent {agent.name} status to {status.value}")
         return True
 
-    def list_agents(self) -> List[Agent]:
+    def list_agents(self) -> list[Agent]:
         """List all registered agents"""
         return list(self.agents.values())
 
-    def get_stats(self) -> Dict[str, Any]:
+    def get_stats(self) -> dict[str, Any]:
         """Get registry statistics"""
         stats = {"total_agents": len(self.agents), "by_type": {}, "by_status": {}}
 
@@ -143,11 +142,11 @@ class AgentManager:
 
     def __init__(self):
         self.registry = AgentRegistry()
-        self.running_tasks: Dict[str, asyncio.Task] = {}
+        self.running_tasks: dict[str, asyncio.Task] = {}
         self.logger = logging.getLogger(__name__)
 
     async def create_agent(
-        self, name: str, agent_type: AgentType, config: Dict[str, Any]
+        self, name: str, agent_type: AgentType, config: dict[str, Any]
     ) -> Agent:
         """Create and register a new agent"""
         agent_id = str(uuid.uuid4())

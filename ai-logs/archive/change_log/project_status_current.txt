@@ -1,0 +1,29 @@
+ID         Title                          Status       Priority  
+----------------------------------------------------------------------
+SYNC-TEST-001 Test GitHub Projects Sync      review       high      
+PROJ-674C38A1-WI-001 Design Dashboard Layout and    todo         high      
+PROJ-674C38A1-WI-002 Implement Backend API for Da   in_progress  high      
+PROJ-674C38A1-WI-003 Setup Database Schema and Mi   done         medium    
+PROJ-984F846F-WI-001 Research Cross-Platform Fram   done         high      
+PROJ-984F846F-WI-002 Setup Development Environmen   todo         high      
+PROJ-336F4EE3-WI-001 Research TechHutTV/homelab A   todo         high      
+PROJ-336F4EE3-WI-002 Design Agent OS Framework Co   todo         high      
+PROJ-336F4EE3-WI-003 Implement n8n Integration La   todo         high      
+PROJ-336F4EE3-WI-004 Setup Local Gemini-CLI Integ   todo         high      
+PROJ-336F4EE3-WI-005 Create Homeserver Deployment   todo         medium    
+PROJ-336F4EE3-WI-006 Implement Self-Healing Autom   todo         medium    
+PROJ-336F4EE3-WI-007 Create Security and Access C   todo         high      
+PROJ-336F4EE3-WI-008 Develop Monitoring and Alert   todo         medium    
+ID     Title                          Status       Priority  Category       
+---------------------------------------------------------------------------
+IDEA-0 Nachhaltiges Homeserver-Setu   converted    medium    infrastructur  
+IDEA-0 Standalone Framework Version   converted    high      development    
+IDEA-0 Globale Vision für AI Lab Fr   implemente   high      development    
+IDEA-0 Tailscale-Verbindung zwische   converted    high      infrastructur  
+IDEA-0 VPS mit LLAMA und n8n für Ho   backlog      medium    automation     
+IDEA-0 Homeserver Vision Infrastruc   converted    medium    infrastructur  
+IDEA-0 Homeserver Vision Documentat   converted    medium    development    
+IDEA-0 AI Personas Framework für Ag   backlog      high      development    
+IDEA-0 Agent-OS Quality Assurance A   backlog      high      automation     
+IDEA-0 Globaler Techstack für Hardw   backlog      medium    development    
+IDEA-0 Test Idee für das Ideen-Mana   implemente   high      development    

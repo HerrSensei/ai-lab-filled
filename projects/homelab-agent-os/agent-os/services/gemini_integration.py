@@ -4,17 +4,16 @@ Integrates local gemini-cli/opencode with the Agent OS framework
 """
 
 import asyncio
-import json
 import logging
+import os
 import subprocess
 import tempfile
-import os
-from datetime import datetime
-from typing import Dict, Any, List, Optional
-from dataclasses import dataclass
 import uuid
+from dataclasses import dataclass
+from datetime import datetime
+from typing import Any
 
-from ..core.agent_manager import Agent, AgentType, AgentStatus
+from ..core.agent_manager import Agent
 
 
 @dataclass
@@ -23,12 +22,12 @@ class GeminiTask:
     agent_id: str
     task_type: str
     prompt: str
-    context: Dict[str, Any]
+    context: dict[str, Any]
     created_at: datetime
     status: str
-    result: Optional[str] = None
-    error: Optional[str] = None
-    execution_time: Optional[float] = None
+    result: str | None = None
+    error: str | None = None
+    execution_time: float | None = None
 
 
 class GeminiIntegrationService:
@@ -37,11 +36,11 @@ class GeminiIntegrationService:
     def __init__(self):
         self.logger = logging.getLogger(__name__)
         self.gemini_cli_path = self._find_gemini_cli()
-        self.active_tasks: Dict[str, GeminiTask] = {}
+        self.active_tasks: dict[str, GeminiTask] = {}
         self.task_queue = asyncio.Queue()
         self.worker_task = None
 
-    def _find_gemini_cli(self) -> Optional[str]:
+    def _find_gemini_cli(self) -> str | None:
         """Find gemini-cli executable"""
         # Check common locations
         possible_paths = [
@@ -84,7 +83,7 @@ class GeminiIntegrationService:
             self.logger.info("Gemini task worker stopped")
 
     async def submit_task(
-        self, agent_id: str, task_type: str, prompt: str, context: Dict[str, Any] = None
+        self, agent_id: str, task_type: str, prompt: str, context: dict[str, Any] = None
     ) -> str:
         """Submit a task to gemini-cli"""
         task_id = str(uuid.uuid4())
@@ -105,7 +104,7 @@ class GeminiIntegrationService:
         self.logger.info(f"Submitted task {task_id} for agent {agent_id}")
         return task_id
 
-    async def get_task_result(self, task_id: str) -> Optional[GeminiTask]:
+    async def get_task_result(self, task_id: str) -> GeminiTask | None:
         """Get task result"""
         return self.active_tasks.get(task_id)
 
@@ -252,7 +251,7 @@ Mock troubleshooting advice provided."""
 
         return "\n".join(prompt_parts)
 
-    def get_queue_status(self) -> Dict[str, Any]:
+    def get_queue_status(self) -> dict[str, Any]:
         """Get current queue status"""
         queued_tasks = sum(
             1 for t in self.active_tasks.values() if t.status == "queued"
@@ -294,7 +293,7 @@ class GeminiAgent(Agent):
         ]
 
     async def process_task(
-        self, task_type: str, prompt: str, context: Dict[str, Any] = None
+        self, task_type: str, prompt: str, context: dict[str, Any] = None
     ) -> str:
         """Process a task using Gemini"""
         if task_type not in self.supported_task_types:
