@@ -1,0 +1,215 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: agent-os-ingress
+  namespace: homelab
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
+spec:
+  tls:
+  - hosts:
+    - agent-os.homelab.local
+    - n8n.homelab.local
+    - grafana.homelab.local
+    secretName: agent-os-tls
+  rules:
+  - host: agent-os.homelab.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: agent-os-api
+            port:
+              number: 8080
+  - host: n8n.homelab.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: n8n
+            port:
+              number: 5678
+  - host: grafana.homelab.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: grafana
+            port:
+              number: 3000
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-data-pvc
+  namespace: homelab
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: fast-ssd
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: n8n-data-pvc
+  namespace: homelab
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: fast-ssd
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: redis-data-pvc
+  namespace: homelab
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+  storageClassName: fast-ssd
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: prometheus-data-pvc
+  namespace: homelab
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: fast-ssd
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: grafana-data-pvc
+  namespace: homelab
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: fast-ssd
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: agent-os-config
+  namespace: homelab
+data:
+  config.yaml: |
+    # Agent OS Configuration
+    server:
+      host: "0.0.0.0"
+      port: 8080
+      workers: 4
+    
+    database:
+      url: "postgresql://agent-os:password@postgres:5432/agent_os"
+      pool_size: 10
+      max_overflow: 20
+    
+    redis:
+      url: "redis://redis:6379"
+      db: 0
+    
+    logging:
+      level: "INFO"
+      format: "json"
+    
+    security:
+      secret_key: "${SECRET_KEY}"
+      jwt_expiry: 3600
+    
+    gemini:
+      model: "gemini-1.5-pro"
+      temperature: 0.7
+      max_tokens: 2048
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-init
+  namespace: homelab
+data:
+  init-databases.sh: |
+    #!/bin/bash
+    set -e
+    
+    # Create additional databases
+    psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
+        CREATE DATABASE n8n;
+        CREATE USER n8n WITH PASSWORD '$POSTGRES_PASSWORD';
+        GRANT ALL PRIVILEGES ON DATABASE n8n TO n8n;
+    EOSQL
+    
+    echo "Additional databases created successfully"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: agent-os-secrets
+  namespace: homelab
+type: Opaque
+data:
+  # Base64 encoded values - replace with actual encoded secrets
+  google-ai-api-key: <BASE64_ENCODED_API_KEY>
+  n8n-password: <BASE64_ENCODED_PASSWORD>
+  postgres-password: <BASE64_ENCODED_PASSWORD>
+  secret-key: <BASE64_ENCODED_SECRET_KEY>
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: agent-os-sa
+  namespace: homelab
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: agent-os-role
+  namespace: homelab
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services", "configmaps", "secrets"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["apps"]
+  resources: ["deployments", "replicasets"]
+  verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: agent-os-rolebinding
+  namespace: homelab
+subjects:
+- kind: ServiceAccount
+  name: agent-os-sa
+  namespace: homelab
+roleRef:
+  kind: Role
+  name: agent-os-role
+  apiGroup: rbac.authorization.k8s.io

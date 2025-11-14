@@ -1,0 +1,313 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: agent-os-api
+  namespace: homelab
+  labels:
+    app: agent-os
+    component: api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: agent-os
+      component: api
+  template:
+    metadata:
+      labels:
+        app: agent-os
+        component: api
+    spec:
+      containers:
+      - name: agent-os-api
+        image: homelab/agent-os:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: LOG_LEVEL
+          value: "INFO"
+        - name: DATABASE_URL
+          value: "postgresql://agent-os:password@postgres:5432/agent_os"
+        - name: REDIS_URL
+          value: "redis://redis:6379"
+        - name: GOOGLE_AI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: agent-os-secrets
+              key: google-ai-api-key
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        volumeMounts:
+        - name: config
+          mountPath: /app/config
+          readOnly: true
+      volumes:
+      - name: config
+        configMap:
+          name: agent-os-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: agent-os-api
+  namespace: homelab
+spec:
+  selector:
+    app: agent-os
+    component: api
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: n8n
+  namespace: homelab
+  labels:
+    app: agent-os
+    component: n8n
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: agent-os
+      component: n8n
+  template:
+    metadata:
+      labels:
+        app: agent-os
+        component: n8n
+    spec:
+      containers:
+      - name: n8n
+        image: n8nio/n8n:latest
+        ports:
+        - containerPort: 5678
+        env:
+        - name: N8N_BASIC_AUTH_ACTIVE
+          value: "true"
+        - name: N8N_BASIC_AUTH_USER
+          value: "admin"
+        - name: N8N_BASIC_AUTH_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: agent-os-secrets
+              key: n8n-password
+        - name: N8N_HOST
+          value: "0.0.0.0"
+        - name: N8N_PORT
+          value: "5678"
+        - name: N8N_PROTOCOL
+          value: "http"
+        - name: WEBHOOK_URL
+          value: "https://n8n.homelab.local/"
+        - name: GENERIC_TIMEZONE
+          value: "Europe/Berlin"
+        - name: N8N_CUSTOM_EXTENSIONS
+          value: "/app/custom-nodes"
+        - name: DB_TYPE
+          value: "postgresdb"
+        - name: DB_POSTGRESDB_HOST
+          value: "postgres"
+        - name: DB_POSTGRESDB_PORT
+          value: "5432"
+        - name: DB_POSTGRESDB_DATABASE
+          value: "n8n"
+        - name: DB_POSTGRESDB_USER
+          value: "n8n"
+        - name: DB_POSTGRESDB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: agent-os-secrets
+              key: postgres-password
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
+        volumeMounts:
+        - name: n8n-data
+          mountPath: /home/node/.n8n
+        - name: custom-nodes
+          mountPath: /app/custom-nodes
+          readOnly: true
+      volumes:
+      - name: n8n-data
+        persistentVolumeClaim:
+          claimName: n8n-data-pvc
+      - name: custom-nodes
+        configMap:
+          name: n8n-custom-nodes
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: n8n
+  namespace: homelab
+spec:
+  selector:
+    app: agent-os
+    component: n8n
+  ports:
+  - protocol: TCP
+    port: 5678
+    targetPort: 5678
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+  namespace: homelab
+  labels:
+    app: agent-os
+    component: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: agent-os
+      component: postgres
+  template:
+    metadata:
+      labels:
+        app: agent-os
+        component: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:15-alpine
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_DB
+          value: "agent_os"
+        - name: POSTGRES_USER
+          value: "agent-os"
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: agent-os-secrets
+              key: postgres-password
+        - name: POSTGRES_MULTIPLE_DATABASES
+          value: "n8n"
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
+        volumeMounts:
+        - name: postgres-data
+          mountPath: /var/lib/postgresql/data
+        - name: postgres-init
+          mountPath: /docker-entrypoint-initdb.d
+          readOnly: true
+      volumes:
+      - name: postgres-data
+        persistentVolumeClaim:
+          claimName: postgres-data-pvc
+      - name: postgres-init
+        configMap:
+          name: postgres-init
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  namespace: homelab
+spec:
+  selector:
+    app: agent-os
+    component: postgres
+  ports:
+  - protocol: TCP
+    port: 5432
+    targetPort: 5432
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  namespace: homelab
+  labels:
+    app: agent-os
+    component: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: agent-os
+      component: redis
+  template:
+    metadata:
+      labels:
+        app: agent-os
+        component: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis:7-alpine
+        ports:
+        - containerPort: 6379
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+        volumeMounts:
+        - name: redis-data
+          mountPath: /data
+        command:
+        - redis-server
+        - --appendonly
+        - "yes"
+        - --maxmemory
+        - "256mb"
+        - --maxmemory-policy
+        - "allkeys-lru"
+      volumes:
+      - name: redis-data
+        persistentVolumeClaim:
+          claimName: redis-data-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  namespace: homelab
+spec:
+  selector:
+    app: agent-os
+    component: redis
+  ports:
+  - protocol: TCP
+    port: 6379
+    targetPort: 6379
+  type: ClusterIP
