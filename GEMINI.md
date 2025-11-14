@@ -77,6 +77,15 @@ The project adheres to high standards of code quality and structured development
 *   **Structured Logging:** Implemented using `structlog` for better observability and analysis.
 *   **CLI Workflows:** A detailed set of documented CLI workflows (`core/docs/CLI_WORKFLOWS.md`) guides developers through common tasks, ensuring consistency and efficiency.
 
+### Subtask Management for Gemini CLI
+
+When working on a work item or a task from a project, it is crucial to break down complex tasks into smaller, manageable subtasks. These subtasks should then be added to the Gemini CLI's internal todo list. This ensures clear progress tracking, organization of complex queries, and comprehensive task completion.
+
+*   **Break Down Tasks:** Decompose large tasks into distinct, actionable subtasks.
+*   **Add to Todo List:** Utilize the `write_todos` tool to add these subtasks to the current session's todo list.
+*   **Track Progress:** Mark subtasks as `pending`, `in_progress`, `completed`, or `cancelled` as work progresses.
+*   **Iterative Refinement:** The todo list is dynamic; update it as new information emerges or plans evolve.
+
 ## Project Structure
 
 *   **`src/`**: Contains the core framework code, including AI tool abstractions, profile definitions, and infrastructure services.

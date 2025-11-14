@@ -112,6 +112,8 @@ jobs:
             }
 
       - name: 'Acknowledge request'
+        if: |-
+          ${{ needs.dispatch.outputs.command != 'fallthrough' }}
         env:
           GITHUB_TOKEN: '${{ steps.mint_identity_token.outputs.token || secrets.GITHUB_TOKEN || github.token }}'
           ISSUE_NUMBER: '${{ github.event.pull_request.number || github.event.issue.number }}'
@@ -192,6 +194,8 @@ jobs:
           permission-pull-requests: 'write'
 
       - name: 'Send failure comment'
+        if: |-
+          ${{ needs.dispatch.outputs.command != 'fallthrough' }}
         env:
           GITHUB_TOKEN: '${{ steps.mint_identity_token.outputs.token || secrets.GITHUB_TOKEN || github.token }}'
           ISSUE_NUMBER: '${{ github.event.pull_request.number || github.event.issue.number }}'

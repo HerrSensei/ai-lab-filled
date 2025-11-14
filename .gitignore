@@ -156,7 +156,7 @@ local/
 
 # Gemini CLI specific ignores
 pat.md
-GEMINI.md
+
 
 # GitHub PAT Security
 *.token
@@ -165,4 +165,3 @@ GITHUB_TOKEN
 gha-creds-*.json
 
 # Nested git repositories
-projects/Homelab-Orchestrator/
