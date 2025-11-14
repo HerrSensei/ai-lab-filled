@@ -1,0 +1,124 @@
+{
+  "project_info": {
+    "project_id": "PRJ-001",
+    "project_name": "Agent Control Plane",
+    "version": "1.0.0",
+    "status": "active",
+    "health": "healthy",
+    "last_updated": "2025-11-09T06:14:13Z"
+  },
+  "milestones": [
+    {
+      "id": "M1",
+      "title": "Basic API Framework",
+      "description": "Grundlegende FastAPI-Struktur mit Authentifizierung",
+      "status": "completed",
+      "due_date": "2025-11-10",
+      "completed_date": "2025-11-08",
+      "progress": 100,
+      "dependencies": []
+    },
+    {
+      "id": "M2",
+      "title": "Proxmox Integration",
+      "description": "Anbindung an Proxmox API für VM/Container Management",
+      "status": "in_progress",
+      "due_date": "2025-11-20",
+      "completed_date": null,
+      "progress": 60,
+      "dependencies": ["M1"]
+    }
+  ],
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "FastAPI Setup",
+      "description": "FastAPI-Projekt mit grundlegender Struktur einrichten",
+      "status": "done",
+      "priority": "high",
+      "estimated_hours": 4,
+      "actual_hours": 3,
+      "created_date": "2025-11-07T09:00:00Z",
+      "updated_date": "2025-11-08T15:30:00Z",
+      "due_date": "2025-11-07",
+      "tags": ["setup", "api"],
+      "milestone": "M1",
+      "dependencies": []
+    },
+    {
+      "id": "T3",
+      "title": "Proxmox API Client",
+      "description": "Python-Client für Proxmox API entwickeln",
+      "status": "in_progress",
+      "priority": "high",
+      "estimated_hours": 8,
+      "actual_hours": 5,
+      "created_date": "2025-11-09T09:00:00Z",
+      "updated_date": "2025-11-09T14:00:00Z",
+      "due_date": "2025-11-15",
+      "tags": ["proxmox", "api"],
+      "milestone": "M2",
+      "dependencies": []
+    }
+  ],
+  "developer": {
+    "name": "jns",
+    "focus_areas": ["API Development", "Proxmox Integration", "Security"],
+    "availability": "full_time",
+    "skills_used": ["Python", "FastAPI", "Docker", "Proxmox API", "System Administration"]
+  },
+  "resources": {
+    "timeline": {
+      "start_date": "2025-11-07",
+      "end_date": "2025-12-15",
+      "estimated_duration_days": 38
+    },
+    "focus_time_per_day": {
+      "target_hours": 6,
+      "actual_average": 5.5
+    }
+  },
+  "risks": [
+    {
+      "id": "R1",
+      "title": "Proxmox API Complexity",
+      "description": "Die Proxmox API ist komplex und könnte unerwartete Herausforderungen bereiten",
+      "probability": "medium",
+      "impact": "medium",
+      "status": "open",
+      "mitigation_plan": "Schrittweise Implementierung mit gründlichem Testing der API-Endpunkte",
+      "created_date": "2025-11-07T14:00:00Z",
+      "review_date": "2025-11-14T14:00:00Z"
+    }
+  ],
+  "metrics": {
+    "progress_percentage": 65,
+    "tasks_completed": 1,
+    "tasks_total": 2,
+    "milestones_completed": 1,
+    "milestones_total": 2,
+    "time_utilization": 0.92,
+    "quality_score": 8.5,
+    "streak_days": 3
+  },
+  "notes": [
+    {
+      "id": "N1",
+      "type": "decision",
+      "title": "Technology Stack Decision",
+      "content": "Entscheidung für FastAPI als Framework aufgrund der guten Performance und einfachen Authentifizierung",
+      "date": "2025-11-07T16:00:00Z",
+      "tags": ["architecture", "decision"]
+    }
+  ],
+  "work_sessions": [
+    {
+      "date": "2025-11-09",
+      "duration_hours": 5.5,
+      "focus_area": "Proxmox API Client",
+      "accomplishments": ["Basic API connection established", "Authentication working", "VM listing implemented"],
+      "blockers": ["Container management API not documented"],
+      "next_session_focus": "Complete VM management endpoints"
+    }
+  ]
+}
