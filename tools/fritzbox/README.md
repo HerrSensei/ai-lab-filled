@@ -1,52 +1,79 @@
-# Fritz!Box API Tool
+# 🌐 Fritz!Box API Tool
 
-Comprehensive Python tool for controlling Fritz!Box routers via TR-064 API.
+<div align="center">
 
-## Features
+![Python](https://img.shields.io/badge/python-3.11+-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
+![Fritz!Box](https://img.shields.io/badge/Fritz!Box-TR--064%20API-orange.svg)
 
-### 🔍 Device Discovery
-- List all connected devices with IP, MAC, hostname, and status
-- Real-time device monitoring
-- Device type identification
+*Comprehensive Python tool for controlling Fritz!Box routers via TR-064 API, integrated with the AI Lab Framework.*
 
-### 📶 WiFi Management
-- View all WiFi networks (2.4GHz, 5GHz, guest networks)
-- Network status and configuration
-- Channel and signal information
+</div>
 
-### 🔌 Port Forwarding
-- List all port forwarding rules
-- Enable/disable port mappings
-- Protocol-specific forwarding (TCP/UDP)
+---
 
-### 😴 Device Management
-- Wake-on-LAN support
-- Device status monitoring
-- Network topology information
+## 📖 Table of Contents
 
-### 📊 Network Monitoring
-- External IP address tracking
-- Connection statistics (upload/download)
-- Bandwidth monitoring
+*   [✨ Features](#-features)
+*   [⬇️ Installation](#️-installation)
+*   [🚀 Quick Start](#-quick-start)
+*   [📚 API Reference](#-api-reference)
+*   [🔒 Security](#-security)
+*   [💡 Examples](#-examples)
+*   [🤝 Integration with AI Lab Framework](#-integration-with-ai-lab-framework)
+*   [⚠️ Troubleshooting](#️-troubleshooting)
+*   [🛠️ Development](#️-development)
+*   [🙌 Contributing](#-contributing)
+*   [📄 License](#-license)
+*   [❓ Support](#-support)
 
-### 🔐 Security Features
-- Encrypted credential storage
-- Secure authentication
-- Permission-based access control
+---
 
-## Installation
+## ✨ Features
 
-```bash
-# Install dependencies
-pip install -r requirements.txt
+This tool provides a rich set of functionalities to manage your Fritz!Box router:
 
-# Or install individual packages
-pip install fritzconnection cryptography structlog
-```
+*   **🔍 Device Discovery**: List all connected devices with detailed information (IP, MAC, hostname, status) and real-time monitoring.
+*   **📶 WiFi Management**: View and manage all WiFi networks (2.4GHz, 5GHz, guest networks), including status and configuration.
+*   **🔌 Port Forwarding**: List, enable, and disable port forwarding rules with protocol-specific configurations (TCP/UDP).
+*   **😴 Device Management**: Wake-on-LAN support and comprehensive device status monitoring.
+*   **📊 Network Monitoring**: Track external IP address, connection statistics (upload/download), and bandwidth usage.
+*   **🔐 Security Features**: Encrypted credential storage, secure authentication, and permission-based access control.
 
-## Quick Start
+---
 
-### 1. Store Credentials
+## ⬇️ Installation
+
+To get started with the Fritz!Box API Tool, follow these steps:
+
+1.  **Clone the AI Lab Framework repository:**
+    ```bash
+    git clone https://github.com/HerrSensei/ai-lab.git
+    cd ai-lab
+    ```
+2.  **Navigate to the Fritz!Box tool directory:**
+    ```bash
+    cd tools/fritzbox
+    ```
+3.  **Install dependencies using Poetry (recommended for AI Lab Framework projects):**
+    ```bash
+    poetry install
+    ```
+    Alternatively, you can install individual packages:
+    ```bash
+    pip install fritzconnection cryptography structlog
+    ```
+
+---
+
+## 🚀 Quick Start
+
+Follow these steps to quickly set up and use the Fritz!Box API Tool:
+
+### 1. Store Credentials Securely
+
+Use the `secret_manager.py` script to store your Fritz!Box credentials. This ensures your username and password are encrypted.
+
 ```bash
 python secret_manager.py
 # Select option 1 to store credentials
@@ -54,72 +81,91 @@ python secret_manager.py
 # Enter username and password
 ```
 
-### 2. Basic Usage
+### 2. Basic Usage Example
+
+Here's a simple Python script demonstrating how to connect to your Fritz!Box and retrieve basic information:
+
 ```python
 import asyncio
 from fritzbox_api import FritzBoxAPI
 
 async def main():
+    # Replace with your actual Fritz!Box host, username, and password
+    # For secure credential retrieval, integrate with AI Lab Framework's secret management
     fritz = FritzBoxAPI(
         host="192.168.178.1",
         user="admin",
-        password="your_password"
+        password="your_password" # Consider using environment variables or a secure vault
     )
 
     if await fritz.connect():
-        # Get router info
+        # Get router information
         info = await fritz.get_device_info()
-        print(f"Router: {info['ModelName']}")
+        print(f"Router Model: {info.get('ModelName', 'N/A')}")
+        print(f"Firmware Version: {info.get('SoftwareVersion', 'N/A')}")
 
-        # Get external IP
+        # Get external IP address
         ip = await fritz.get_external_ip()
         print(f"External IP: {ip}")
 
-        # List devices
+        # List connected devices
         devices = await fritz.get_connected_devices()
+        print("\nConnected Devices:")
         for device in devices:
-            print(f"{device.hostname} - {device.ip_address}")
+            print(f"  - {device.hostname} ({device.ip_address}) - {'Active' if device.active else 'Inactive'}")
+    else:
+        print("Failed to connect to Fritz!Box.")
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
 ```
 
-### 3. Run Examples
-```bash
-# Interactive demo
-python fritzbox_api_examples.py --interactive
+### 3. Run Interactive Examples
 
-# Or run all demos
+Explore the full capabilities of the tool using the interactive demo:
+
+```bash
+python fritzbox_api_examples.py --interactive
+```
+Or run all predefined examples:
+```bash
 python fritzbox_api_examples.py
 ```
 
-## API Reference
+---
 
-### FritzBoxAPI Class
+## 📚 API Reference
 
-#### Connection
-- `connect()` - Establish connection to router
-- `get_device_info()` - Get router model, firmware, serial number
+The `FritzBoxAPI` class provides the primary interface for interacting with your Fritz!Box.
 
-#### Network Information
-- `get_external_ip()` - Get current external IP address
-- `get_connection_stats()` - Get upload/download statistics
+### `FritzBoxAPI` Class
 
-#### Device Management
-- `get_connected_devices()` - List all connected devices
-- `wake_device(mac_address)` - Send Wake-on-LAN packet
+#### Connection Methods
+*   `async connect() -> bool`: Establishes a connection to the Fritz!Box router. Returns `True` on success, `False` otherwise.
+*   `async get_device_info() -> dict`: Retrieves detailed information about the router, including model, firmware, and serial number.
 
-#### WiFi Management
-- `get_wifi_networks()` - List all WiFi networks and status
+#### Network Information Methods
+*   `async get_external_ip() -> str`: Fetches the current external IP address of your internet connection.
+*   `async get_connection_stats() -> dict`: Provides statistics on upload and download usage.
 
-#### Port Forwarding
-- `get_port_forwards()` - List all port forwarding rules
+#### Device Management Methods
+*   `async get_connected_devices() -> List[FritzDevice]`: Lists all devices currently connected to your network.
+*   `async wake_device(mac_address: str) -> bool`: Sends a Wake-on-LAN packet to a specified device.
 
-#### System Control
-- `reboot_router()` - Reboot the Fritz!Box
+#### WiFi Management Methods
+*   `async get_wifi_networks() -> List[FritzWiFiNetwork]`: Retrieves information about all configured WiFi networks and their status.
+
+#### Port Forwarding Methods
+*   `async get_port_forwards() -> List[FritzPortForward]`: Lists all active port forwarding rules.
+
+#### System Control Methods
+*   `async reboot_router() -> bool`: Initiates a reboot of the Fritz!Box router.
 
 ### Data Models
 
-#### FritzDevice
+The API utilizes the following dataclasses for structured data representation:
+
+#### `FritzDevice`
 ```python
 @dataclass
 class FritzDevice:
@@ -129,8 +175,9 @@ class FritzDevice:
     device_type: str
     active: bool
 ```
+Represents a connected device on the network.
 
-#### FritzPortForward
+#### `FritzPortForward`
 ```python
 @dataclass
 class FritzPortForward:
@@ -141,38 +188,42 @@ class FritzPortForward:
     protocol: str
     description: str
 ```
+Represents a configured port forwarding rule.
 
-## Security
+---
 
-### Credential Management
-The tool uses encrypted storage for credentials:
-- AES-256 encryption via Fernet
-- Local key storage with restrictive permissions (0o600)
-- No passwords in plain text or configuration files
+## 🔒 Security
 
-### Network Security
-- TR-064 protocol works only from local network
-- Session-based authentication
-- No external API exposure
+Security is a paramount concern for network tools. This tool incorporates several measures:
 
-## Examples
+*   **Credential Management**: Utilizes AES-256 encryption via Fernet for secure storage of Fritz!Box credentials. Keys are stored locally with restrictive permissions (`0o600`), ensuring no plain-text passwords in configuration files.
+*   **Network Security**: The TR-064 protocol operates exclusively within your local network, preventing external exposure.
+*   **Authentication**: Employs session-based authentication for secure interactions with the router.
+
+---
+
+## 💡 Examples
+
+Here are some practical examples demonstrating the tool's capabilities:
 
 ### Device Discovery
 ```python
 devices = await fritz.get_connected_devices()
 for device in devices:
     if device.active:
-        print(f"🟢 {device.hostname} ({device.ip_address})")
+        print(f"🟢 {device.hostname} ({device.ip_address}) - Active")
     else:
         print(f"🔴 {device.hostname} - Offline")
 ```
 
 ### Wake-on-LAN
 ```python
-# Wake up a specific device
-success = await fritz.wake_device("00:11:22:33:44:55")
+# Example: Wake up a specific device by its MAC address
+success = await fritz.wake_device("00:11:22:33:44:55") # Replace with actual MAC
 if success:
-    print("Wake-on-LAN sent successfully")
+    print("Wake-on-LAN packet sent successfully!")
+else:
+    print("Failed to send Wake-on-LAN packet.")
 ```
 
 ### Port Forwarding Management
@@ -180,15 +231,19 @@ if success:
 forwards = await fritz.get_port_forwards()
 active_forwards = [f for f in forwards if f.enabled]
 
+print("\nActive Port Forwards:")
 for forward in active_forwards:
-    print(f"{forward.external_port} -> {forward.internal_ip}:{forward.internal_port}")
+    print(f"  - External Port: {forward.external_port}, Internal IP: {forward.internal_ip}, Internal Port: {forward.internal_port}, Protocol: {forward.protocol}")
 ```
 
-## Integration with AI Lab Framework
+---
 
-The Fritz!Box tool integrates with the AI Lab Framework's MCP architecture:
+## 🤝 Integration with AI Lab Framework
 
-### MCP Integration
+The Fritz!Box API Tool is designed for seamless integration with the AI Lab Framework's Model Context Protocol (MCP) architecture, enabling advanced automation and control within your homelab environment.
+
+### MCP Integration Configuration
+To integrate with an MCP server, configure your `mcpServers` as follows:
 ```json
 {
   "mcpServers": {
@@ -201,48 +256,66 @@ The Fritz!Box tool integrates with the AI Lab Framework's MCP architecture:
 ```
 
 ### Available MCP Tools
-- `fritzbox_list_devices` - Get connected devices
-- `fritzbox_get_info` - Get router information
-- `fritzbox_wake_device` - Wake-on-LAN functionality
-- `fritzbox_port_forwards` - List port forwarding rules
-- `fritzbox_wifi_networks` - Get WiFi network info
+The following functionalities are exposed as MCP tools for framework-level orchestration:
+*   `fritzbox_list_devices`: Retrieve a list of all connected devices.
+*   `fritzbox_get_info`: Obtain detailed router information.
+*   `fritzbox_wake_device`: Trigger Wake-on-LAN for a specified device.
+*   `fritzbox_port_forwards`: List all configured port forwarding rules.
+*   `fritzbox_wifi_networks`: Get information about WiFi networks.
 
-## Troubleshooting
+---
 
-### Connection Issues
-1. Verify Fritz!Box IP address (usually 192.168.178.1)
-2. Check username/password credentials
-3. Ensure TR-064 is enabled in Fritz!Box settings
-4. Verify network connectivity
+## ⚠️ Troubleshooting
 
-### Permission Issues
-1. Run with appropriate user permissions
-2. Check file permissions for credential storage
-3. Ensure firewall allows local network access
+Encountering issues? Here are some common problems and their solutions:
 
-### API Limitations
-- Some features may require admin privileges
-- Certain Fritz!Box models have limited TR-064 support
-- Firmware version affects available features
+*   **Connection Issues**:
+    1.  Verify your Fritz!Box IP address (default is `192.168.178.1`).
+    2.  Double-check your username and password credentials.
+    3.  Ensure TR-064 is enabled in your Fritz!Box settings.
+    4.  Confirm network connectivity between your system and the Fritz!Box.
+*   **Permission Issues**:
+    1.  Run scripts with appropriate user permissions.
+    2.  Check file permissions for credential storage (`secret_manager.py`).
+    3.  Ensure your firewall allows local network access to the Fritz!Box.
+*   **API Limitations**:
+    1.  Some advanced features may require administrator privileges on the Fritz!Box.
+    2.  Certain Fritz!Box models or firmware versions may have limited TR-064 support.
 
-## Development
+---
+
+## 🛠️ Development
+
+For developers looking to contribute or extend this tool:
 
 ### Running Tests
+Execute the test suite to ensure functionality and prevent regressions:
 ```bash
 pytest tests/
 ```
 
-### Code Formatting
+### Code Quality
+Maintain high code quality standards using:
 ```bash
-black .
-ruff check --fix .
-mypy .
+black .             # Code formatting
+ruff check --fix .  # Linting and auto-fixing
+mypy .              # Static type checking
 ```
 
-## License
+---
 
-This tool is part of the AI Lab Framework and follows the same licensing terms.
+## 🙌 Contributing
 
-## Support
+We welcome contributions to the Fritz!Box API Tool! Please refer to the main [Contributing Guidelines](core/guidelines/AGENTS.md) for the AI Lab Framework.
 
-For issues and feature requests, please refer to the AI Lab Framework documentation.
+---
+
+## 📄 License
+
+This tool is part of the AI Lab Framework and is licensed under the MIT License. See the main [LICENSE](LICENSE) file for details.
+
+---
+
+## ❓ Support
+
+For issues, feature requests, or general support, please refer to the main [AI Lab Framework Documentation](README.md).
