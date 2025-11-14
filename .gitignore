@@ -141,7 +141,7 @@ data/ideas/*.json
 !data/ideas/.gitkeep
 
 # Ignore generated __init__.py in tests directory
-tests/__init__.py
+
 
 # Archive - keep structure but exclude large files
 archive/reports/*.md
