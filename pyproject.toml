@@ -38,6 +38,11 @@ dependencies = [
     "structlog>=23.0.0",
     "sqlalchemy (>=2.0.44,<3.0.0)",
     "PyGithub>=2.0.0",
+    "uvicorn>=0.29.0",
+    "fastapi>=0.111.0",
+    "passlib>=1.7.4",
+    "psutil>=5.9.0",
+    "bcrypt>=4.1.0",
 ]
 
 [project.optional-dependencies]
@@ -119,6 +124,7 @@ testpaths = ["tests", "tools"]
 python_files = ["test_*.py", "*_test.py"]
 python_classes = ["Test*"]
 python_functions = ["test_*"]
+norecursedirs = ["tests/e2e"]
 
 [tool.coverage.run]
 source = ["src"]

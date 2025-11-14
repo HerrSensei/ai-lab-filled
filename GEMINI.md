@@ -77,6 +77,15 @@ The project adheres to high standards of code quality and structured development
 *   **Structured Logging:** Implemented using `structlog` for better observability and analysis.
 *   **CLI Workflows:** A detailed set of documented CLI workflows (`core/docs/CLI_WORKFLOWS.md`) guides developers through common tasks, ensuring consistency and efficiency.
 
+### Subtask Management for Gemini CLI
+
+When working on a work item or a task from a project, it is crucial to break down complex tasks into smaller, manageable subtasks. These subtasks should then be added to the Gemini CLI's internal todo list. This ensures clear progress tracking, organization of complex queries, and comprehensive task completion.
+
+*   **Break Down Tasks:** Decompose large tasks into distinct, actionable subtasks.
+*   **Add to Todo List:** Utilize the `write_todos` tool to add these subtasks to the current session's todo list.
+*   **Track Progress:** Mark subtasks as `pending`, `in_progress`, `completed`, or `cancelled` as work progresses.
+*   **Iterative Refinement:** The todo list is dynamic; update it as new information emerges or plans evolve.
+
 ## Project Structure
 
 *   **`src/`**: Contains the core framework code, including AI tool abstractions, profile definitions, and infrastructure services.
@@ -86,3 +95,24 @@ The project adheres to high standards of code quality and structured development
 *   **`projects/`**: An empty directory intended for generated projects, serving as a placeholder for new project scaffolding.
 *   **`pyproject.toml`**: Project configuration, dependencies, and script definitions.
 *   **`run.py`**: An interactive CLI script designed to execute `make` targets, acting as a central operational interface.
+
+## 🚨 Database Interaction (ALWAYS VERIFY)
+- ✅ **USE**: SQLAlchemy ORM (`src/infrastructure/db/models/`)
+- ❌ **AVOID**: Direct SQLite (`src/ai_lab_framework/database.py` - DEPRECATED)
+- ✅ **Database**: `data/ai_lab.db` (SQLite with SQLAlchemy ORM)
+- ✅ **Models**: `src/infrastructure/db/models/models.py`
+
+### Before Any Database Operation
+1. Check if using SQLAlchemy models
+2. Verify imports from `infrastructure.db`
+3. Never import from `ai_lab_framework.database`
+
+### Quick Test Before Coding
+```python
+# ✅ This is correct
+from src.infrastructure.db.database import SessionLocal
+from src.infrastructure.db.models.models import WorkItem
+
+# ❌ This is WRONG - deprecated
+from src.ai_lab_framework.database import AILabDatabase  # DO NOT USE!
+```
