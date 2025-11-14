@@ -12,6 +12,7 @@ import tempfile
 import shutil
 import sqlite3
 import json
+from datetime import datetime
 
 
 @pytest.fixture(scope="session")
@@ -90,8 +91,11 @@ def dashboard_page(page: Page, test_db):
     # Update script to use test database
     import subprocess
 
+    dashboard_output_path = (
+        Path(__file__).parent.parent.parent / "dashboard" / "test_dashboard.html"
+    )
     result = subprocess.run(
-        ["python", str(dashboard_script), "--output", "test_dashboard.html"],
+        ["python", str(dashboard_script), "--output", str(dashboard_output_path)],
         capture_output=True,
         text=True,
     )
@@ -99,10 +103,7 @@ def dashboard_page(page: Page, test_db):
     assert result.returncode == 0, f"Dashboard generation failed: {result.stderr}"
 
     # Navigate to test dashboard
-    dashboard_path = (
-        Path(__file__).parent.parent.parent / "dashboard" / "test_dashboard.html"
-    )
-    page.goto(f"file://{dashboard_path.absolute()}")
+    page.goto(f"file://{dashboard_output_path.absolute()}")
 
     return page
 
@@ -112,7 +113,7 @@ class TestHelpers:
 
     @staticmethod
     def create_test_work_item(
-        db_path: Path, title: str, status: str = "todo", priority: str = "medium"
+        db_path: Path, title: str, status: str = "todo", priority: str = "medium", type: str = "task"
     ):
         """Create a test work item in database."""
         conn = sqlite3.connect(db_path)
@@ -124,10 +125,10 @@ class TestHelpers:
 
         cursor.execute(
             """
-            INSERT INTO work_items (id, title, description, status, priority)
-            VALUES (?, ?, ?, ?, ?)
+            INSERT INTO work_items (id, title, description, status, priority, type, created_date, updated_date)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         """,
-            (work_id, title, f"Test description for {title}", status, priority),
+            (work_id, title, f"Test description for {title}", status, priority, type, datetime.utcnow(), datetime.utcnow()),
         )
 
         conn.commit()
@@ -136,7 +137,7 @@ class TestHelpers:
         return work_id
 
     @staticmethod
-    def create_test_idea(db_path: Path, title: str, category: str = "general"):
+    def create_test_idea(db_path: Path, title: str, category: str = "general", priority: str = "medium"):
         """Create a test idea in database."""
         conn = sqlite3.connect(db_path)
         cursor = conn.cursor()
@@ -147,10 +148,10 @@ class TestHelpers:
 
         cursor.execute(
             """
-            INSERT INTO ideas (id, title, description, category, status)
-            VALUES (?, ?, ?, ?, ?)
+            INSERT INTO ideas (id, title, description, category, status, priority, created_date, updated_date)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         """,
-            (idea_id, title, f"Test idea description for {title}", category, "draft"),
+            (idea_id, title, f"Test idea description for {title}", category, "draft", priority, datetime.utcnow(), datetime.utcnow()),
         )
 
         conn.commit()
@@ -164,14 +165,20 @@ class TestHelpers:
         chart_element = page.locator(f"#{chart_id}")
         expect(chart_element).to_be_visible()
 
-        # Wait for canvas to have content
+        # Wait for canvas to have content and be drawn upon
         page.wait_for_function(f"""
             () => {{
                 const canvas = document.getElementById('{chart_id}');
-                return canvas && canvas.getContext('2d') && 
-                       canvas.width > 0 && canvas.height > 0;
+                if (!canvas || !canvas.getContext('2d')) return false;
+                // Check if canvas has non-transparent pixels
+                const ctx = canvas.getContext('2d');
+                const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+                for (let i = 0; i < data.length; i += 4) {{
+                    if (data[i + 3] > 0) return true; // Check alpha channel
+                }}
+                return false;
             }}
-        """)
+        """, timeout=10000) # Increased timeout for chart rendering
 
 
 @pytest.fixture

@@ -131,12 +131,17 @@ dashboard/dashboard_data.json
 # Generated files that should be regenerated
 dashboard/dashboard.html
 dashboard/dashboard_data.json
+dashboard/test_dashboard*.html
+test_dashboard*.html
 
 # Keep only essential data files, exclude large/generated ones
 data/work-items/*.json
 !data/work-items/.gitkeep
 data/ideas/*.json
 !data/ideas/.gitkeep
+
+# Ignore generated __init__.py in tests directory
+tests/__init__.py
 
 # Archive - keep structure but exclude large files
 archive/reports/*.md

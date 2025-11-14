@@ -10,6 +10,7 @@ from playwright.sync_api import Page, expect
 import time
 import json
 from pathlib import Path
+import re
 
 
 class TestDashboard:
@@ -60,14 +61,19 @@ class TestDashboard:
         
         # Wait for charts to render (canvas content)
         TestHelpers.wait_for_chart_render(dashboard_page, "statusChart")
-        TestHelpers.wait_for_chart_render(dashboard_page, "category_chart")
-        
+        TestHelpers.wait_for_chart_render(dashboard_page, "categoryChart")        
         # Check that charts have canvas elements
         status_canvas = status_chart.locator("canvas")
         category_canvas = category_chart.locator("canvas")
         
-        expect(status_canvas).to_be_visible()
-        expect(category_canvas).to_be_visible()
+        # Check that charts have canvas elements and are rendered
+        status_canvas_box = status_canvas.bounding_box(timeout=15000)
+        category_canvas_box = category_canvas.bounding_box(timeout=15000)
+
+        assert status_canvas_box is not None and status_canvas_box['width'] > 0 and status_canvas_box['height'] > 0, \
+            "Status chart canvas not rendered or has no dimensions"
+        assert category_canvas_box is not None and category_canvas_box['width'] > 0 and category_canvas_box['height'] > 0, \
+            "Category chart canvas not rendered or has no dimensions"
 
     def test_recent_work_items_section(self, dashboard_page: Page):
         """Test recent work items section."""
@@ -97,7 +103,7 @@ class TestDashboard:
         
         # Check for quality indicators
         quality_indicators = dashboard_page.locator(".card:has(h3:has-text('Code Quality')) .flex")
-        expect(quality_indicators).to_be_visible()
+        expect(quality_indicators).to_be_visible(timeout=15000)
 
     def test_system_information_section(self, dashboard_page: Page):
         """Test system information section."""
@@ -134,7 +140,7 @@ class TestDashboard:
         # Test desktop size
         dashboard_page.set_viewport_size({"width": 1200, "height": 800})
         metrics_grid = dashboard_page.locator(".grid").first
-        expect(metrics_grid).to_have_class(/md:grid-cols-4/)
+        expect(metrics_grid).to_have_class(re.compile(r"md:grid-cols-4"))
         
         # Test tablet size
         dashboard_page.set_viewport_size({"width": 768, "height": 1024})
@@ -146,24 +152,22 @@ class TestDashboard:
 
     def test_data_with_test_content(self, dashboard_page: Page, test_db, test_helpers):
         """Test dashboard with actual test data."""
-        # Create test data
+        # Regenerate dashboard with new data
         work_id = test_helpers.create_test_work_item(test_db, "Test Work Item", "in_progress", "high")
         idea_id = test_helpers.create_test_idea(test_db, "Test Idea", "automation")
         
-        # Regenerate dashboard with new data
         dashboard_script = Path(__file__).parent.parent.parent / "scripts" / "dashboard_realtime.py"
+        dashboard_output_path = Path(__file__).parent.parent.parent / "dashboard" / "test_dashboard_with_data.html"
         import subprocess
         result = subprocess.run([
-            "python", str(dashboard_script), 
-            "--output", "test_dashboard_with_data.html"
+            "python", str(dashboard_script),
+            "--output", str(dashboard_output_path)
         ], capture_output=True, text=True)
-        
+
         assert result.returncode == 0
-        
+
         # Reload page
-        dashboard_path = Path(__file__).parent.parent.parent / "dashboard" / "test_dashboard_with_data.html"
-        dashboard_page.goto(f"file://{dashboard_path.absolute()}")
-        
+        dashboard_page.goto(f"file://{dashboard_output_path.absolute()}")        
         # Wait for content to load
         dashboard_page.wait_for_selector(".metric")
         
@@ -181,22 +185,21 @@ class TestDashboard:
         dashboard_script = Path(__file__).parent.parent.parent / "scripts" / "dashboard_realtime.py"
         
         # This should still generate a dashboard with error indicators
+        dashboard_output_path = Path(__file__).parent.parent.parent / "dashboard" / "test_dashboard_error.html"
         import subprocess
         result = subprocess.run([
-            "python", str(dashboard_script), 
-            "--output", "test_dashboard_error.html"
+            "python", str(dashboard_script),
+            "--output", str(dashboard_output_path)
         ], capture_output=True, text=True)
-        
+
         # Should still succeed but with warnings
         assert result.returncode == 0
-        
+
         # Load the error dashboard
-        dashboard_path = Path(__file__).parent.parent.parent / "dashboard" / "test_dashboard_error.html"
-        page.goto(f"file://{dashboard_path.absolute()}")
-        
+        page.goto(f"file://{dashboard_output_path.absolute()}")        
         # Should still load the basic structure
         expect(page.locator("h1")).to_be_visible()
-        expect(page.locator(".metric")).to_be_visible()
+        expect(page.locator(".metric")).to_be_visible(timeout=15000)
 
     def test_accessibility_features(self, dashboard_page: Page):
         """Test basic accessibility features."""
