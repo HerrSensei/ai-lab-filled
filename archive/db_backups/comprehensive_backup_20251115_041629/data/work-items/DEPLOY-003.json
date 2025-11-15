@@ -1,0 +1,39 @@
+{
+  "id": "DEPLOY-003",
+  "title": "CI/CD Pipeline Grundlagen schaffen",
+  "description": "Vorbereitung und Grundlegende Implementierung von CI/CD Pipelines für zukünftige Pull Request Automatisierung und Testing.",
+  "type": "feature",
+  "priority": "medium", 
+  "status": "todo",
+  "created_at": "2025-11-14T02:00:00Z",
+  "updated_at": "2025-11-14T02:00:00Z",
+  "assignee": "ai-agent",
+  "labels": ["ci-cd", "pipeline", "testing"],
+  "subtasks": [
+    {
+      "id": "DEPLOY-003-1",
+      "title": "GitHub Actions Workflow Templates",
+      "description": "Templates für CI/CD Workflows erstellen",
+      "status": "todo"
+    },
+    {
+      "id": "DEPLOY-003-2",
+      "title": "Pull Request Templates",
+      "description": "Standardisierte PR Templates für alle Repositories",
+      "status": "todo"
+    },
+    {
+      "id": "DEPLOY-003-3",
+      "title": "Automated Testing Setup",
+      "description": "Grundlegendes Testing Setup für CI Pipeline",
+      "status": "todo"
+    }
+  ],
+  "acceptance_criteria": [
+    "GitHub Actions Templates sind erstellt",
+    "Pull Request Templates existieren für alle Repos",
+    "Grundlegendes Testing ist implementiert",
+    "CI Pipeline kann Änderungen automatisch testen",
+    "Grundlage für zukünftige Erweiterungen ist geschaffen"
+  ]
+}

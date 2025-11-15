@@ -1,0 +1,115 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AI Lab Idea Schema",
+  "description": "Schema for AI Lab idea management",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^IDEA-\\d{3}$",
+      "description": "Unique idea identifier"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Idea title"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Detailed description of the idea"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["backlog", "refining", "ready", "implemented", "archived"],
+      "description": "Current status of the idea"
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["low", "medium", "high", "critical"],
+      "description": "Priority level"
+    },
+    "category": {
+      "type": "string",
+      "enum": ["infrastructure", "automation", "development", "research", "optimization"],
+      "description": "Category of the idea"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tags for categorization"
+    },
+    "created_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Creation timestamp"
+    },
+    "updated_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last update timestamp"
+    },
+    "estimated_effort": {
+      "type": "string",
+      "description": "Estimated effort (e.g., '2-3 days', '1 week')"
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Dependencies on other ideas or projects"
+    },
+    "acceptance_criteria": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Acceptance criteria for implementation"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes and thoughts"
+    },
+    "author": {
+      "type": "string",
+      "description": "Author of the idea"
+    },
+    "open_questions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Open questions to be answered"
+    },
+    "next_steps": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Next steps for implementation"
+    },
+    "target_audience": {
+      "type": "string",
+      "description": "Target audience for the idea"
+    },
+    "benefits": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Expected benefits"
+    },
+    "prerequisites": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Prerequisites for implementation"
+    }
+  },
+  "required": ["id", "title", "description", "status", "priority", "category", "created_date", "updated_date"],
+  "additionalProperties": false
+}

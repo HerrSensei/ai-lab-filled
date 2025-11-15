@@ -1,0 +1,115 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AI Lab Work Item Schema",
+  "description": "Schema for AI Lab work item management",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}-\\d{3}$",
+      "description": "Unique work item identifier"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Work item title"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Detailed description of the work item"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["todo", "in_progress", "review", "done", "blocked"],
+      "description": "Current status of the work item"
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["low", "medium", "high", "critical"],
+      "description": "Priority level"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["feature", "bug", "task", "research", "documentation", "infrastructure"],
+      "description": "Type of work item"
+    },
+    "project": {
+      "type": "string",
+      "description": "Associated project"
+    },
+    "assignee": {
+      "type": "string",
+      "description": "Assigned person"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tags for categorization"
+    },
+    "created_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Creation timestamp"
+    },
+    "updated_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last update timestamp"
+    },
+    "due_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Due date for completion"
+    },
+    "estimated_hours": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Estimated effort in hours"
+    },
+    "actual_hours": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Actual effort spent in hours"
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Dependencies on other work items"
+    },
+    "acceptance_criteria": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Acceptance criteria for completion"
+    },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "description": {"type": "string"},
+          "severity": {"type": "string", "enum": ["low", "medium", "high", "critical"]},
+          "resolution": {"type": "string"}
+        },
+        "required": ["description", "severity"]
+      },
+      "description": "Current blockers"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes and thoughts"
+    },
+    "file_path": {
+      "type": "string",
+      "description": "Path to the original markdown file"
+    }
+  },
+  "required": ["id", "title", "description", "status", "priority", "type", "created_date", "updated_date"],
+  "additionalProperties": false
+}

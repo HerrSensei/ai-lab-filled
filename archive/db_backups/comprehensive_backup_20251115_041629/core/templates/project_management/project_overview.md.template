@@ -1,0 +1,80 @@
+# Projekt: {{ project_name }}
+
+**Status:** 🟢 Planung | 🟡 In Arbeit | 🔩 Testing | 🚀 Live | ⏸️ Pausiert
+**Start:** {{ start_date }}
+**Ziel:** {{ target_date }}
+
+---
+
+## 🎯 Vision & Ziel
+
+{{ Was möchtest du mit diesem Projekt erreichen? }}
+
+---
+
+## 📊 Aktueller Fortschritt
+
+| Phase | Status | Fertig bis |
+|-------|--------|------------|
+| 🏗️ Grundlagen | {{ grundlagen_status }} | {{ grundlagen_date }} |
+| 🤖 AI/ML Core | {{ ai_core_status }} | {{ ai_core_date }} |
+| 🐛 Testing | {{ testing_status }} | {{ testing_date }} |
+| 🚀 Deployment | {{ deployment_status }} | {{ deployment_date }} |
+
+---
+
+## 📋 Aktuelle Tasks (Top 5)
+
+| ID | Titel | Status | Priorität |
+|----|-------|--------|-----------|
+| {{ task_1_id }} | {{ task_1_title }} | {{ task_1_status }} | {{ task_1_prio }} |
+| {{ task_2_id }} | {{ task_2_title }} | {{ task_2_status }} | {{ task_2_prio }} |
+
+---
+
+## 🏗️ Tech Stack
+
+*   **Backend:** {{ backend_tech }}
+*   **Frontend:** {{ frontend_tech }}
+*   **AI/ML:** {{ ai_ml_tech }}
+*   **Database:** {{ database_tech }}
+*   **Deployment:** {{ deployment_tech }}
+
+---
+
+## 📂 Wichtige Dateien & Ordner
+
+*   `src/` - Hauptquellcode
+*   `docs/` - Dokumentation
+*   `tests/` - Tests
+*   `scripts/` - Automatisierungsskripte
+*   `config/` - Konfigurationsdateien
+
+---
+
+## 🚨 Risiken & Blocker
+
+*   {{ risiko_1 }}
+*   {{ risiko_2 }}
+
+---
+
+## 📚 Lernpunkte & Ressourcen
+
+*   **Gelernt:** {{ was_gelernt }}
+*   **Nützliche Links:** {{ nuetzliche_links }}
+*   **Offene Fragen:** {{ offene_fragen }}
+
+---
+
+## 📈 Nächste Meilensteine
+
+*   [ ] {{ meilenstein_1 }} ({{ meilenstein_1_date }})
+*   [ ] {{ meilenstein_2 }} ({{ meilenstein_2_date }})
+
+---
+
+## 🔄 Letzte Aktualisierung
+
+**Datum:** {{ last_update }}
+**Was wurde getan:** {{ last_update_summary }}

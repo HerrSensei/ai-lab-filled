@@ -1,0 +1,47 @@
+[
+  {
+    "nodes": [
+      {
+        "parameters": {},
+        "name": "Start",
+        "type": "n8n-nodes-base.start",
+        "typeVersion": 1,
+        "id": "start",
+        "position": [240, 300]
+      },
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "webhook",
+          "options": {
+            "rawBody": "true"
+          }
+        },
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 1,
+        "id": "webhook",
+        "position": [440, 300],
+        "webhookId": "{{ project_name }}-webhook"
+      },
+      {
+        "parameters": {
+          "functionCode": "const body = $json.body;\n\n// Example: Process incoming data from the webhook\n// You can access data like: body.some_field\n\nreturn [\n  { json: { message: `Received data for {{ project_name }}: ${JSON.stringify(body)}` } }\n];"
+        },
+        "name": "Process Data",
+        "type": "n8n-nodes-base.function",
+        "typeVersion": 1,
+        "id": "processData",
+        "position": [640, 300]
+      }
+    ],
+    "connections": {
+      "Start": [
+        ["Webhook", "main"]
+      ],
+      "Webhook": [
+        ["Process Data", "main"]
+      ]
+    }
+  }
+]

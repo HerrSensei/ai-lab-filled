@@ -1,0 +1,29 @@
+{
+  "id": "FRM-023",
+  "title": "Homeserver-Agent Projekt-Setup",
+  "description": "Organisiere homeserver-agent als Projekt innerhalb ai-lab Instanz",
+  "status": "todo",
+  "priority": "medium",
+  "type": "framework",
+  "assignee": "AI Lab Team",
+  "author": "AI Lab Framework",
+  "labels": ["project", "homeserver", "organization"],
+  "created_date": "2025-11-14T10:00:00Z",
+  "updated_date": "2025-11-14T10:00:00Z",
+  "estimated_hours": 6,
+  "actual_hours": 0,
+  "dependencies": ["FRM-020"],
+  "acceptance_criteria": [
+    "Projekt-Struktur unter projects/homeserver-agent/",
+    "Eigene pyproject.toml mit Framework-Dependency",
+    "Tools und Integrationen organisiert",
+    "Eigene Tests und Dokumentation",
+    "GitHub-Integration als Instanz-spezifisch"
+  ],
+  "blockers": [],
+  "notes": "homeserver-agent ist CONSUMER des Frameworks, nicht Teil davon",
+  "file_path": "projects/homeserver-agent/",
+  "repository_url": "https://github.com/ai-lab/ai-lab",
+  "is_draft": false,
+  "archived": false
+}

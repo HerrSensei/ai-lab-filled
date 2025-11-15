@@ -1,0 +1,52 @@
+{
+  "id": "DOCS-001",
+  "title": "Comprehensive Framework Benutzerhandbuch",
+  "description": "Erstellung einer umfassenden Anleitung für das AI Lab Framework, die alle Funktionen, Templates und die Struktur erklärt. Zielgruppe sind Nutzer mit Basic IT Wissen.",
+  "type": "documentation",
+  "priority": "high",
+  "status": "todo", 
+  "created_at": "2025-11-14T02:00:00Z",
+  "updated_at": "2025-11-14T02:00:00Z",
+  "assignee": "ai-agent",
+  "labels": ["documentation", "user-guide", "framework"],
+  "subtasks": [
+    {
+      "id": "DOCS-001-1",
+      "title": "Framework Übersicht und Architektur",
+      "description": "Allgemeine Übersicht über das Framework und seine Architektur",
+      "status": "todo"
+    },
+    {
+      "id": "DOCS-001-2",
+      "title": "Installation und Setup Anleitung",
+      "description": "Schritt-für-Schritt Anleitung für Installation und erstes Setup",
+      "status": "todo"
+    },
+    {
+      "id": "DOCS-001-3",
+      "title": "Funktionen und Features erklären",
+      "description": "Detaillierte Erklärung aller Framework Funktionen",
+      "status": "todo"
+    },
+    {
+      "id": "DOCS-001-4",
+      "title": "Templates und Beispiele",
+      "description": "Erklärung aller verfügbaren Templates und deren Verwendung",
+      "status": "todo"
+    },
+    {
+      "id": "DOCS-001-5",
+      "title": "Best Practices und Tipps",
+      "description": "Best Practices und Tipps für effektive Framework Nutzung",
+      "status": "todo"
+    }
+  ],
+  "acceptance_criteria": [
+    "Anleitung ist für Basic IT Nutzer verständlich",
+    "Alle Framework Funktionen sind erklärt",
+    "Alle Templates sind dokumentiert",
+    "Struktur des Frameworks ist klar erklärt",
+    "Praktische Beispiele sind enthalten",
+    "Anleitung ist in allen Repositories verfügbar"
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "id": "IDEA-007",
+  "title": "Homeserver Vision Documentation Projekt",
+  "description": "Erstellung einer umfassenden Dokumentation für den Homeserver-Aufbau und Betrieb. Strukturierte Dokumentation aller Homeserver-Komponenten, Konfigurationen und Prozesse für Wartung und Wiederherstellung.",
+  "status": "converted",
+  "priority": "medium",
+  "category": "development",
+  "tags": [
+    "homeserver",
+    "documentation",
+    "knowledge",
+    "maintenance"
+  ],
+  "created_date": "2025-11-07T00:00:00Z",
+  "updated_date": "2025-11-09T06:14:13Z",
+  "estimated_effort": "3-5 days",
+  "dependencies": [
+    "IDEA-002"
+  ],
+  "acceptance_criteria": [
+    "Alle Komponenten sind dokumentiert",
+    "Konfigurationen sind nachvollziehbar",
+    "Prozesse sind beschrieben",
+    "Dokumentation ist aktuell und pflegbar"
+  ],
+  "notes": "Bestehende Inhalte aus dem Projekt können übernommen werden. Architektur-Diagramme bereits vorhanden. Fokus auf praktische, nutzbare Dokumentation.",
+  "author": "jns",
+  "open_questions": [
+    "Welche Dokumentationsstruktur wird verwendet?",
+    "Wie wird die Aktualität sichergestellt?",
+    "Welche Tools für die Dokumentation (Markdown, Wiki, etc.)?",
+    "Wie werden Diagramme und Screenshots integriert?"
+  ],
+  "next_steps": [
+    "Idee mit KI-Assistent verfeinern",
+    "Offene Fragen klären",
+    "Machbarkeit prüfen",
+    "Priorisierung festlegen"
+  ],
+  "target_audience": "Ich selbst (jns) als Systemadministrator",
+  "benefits": [
+    "Wissensmanagement",
+    "Schnellere Fehlerbehebung",
+    "Wartungs-Unterstützung"
+  ],
+  "prerequisites": [
+    "Funktionsfähiger Homeserver",
+    "Dokumentations-Tools"
+  ]
+}

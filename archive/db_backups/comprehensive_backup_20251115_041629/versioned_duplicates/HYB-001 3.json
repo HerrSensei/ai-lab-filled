@@ -1,0 +1,27 @@
+{
+  "id": "HYB-001",
+  "title": "Hybrid-Architektur Implementierung",
+  "description": "Implementierung der 3-Schichten-Hybrid-Architektur für autonome Homelab-Verwaltung bestehend aus Agent OS (Design Layer), n8n (Orchestration Layer) und MCP (Runtime Control Layer).",
+  "status": "in_progress",
+  "priority": "high",
+  "type": "infrastructure",
+  "assignee": "AI Lab Team",
+  "tags": ["hybrid-architecture", "agent-os", "n8n", "mcp"],
+  "created_date": "2025-11-06T00:00:00Z",
+  "updated_date": "2025-11-10T00:00:00Z",
+  "due_date": "2025-12-15T00:00:00Z",
+  "estimated_hours": 100,
+  "actual_hours": 0,
+  "dependencies": [],
+  "acceptance_criteria": [
+    "Agent OS kann Specs für n8n Workflows generieren",
+    "n8n kann MCP Tools für Kubernetes-Operationen aufrufen",
+    "MCP Server stellt sichere Kubernetes-Steuerung bereit"
+  ],
+  "sub_tasks": [],
+  "blockers": [],
+  "notes": "Komplexität der 3-Schichten-Integration könnte fehleranfällig sein.",
+  "file_path": "/Users/jns/Documents/1 | Projekte/ai-lab/archive/work-items/HYB-001_hybrid-architektur-implementierung.md",
+  "project_id": "PRJ-005",
+  "project_name": "AI Lab Deployment & Operations"
+}

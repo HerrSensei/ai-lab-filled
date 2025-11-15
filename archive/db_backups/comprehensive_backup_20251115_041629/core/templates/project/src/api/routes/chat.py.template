@@ -1,0 +1,133 @@
+"""
+Chat endpoints for AI interactions.
+
+This module provides endpoints for chat functionality
+with AI models, including prompt management and
+response handling.
+"""
+
+from fastapi import APIRouter, Depends, HTTPException
+from typing import Dict, Any, List
+import structlog
+
+from src.models.chat import ChatRequest, ChatResponse
+from src.services.ai_service import AIService
+from src.core.exceptions import ValidationError, AIServiceError
+
+logger = structlog.get_logger(__name__)
+router = APIRouter()
+
+
+@router.post("/", response_model=ChatResponse)
+async def chat(
+    request: ChatRequest,
+    ai_service: AIService = Depends(AIService),
+) -> ChatResponse:
+    """
+    Process a chat request with AI model.
+
+    Args:
+        request: Chat request containing message and parameters
+        ai_service: AI service dependency
+
+    Returns:
+        ChatResponse: AI response with metadata
+
+    Raises:
+        ValidationError: If request is invalid
+        AIServiceError: If AI service fails
+    """
+    try:
+        logger.info(
+            "chat_request_received",
+            message_length=len(request.message),
+            model=request.model,
+            temperature=request.temperature,
+        )
+
+        # Validate request
+        if not request.message.strip():
+            raise ValidationError("Message cannot be empty")
+
+        if len(request.message) > 10000:
+            raise ValidationError("Message too long (max 10000 characters)")
+
+        # Process with AI service
+        response = await ai_service.chat_completion(
+            message=request.message,
+            model=request.model,
+            temperature=request.temperature,
+            max_tokens=request.max_tokens,
+        )
+
+        logger.info(
+            "chat_request_completed",
+            response_length=len(response.message),
+            tokens_used=response.tokens_used,
+            cost=response.cost,
+        )
+
+        return response
+
+    except ValidationError:
+        raise
+    except Exception as e:
+        logger.error("chat_request_failed", error=str(e))
+        raise AIServiceError(f"Failed to process chat request: {str(e)}")
+
+
+@router.get("/models")
+async def list_models() -> Dict[str, Any]:
+    """
+    List available AI models.
+
+    Returns:
+        Dict containing available models and their capabilities
+    """
+    try:
+        models = {
+            "available": [
+                {
+                    "id": "gpt-3.5-turbo",
+                    "name": "GPT-3.5 Turbo",
+                    "description": "Fast and efficient model for most tasks",
+                    "max_tokens": 4096,
+                    "cost_per_token": 0.0000015,
+                },
+                {
+                    "id": "gpt-4",
+                    "name": "GPT-4",
+                    "description": "Most capable model for complex tasks",
+                    "max_tokens": 8192,
+                    "cost_per_token": 0.00003,
+                },
+            ],
+            "default": "gpt-3.5-turbo",
+        }
+
+        return models
+
+    except Exception as e:
+        logger.error("list_models_failed", error=str(e))
+        raise AIServiceError(f"Failed to list models: {str(e)}")
+
+
+@router.get("/history")
+async def get_chat_history() -> Dict[str, Any]:
+    """
+    Get chat history for the current session.
+
+    Returns:
+        Dict containing chat history
+    """
+    try:
+        # This would typically fetch from a database
+        # For now, return empty history
+        return {
+            "history": [],
+            "total_messages": 0,
+        }
+
+    except Exception as e:
+        logger.error("get_chat_history_failed", error=str(e))
+        raise AIServiceError(f"Failed to get chat history: {str(e)}")

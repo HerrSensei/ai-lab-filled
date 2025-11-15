@@ -1,0 +1,120 @@
+"""
+Health check endpoints.
+
+This module provides health check endpoints for monitoring
+the application status and dependencies.
+"""
+
+from fastapi import APIRouter, Depends
+from typing import Dict, Any
+import time
+import structlog
+
+from src.core.config import settings
+
+logger = structlog.get_logger(__name__)
+router = APIRouter()
+
+
+@router.get("/")
+async def health_check() -> Dict[str, Any]:
+    """Basic health check."""
+    return {
+        "status": "healthy",
+        "timestamp": time.time(),
+        "version": settings.APP_VERSION,
+        "environment": settings.ENVIRONMENT,
+    }
+
+
+@router.get("/detailed")
+async def detailed_health_check() -> Dict[str, Any]:
+    """Detailed health check with component status."""
+    checks = {
+        "application": await check_application(),
+        "ai_service": await check_ai_service(),
+        "configuration": await check_configuration(),
+    }
+
+    overall_status = "healthy" if all(
+        check["status"] == "healthy" for check in checks.values()
+    ) else "unhealthy"
+
+    return {
+        "status": overall_status,
+        "timestamp": time.time(),
+        "version": settings.APP_VERSION,
+        "environment": settings.ENVIRONMENT,
+        "checks": checks,
+    }
+
+
+async def check_application() -> Dict[str, Any]:
+    """Check application health."""
+    try:
+        # Basic application checks
+        return {
+            "status": "healthy",
+            "message": "Application is running normally",
+        }
+    except Exception as e:
+        logger.error("Application health check failed", error=str(e))
+        return {
+            "status": "unhealthy",
+            "message": f"Application check failed: {str(e)}",
+        }
+
+
+async def check_ai_service() -> Dict[str, Any]:
+    """Check AI service connectivity."""
+    try:
+        # Here you would check actual AI service connectivity
+        # For now, just check if API key is present
+        if settings.OPENAI_API_KEY:
+            return {
+                "status": "healthy",
+                "message": "AI service is accessible",
+            }
+        else:
+            return {
+                "status": "unhealthy",
+                "message": "AI service API key not configured",
+            }
+    except Exception as e:
+        logger.error("AI service health check failed", error=str(e))
+        return {
+            "status": "unhealthy",
+            "message": f"AI service check failed: {str(e)}",
+        }
+
+
+async def check_configuration() -> Dict[str, Any]:
+    """Check configuration validity."""
+    try:
+        # Check critical configuration
+        required_settings = [
+            "OPENAI_API_KEY",
+            "SECRET_KEY",
+        ]
+
+        missing_settings = []
+        for setting in required_settings:
+            if not getattr(settings, setting, None):
+                missing_settings.append(setting)
+
+        if missing_settings:
+            return {
+                "status": "unhealthy",
+                "message": f"Missing required settings: {', '.join(missing_settings)}",
+            }
+
+        return {
+            "status": "healthy",
+            "message": "Configuration is valid",
+        }
+    except Exception as e:
+        logger.error("Configuration health check failed", error=str(e))
+        return {
+            "status": "unhealthy",
+            "message": f"Configuration check failed: {str(e)}",
+        }

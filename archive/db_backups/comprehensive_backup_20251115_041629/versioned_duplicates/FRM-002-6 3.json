@@ -1,0 +1,33 @@
+{
+  "id": "FRM-002-6",
+  "title": "Data Management Migration",
+  "description": "Migration of data management to a JSON-first approach, including data cleanup, schema validation, and workflow redefinition.",
+  "status": "done",
+  "priority": "high",
+  "type": "infrastructure",
+  "project": "AI Lab Framework",
+  "assignee": "AI Lab Framework Team",
+  "tags": [
+    "data-management",
+    "json",
+    "migration"
+  ],
+  "created_date": "2025-11-09T00:00:00Z",
+  "updated_date": "2025-11-09T00:00:00Z",
+  "due_date": null,
+  "estimated_hours": 6,
+  "actual_hours": 6,
+  "dependencies": [
+    "FRM-002"
+  ],
+  "acceptance_criteria": [
+    "100% schema compliance for all JSON files",
+    "Zero duplicate data across directories",
+    "Clear separation between development (markdown) and production (JSON)",
+    "Automated validation for all data operations"
+  ],
+  "sub_tasks": [],
+  "blockers": [],
+  "notes": "Fully JSON-first data management implemented. 100% schema compliance, automated validation, and a clear workflow have been established.",
+  "file_path": "/Users/jns/Documents/1 | Projekte/ai-lab/archive/work-items/FRM-002-6_data-management-migration.md"
+}

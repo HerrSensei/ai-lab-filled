@@ -1,0 +1,22 @@
+{
+  "id": "FRM-006-4",
+  "title": "Phase 4: Identify and Document Framework Files for Future Relocation - Analysis Report",
+  "description": "Analysis of the root directory to identify framework-related files and folders that could potentially be relocated into the standalone project. This report concludes that no further relocation is necessary or advisable.",
+  "status": "completed",
+  "priority": "medium",
+  "category": "refactoring",
+  "tags": ["framework", "decoupling", "architecture", "relocation"],
+  "created_date": "2025-11-11T00:00:00Z",
+  "updated_date": "2025-11-11T12:30:00Z",
+  "due_date": null,
+  "estimated_hours": 2,
+  "actual_hours": 2,
+  "dependencies": ["FRM-006-3"],
+  "acceptance_criteria": [
+    "A comprehensive list of framework-related files/folders in the root is documented.",
+    "Each item's purpose and dependencies are described.",
+    "A clear recommendation for future relocation is provided."
+  ],
+  "blockers": [],
+  "notes": "Analysis of the root directory (`/Users/jns/Documents/1 | Projekte/ai-lab`) was performed to identify files and folders that are framework-related but not yet part of the `standalone-framework-version` project, and could potentially be relocated.\n\n**Findings:**\n\nMost files and directories in the root are either:\n1.  **Global configuration/documentation:** e.g., `.gitignore`, `.pre-commit-config.yaml`, `Makefile`, `README.md`, `DEVELOPER_GUIDE.md`, `AI_GUIDE.md`, `project_management.json`, `poetry.lock`, `pyproject.toml`, `run.py`, `docker-compose.yml`, `Dockerfile`, `makefiles/`, `docs/`. These apply to the entire AI Lab Framework monorepo-like structure.\n2.  **Separate projects/components:** e.g., `.claude/`, `agent-os/`, `dashboard/`, `functional-mcp-server/`, `projects/` (which contains `standalone-framework-version` itself), `tools/`. These are distinct parts of the larger AI Lab ecosystem.\n3.  **Data/Logs:** `ai_logs/`, `ai-logs/`, `archive/`, `data/`, `ideas/`. The `standalone-framework-version` has its own `data/` and logging mechanisms.\n4.  **Development/Utility:** `dev-tools/`, `utils/`, `venv/`, `.ruff_cache/`.\n\n**Conclusion and Recommendation:**\n\nThe `standalone-framework-version` project is designed to be a *decoupled instance* of the core framework logic, capable of running independently. It already contains its own `src/`, `tests/`, `data/`, etc., which encapsulate the necessary framework components.\n\nRelocating other root-level files or folders *into* the `standalone-framework-version` project would contradict its purpose as a standalone, decoupled entity. It would effectively merge the standalone project back into the larger AI Lab repository, defeating the goal of creating an independent framework instance.\n\nTherefore, the recommendation is that **no further files or folders from the root directory need to be relocated into the `standalone-framework-version` project.** The current separation is appropriate for maintaining the standalone nature of the framework. The `standalone-framework-version` project is self-contained with the necessary framework logic to operate independently.\n\nThis completes the analysis for FRM-006-4."
+}

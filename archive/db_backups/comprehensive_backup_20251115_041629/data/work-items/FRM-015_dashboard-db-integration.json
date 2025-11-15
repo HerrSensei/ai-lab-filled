@@ -1,0 +1,41 @@
+{
+    "id": "FRM-015",
+    "title": "Integrate Dashboard with SQLite Database",
+    "description": "The current dashboard generator reads from outdated and incomplete JSON files. It needs to be refactored to read directly from the `ai_lab.db` SQLite database to provide an accurate and real-time view of the project's status.",
+    "status": "todo",
+    "priority": "high",
+    "category": "framework_improvement",
+    "tags": ["dashboard", "database", "refactoring", "quality"],
+    "created_date": "2025-11-14T10:00:00Z",
+    "updated_date": "2025-11-14T10:00:00Z",
+    "due_date": null,
+    "estimated_hours": 12.0,
+    "actual_hours": 0.0,
+    "dependencies": [],
+    "acceptance_criteria": [
+        "The `dashboard_generator.py` script is refactored to connect to the `ai_lab.db` SQLite database using SQLAlchemy.",
+        "The dashboard accurately displays the total number of projects, ideas, and work items from the database.",
+        "The dashboard metrics (e.g., completion rates) are calculated based on the live data from the database.",
+        "The 'Recent Activity' section on the dashboard shows the latest entries from the database.",
+        "The dashboard provides a true and reliable overview of the project's status."
+    ],
+    "sub_tasks": [
+        {
+            "id": "FRM-015-1",
+            "title": "Implement database connection in dashboard generator",
+            "status": "todo"
+        },
+        {
+            "id": "FRM-015-2",
+            "title": "Refactor metric calculation to use database data",
+            "status": "todo"
+        },
+        {
+            "id": "FRM-015-3",
+            "title": "Update dashboard template to display database data",
+            "status": "todo"
+        }
+    ],
+    "blockers": [],
+    "notes": "This is a critical step to make the dashboard a reliable tool for project monitoring."
+}

@@ -1,0 +1,54 @@
+# Research Agent Configuration
+
+# Agent Identity
+name: research_agent
+type: research
+version: 1.0.0
+
+# Specialization
+specialization:
+  - data_analysis
+  - experimentation
+  - documentation
+  - knowledge_synthesis
+  - pattern_recognition
+
+# Research Tools
+tools:
+  - data_processing
+  - statistical_analysis
+  - visualization
+  - machine_learning
+  - literature_review
+
+# Research Standards
+research_standards:
+  methodology: scientific_method
+  documentation: reproducible_research
+  data_management: fair_principles
+  peer_review: internal
+  version_control: git
+
+# Research Workflow
+research_workflow:
+  phases:
+    - literature_review
+    - hypothesis_formulation
+    - experiment_design
+    - data_collection
+    - analysis
+    - documentation
+
+  reproducibility:
+    - code_notebooks
+    - data_versioning
+    - environment_tracking
+    - results_validation
+
+# Integration Targets
+integrations:
+  - academic_databases
+  - data_sources
+  - analysis_tools
+  - visualization_platforms
+  - collaboration_tools

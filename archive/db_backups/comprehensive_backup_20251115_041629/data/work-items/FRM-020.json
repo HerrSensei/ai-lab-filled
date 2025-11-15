@@ -1,0 +1,29 @@
+{
+  "id": "FRM-020",
+  "title": "Framework Core Extraktion",
+  "description": "Extrahiere Framework-Core aus ai-lab-clean in eigenes Repository unter ai-lab/ai-lab-framework",
+  "status": "in_progress",
+  "priority": "critical",
+  "type": "framework",
+  "assignee": "AI Lab Team",
+  "author": "AI Lab Framework",
+  "labels": ["framework", "extraction", "repository"],
+  "created_date": "2025-11-14T10:00:00Z",
+  "updated_date": "2025-11-14T10:00:00Z",
+  "estimated_hours": 16,
+  "actual_hours": 4,
+  "dependencies": [],
+  "acceptance_criteria": [
+    "Framework-Code in ai-lab-framework Repo",
+    "Framework-Datenbank-Modelle implementiert",
+    "CI/CD für Framework eingerichtet",
+    "PyPI-Publishing konfiguriert",
+    "AGENTS.md und GEMINI.md erstellt"
+  ],
+  "blockers": [],
+  "notes": "Kernkomponenten: base_ai_tool.py, profiles.py, profile_validator.py, tool_generator.py, db/models.py",
+  "file_path": "projects/ai-lab-framework/",
+  "repository_url": "https://github.com/ai-lab/ai-lab-framework",
+  "is_draft": false,
+  "archived": false
+}

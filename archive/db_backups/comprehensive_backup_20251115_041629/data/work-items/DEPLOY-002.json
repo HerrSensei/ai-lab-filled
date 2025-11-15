@@ -1,0 +1,39 @@
+{
+  "id": "DEPLOY-002",
+  "title": "Automatisierte Multi-Repo Management Skripte",
+  "description": "Erstellung von Skripten zur Automatisierung von Pushes, Pulls und Synchronisation zwischen den drei Repositories (ai-lab, ai-lab-filled, ai-lab-framework).",
+  "type": "feature", 
+  "priority": "high",
+  "status": "todo",
+  "created_at": "2025-11-14T02:00:00Z",
+  "updated_at": "2025-11-14T02:00:00Z",
+  "assignee": "ai-agent",
+  "labels": ["automation", "scripts", "multi-repo"],
+  "subtasks": [
+    {
+      "id": "DEPLOY-002-1",
+      "title": "Framework Deployment Skript",
+      "description": "Skript zum Deployen von Framework-Änderungen zu ai-lab und ai-lab-filled",
+      "status": "todo"
+    },
+    {
+      "id": "DEPLOY-002-2",
+      "title": "Feature Branch Synchronisation",
+      "description": "Skript zur Synchronisation von Feature Branches über Repositories",
+      "status": "todo"
+    },
+    {
+      "id": "DEPLOY-002-3",
+      "title": "Release Automation",
+      "description": "Skript für automatisierte Releases mit Versionierung und Tagging",
+      "status": "todo"
+    }
+  ],
+  "acceptance_criteria": [
+    "Framework kann mit einem Befehl zu allen Repos deployed werden",
+    "Feature Branches können automatisch synchronisiert werden",
+    "Releases sind vollständig automatisiert",
+    "Alle Skripte haben Fehlerbehandlung und Logging",
+    "Skripte sind dokumentiert und getestet"
+  ]
+}

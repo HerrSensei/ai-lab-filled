@@ -1,0 +1,43 @@
+# AgentOS Knowledge Base
+
+## 📚 Knowledge Structure
+
+This directory contains the knowledge base for the {{ project_name }} agent.
+
+## 📁 Directory Structure
+
+```
+knowledge_base/
+├── project_docs/          # Project-specific documentation
+├── technical_docs/         # Technical specifications
+├── process_docs/          # Development processes
+├── best_practices/        # Industry best practices
+├── historical_data/       # Project history and decisions
+└── external_resources/    # External references and links
+```
+
+## 🔄 Knowledge Updates
+
+The agent automatically updates this knowledge base when:
+- New project documentation is created
+- Technical decisions are made
+- Process improvements are identified
+- Lessons are learned from issues
+- External resources are discovered
+
+## 📖 Usage
+
+The agent uses this knowledge base to:
+- Provide context-aware assistance
+- Generate relevant documentation
+- Suggest best practices
+- Avoid repeating mistakes
+- Maintain consistency across the project
+
+## 🤖 Agent Access
+
+The agent has read/write access to this knowledge base and maintains it as a single source of truth for project-related information.
+
+---
+
+*Managed by AgentOS for {{ project_name }}*

@@ -1,0 +1,23 @@
+{
+  "id": "FRM-010",
+  "title": "Redundancy Cleanup",
+  "description": "Based on the analysis from 2025-11-12, there are numerous redundant files (e.g., files ending in ' 2.md'). This task is to identify, review, and delete these unnecessary files to restore a single source of truth.",
+  "status": "open",
+  "priority": "high",
+  "category": "framework_maintenance",
+  "tags": ["cleanup", "redundancy", "maintenance"],
+  "created_date": "2025-11-12T00:00:00Z",
+  "updated_date": "2025-11-12T00:00:00Z",
+  "due_date": null,
+  "estimated_hours": 4.0,
+  "actual_hours": 0.0,
+  "dependencies": [],
+  "acceptance_criteria": [
+    "All files ending with ' 2.md' have been reviewed.",
+    "Redundant files have been deleted.",
+    "The root cause of file duplication is investigated and documented."
+  ],
+  "sub_tasks": [],
+  "blockers": [],
+  "notes": "This is a critical first step to reduce clutter and confusion in the repository."
+}

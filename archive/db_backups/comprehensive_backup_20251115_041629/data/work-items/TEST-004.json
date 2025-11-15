@@ -1,0 +1,57 @@
+{
+  "id": "TEST-004",
+  "title": "Set Up Quality Thresholds in CI/CD",
+  "description": "Implement quality gates with coverage >80% and security scans in CI/CD pipeline",
+  "status": "completed",
+  "priority": "medium",
+  "category": "testing",
+  "tags": ["ci-cd", "quality-gates", "coverage", "security"],
+  "created_at": "2025-11-14T10:00:00Z",
+  "updated_at": "2025-11-14T10:00:00Z",
+  "assignee": "ai-assistant",
+  "estimated_hours": 6,
+  "actual_hours": 2,
+  "definition_of_done": [
+    "Quality thresholds configured in GitHub Actions",
+    "Code coverage >80% requirement enforced",
+    "Security scans integrated (Bandit, Safety)",
+    "Performance benchmarks implemented",
+    "Quality reports generated",
+    "Deployment blocking on failures"
+  ],
+  "acceptance_criteria": [
+    "CI/CD pipeline fails when coverage <80%",
+    "Security vulnerabilities block deployment",
+    "Performance regressions detected",
+    "Quality metrics visible in dashboard",
+    "Automated quality reports sent"
+  ],
+  "subtasks": [
+    {
+      "id": "TEST-004-1",
+      "title": "Configure coverage thresholds in pytest",
+      "status": "completed"
+    },
+    {
+      "id": "TEST-004-2",
+      "title": "Add security scan requirements",
+      "status": "completed"
+    },
+    {
+      "id": "TEST-004-3",
+      "title": "Implement performance benchmarks",
+      "status": "completed"
+    },
+    {
+      "id": "TEST-004-4",
+      "title": "Create quality gate workflows",
+      "status": "completed"
+    }
+  ],
+  "implementation_files": [
+    ".github/workflows/ci-cd.yml",
+    ".github/workflows/quality-gates.yml",
+    "scripts/pre_push_tests.py",
+    "tests/quality/test_coverage.py"
+  ]
+}

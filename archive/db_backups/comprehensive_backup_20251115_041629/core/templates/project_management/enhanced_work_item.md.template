@@ -1,0 +1,156 @@
+# Enhanced Work Item Template
+
+## {{ work_item_title }}
+
+**ID:** {{ work_item_id }}
+**Epic/Feature:** {{ epic_name }}
+**Status:** Backlog | Ready | In Progress | In Review | Done | Blocked
+**Priority:** {{ priority }} (1=Highest, 5=Lowest)
+**Iteration:** {{ sprint_name }}
+**Assignee:** {{ assignee }}
+**Reporter:** {{ reporter }}
+**Created:** {{ creation_date }}
+**Updated:** {{ last_updated }}
+
+---
+
+## Business Context
+
+### Problem Statement
+{{ problem_statement }}
+
+### Business Value
+- **Value Proposition:** {{ value_proposition }}
+- **Business Impact:** {{ business_impact }}
+- **User Impact:** {{ user_impact }}
+- **Revenue Impact:** {{ revenue_impact }}
+
+### Success Metrics
+| Metric | Baseline | Target | Measurement Method |
+|--------|----------|--------|-------------------|
+| {{ metric1 }} | {{ metric1_baseline }} | {{ metric1_target }} | {{ metric1_measurement }} |
+
+---
+
+## Technical Details
+
+### Requirements
+
+#### Functional Requirements
+- [FR-001] {{ functional_requirement_1 }}
+- [FR-002] {{ functional_requirement_2 }}
+
+#### Non-Functional Requirements
+- [NFR-001] Performance: {{ nfr_performance }}
+- [NFR-002] Security: {{ nfr_security }}
+- [NFR-003] Scalability: {{ nfr_scalability }}
+
+#### Technical Requirements
+- [TR-001] {{ technical_requirement_1 }}
+- [TR-002] {{ technical_requirement_2 }}
+
+### Acceptance Criteria (Definition of Done)
+- [ ] **Code Quality:** Code review completed, all comments addressed
+- [ ] **Testing:** Unit tests ≥ 80% coverage, integration tests pass
+- [ ] **Documentation:** API documentation updated, README updated
+- [ ] **Security:** Security scan passed, no critical vulnerabilities
+- [ ] **Performance:** Performance benchmarks met
+- [ ] **Functional:** All functional requirements working as specified
+- [ ] **User Acceptance:** UAT signed off by product owner
+
+### Technical Specifications
+{{ technical_specifications }}
+
+---
+
+## Project Management
+
+### Effort Estimation
+| Activity | Estimated Hours | Actual Hours | Confidence |
+|----------|----------------|--------------|------------|
+| Analysis | {{ analysis_hours }} | | {{ analysis_confidence }}% |
+| Design | {{ design_hours }} | | {{ design_confidence }}% |
+| Development | {{ dev_hours }} | | {{ dev_confidence }}% |
+| Testing | {{ test_hours }} | | {{ test_confidence }}% |
+| Deployment | {{ deploy_hours }} | | {{ deploy_confidence }}% |
+| **Total** | **{{ total_hours }}** | | |
+
+### Dependencies
+| Dependency | Type | Status | Blocker? | Owner |
+|------------|------|--------|----------|-------|
+| {{ dependency1 }} | Technical/Business | {{ dependency1_status }} | {{ dependency1_blocker }} | {{ dependency1_owner }} |
+
+### Risk Assessment
+| Risk | Probability | Impact | Mitigation Strategy | Contingency |
+|------|-------------|--------|-------------------|------------|
+| {{ risk1 }} | {{ risk1_probability }} | {{ risk1_impact }} | {{ risk1_mitigation }} | {{ risk1_contingency }} |
+
+---
+
+## Implementation Plan
+
+### Tasks Breakdown
+| Task | Assignee | Estimated Hours | Status | Dependencies |
+|------|----------|------------------|--------|--------------|
+| {{ task1 }} | {{ task1_assignee }} | {{ task1_hours }} | {{ task1_status }} | {{ task1_deps }} |
+
+### Definition of Ready
+- [ ] Requirements are clear and testable
+- [ ] Design is reviewed and approved
+- [ ] Dependencies are identified and resolved
+- [ ] Acceptance criteria are defined
+- [ ] Team capacity is available
+
+### Definition of Done
+- [ ] All acceptance criteria met
+- [ ] Code is peer-reviewed and approved
+- [ ] Tests are written and passing
+- [ ] Documentation is updated
+- [ ] Security checks pass
+- [ ] Performance requirements met
+- [ ] Deployed to staging environment
+- [ ] Stakeholder acceptance received
+
+---
+
+## Review & Sign-off
+
+### Review Checklist
+- [ ] Requirements implemented correctly
+- [ ] Code quality standards met
+- [ ] Tests comprehensive and passing
+- [ ] Documentation complete
+- [ ] Security requirements satisfied
+- [ ] Performance requirements met
+- [ ] User acceptance criteria fulfilled
+
+### Approval
+**Developer:** _________________________ Date: _________
+
+**Code Reviewer:** _________________________ Date: _________
+
+**QA Engineer:** _________________________ Date: _________
+
+**Product Owner:** _________________________ Date: _________
+
+---
+
+## Post-Implementation
+
+### Deployment Information
+- **Deployment Date:** {{ deployment_date }}
+- **Environment:** {{ deployment_environment }}
+- **Version:** {{ deployment_version }}
+- **Rollback Plan:** {{ rollback_plan }}
+
+### Monitoring & Metrics
+- **Performance Metrics:** {{ performance_metrics }}
+- **Error Rates:** {{ error_rates }}
+- **User Feedback:** {{ user_feedback }}
+
+### Lessons Learned
+{{ lessons_learned }}
+
+### Follow-up Actions
+- [ ] {{ followup_action1 }}
+- [ ] {{ followup_action2 }}

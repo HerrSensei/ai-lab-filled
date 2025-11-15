@@ -1,0 +1,53 @@
+{
+  "id": "IDEA-003",
+  "title": "Nachhaltiges Homeserver-Setup installieren",
+  "description": "Einrichtung eines zukunftsfähigen, wartungsarmen und energieeffizienten Homeserver-Setups. Nach der Wiederherstellung soll der Homeserver langfristig stabil laufen mit minimalen Wartungsaufwand und guter Energieeffizienz.",
+  "status": "converted",
+  "priority": "medium",
+  "category": "infrastructure",
+  "tags": [
+    "homeserver",
+    "sustainability",
+    "infrastructure",
+    "automation"
+  ],
+  "created_date": "2025-11-07T00:00:00Z",
+  "updated_date": "2025-11-13T18:32:54.874696Z",
+  "estimated_effort": "1-2 weeks",
+  "dependencies": [
+    "IDEA-002"
+  ],
+  "acceptance_criteria": [
+    "System ist energieeffizient konfiguriert",
+    "Wartungsaufwand ist minimal",
+    "Automatisierte Backups sind implementiert",
+    "Monitoring ist vollständig eingerichtet"
+  ],
+  "notes": "Mögliche Technologien: K3s für Kubernetes, Prometheus/Grafana für Monitoring, automatische Backups, Green-IT-Prinzipien.",
+  "author": "jns",
+  "open_questions": [
+    "Welche Container-Orchestrierung (Docker Compose, K3s, etc.)?",
+    "Wie wird Monitoring und Alerting implementiert?",
+    "Welche Backup-Strategie wird verwendet?",
+    "Wie wird Energieeffizienz gemessen?"
+  ],
+  "next_steps": [
+    "Idee mit KI-Assistent verfeinern",
+    "Offene Fragen klären",
+    "Machbarkeit prüfen",
+    "Priorisierung festlegen"
+  ],
+  "target_audience": "Ich selbst (jns) als Systemadministrator",
+  "benefits": [
+    "Stabilität",
+    "Energieeffizienz",
+    "Wartungsarmut",
+    "Skalierbarkeit"
+  ],
+  "prerequisites": [
+    "Funktionsfähiger Homeserver",
+    "Docker",
+    "Container-Orchestrierung"
+  ],
+  "related_project": "PRJ-006"
+}

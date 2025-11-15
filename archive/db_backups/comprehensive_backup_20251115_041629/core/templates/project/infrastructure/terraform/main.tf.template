@@ -1,0 +1,43 @@
+# terraform/main.tf
+# Basic Terraform configuration template
+
+# Configure the required providers
+terraform {
+  required_providers {
+    # Example: AWS provider
+    # aws = {
+    #   source  = "hashicorp/aws"
+    #   version = "~> 5.0"
+    # }
+    # Example: Kubernetes provider (for k3s integration)
+    # kubernetes = {
+    #   source  = "hashicorp/kubernetes"
+    #   version = "~> 2.0"
+    # }
+  }
+}
+
+# Configure the provider (e.g., AWS)
+# provider "aws" {
+#   region = "us-east-1" # Example region
+# }
+
+# Example: Create a resource (e.g., an S3 bucket)
+# resource "aws_s3_bucket" "{{ project_name }}-bucket" {
+#   bucket = "{{ project_name }}-data-bucket"
+#   acl    = "private"
+#
+#   tags = {
+#     Project     = "{{ project_name }}"
+#     Environment = "development"
+#   }
+# }
+
+# Example: Output a value
+# output "bucket_id" {
+#   description = "ID of the S3 bucket"
+#   value       = aws_s3_bucket.{{ project_name }}-bucket.id
+# }
+
+# For more advanced configurations, refer to Terraform documentation:
+# https://developer.hashicorp.com/terraform/docs

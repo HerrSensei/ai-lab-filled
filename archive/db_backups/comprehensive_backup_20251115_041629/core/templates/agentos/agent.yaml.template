@@ -1,0 +1,39 @@
+# AgentOS Configuration
+name: {{ project_name }}_agent
+version: 1.0.0
+type: {{ agent_type }}
+description: "AgentOS agent for {{ project_name }} project"
+
+# Agent Capabilities
+capabilities:
+  - project_management
+  - code_generation
+  - documentation
+  - testing
+  - deployment
+
+# Context Management
+context:
+  project_name: {{ project_name }}
+  project_type: {{ project_type }}
+  tech_stack: {{ tech_stack }}
+  target_users: {{ target_users }}
+
+# Tool Integration
+tools:
+  - project_tools
+  - git_tools
+  - documentation_tools
+  - testing_tools
+
+# Logging Configuration
+logging:
+  level: info
+  sessions_dir: agent/logs/sessions
+  changes_dir: agent/logs/changes
+
+# AI Integration
+ai_config:
+  model: gpt-4
+  temperature: 0.7
+  max_tokens: 2000

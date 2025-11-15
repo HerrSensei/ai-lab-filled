@@ -1,0 +1,27 @@
+{
+  "id": "INF-002",
+  "title": "Container Orchestration Standards",
+  "description": "Defines the container orchestration standards for the AI Lab framework, based on the k3s Proof of Concept.",
+  "status": "todo",
+  "priority": "high",
+  "type": "infrastructure",
+  "assignee": "Infrastructure Team",
+  "tags": ["kubernetes", "k3s", "standards"],
+  "created_date": "2025-11-09T00:00:00Z",
+  "updated_date": "2025-11-10T00:00:00Z",
+  "due_date": null,
+  "estimated_hours": 6,
+  "actual_hours": 0,
+  "dependencies": ["INF-001"],
+  "acceptance_criteria": [
+    "k3s setup is documented for future nodes",
+    "Container orchestration standards are defined",
+    "Reference implementation available (HS-002)"
+  ],
+  "sub_tasks": [],
+  "blockers": [],
+  "notes": "Based on the learnings from the k3s PoC (HS-002).",
+  "file_path": "/Users/jns/Documents/1 | Projekte/ai-lab/archive/work-items/INF-002_container-orchestration-standards.md",
+  "project_id": "PRJ-002",
+  "project_name": "AI Lab Framework"
+}

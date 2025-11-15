@@ -1,0 +1,54 @@
+{
+  "id": "IDEA-005",
+  "title": "Tailscale-Verbindung zwischen VPS und Homeserver",
+  "description": "Sichere Netzwerkverbindung zwischen VPS und Homeserver via Tailscale für nahtloses Management. Sichere, einfache und zuverlässige Verbindung zwischen den Systemen für zentrale Verwaltung und Daten-Synchronisation.",
+  "status": "converted",
+  "priority": "high",
+  "category": "infrastructure",
+  "tags": [
+    "tailscale",
+    "networking",
+    "security",
+    "vpn",
+    "homeserver",
+    "vps"
+  ],
+  "created_date": "2025-11-07T00:00:00Z",
+  "updated_date": "2025-11-09T06:14:13Z",
+  "estimated_effort": "2-3 days",
+  "dependencies": [
+    "IDEA-002"
+  ],
+  "acceptance_criteria": [
+    "Tailscale ist auf beiden Systemen installiert",
+    "Verbindung ist stabil und sicher",
+    "Firewall-Regeln sind konfiguriert",
+    "Monitoring der Verbindung ist implementiert"
+  ],
+  "notes": "Tailscale ermöglicht sichere Verbindungen ohne komplexe Port-Forwardings. Wichtig für API-Kommunikation zwischen n8n und Homeserver-Diensten.",
+  "author": "jns",
+  "open_questions": [
+    "Wie wird Access Control konfiguriert?",
+    "Welche Dienste sollen über Tailscale erreichbar sein?",
+    "Wie wird Monitoring der Verbindung implementiert?",
+    "Backup-Strategie für Tailscale-Konfiguration?"
+  ],
+  "next_steps": [
+    "Idee mit KI-Assistent verfeinern",
+    "Offene Fragen klären",
+    "Machbarkeit prüfen",
+    "Priorisierung festlegen"
+  ],
+  "target_audience": "Ich selbst (jns) als Netzwerkadministrator",
+  "benefits": [
+    "Sicherheit",
+    "Einfache Konfiguration",
+    "Mesh-Netzwerk",
+    "Automatische Verbindungen"
+  ],
+  "prerequisites": [
+    "Tailscale-Account",
+    "Installation auf beiden Systemen",
+    "Firewall-Konfiguration"
+  ]
+}

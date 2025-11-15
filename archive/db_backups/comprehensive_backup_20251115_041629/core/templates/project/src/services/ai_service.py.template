@@ -1,0 +1,171 @@
+"""
+AI service for handling interactions with language models.
+
+This module provides a service layer for AI model interactions
+including cost tracking, rate limiting, and error handling.
+"""
+
+import time
+from typing import Optional
+import openai
+import structlog
+
+from src.models.chat import ChatResponse
+from src.core.config import settings
+from src.core.exceptions import AIServiceError, CostLimitError, RateLimitError
+
+logger = structlog.get_logger(__name__)
+
+
+class AIService:
+    """Service for AI model interactions."""
+
+    def __init__(self):
+        """Initialize AI service."""
+        self.client = openai.AsyncOpenAI(api_key=settings.OPENAI_API_KEY)
+        self._daily_cost = 0.0
+        self._request_count = 0
+        self._last_reset = time.time()
+
+    async def chat_completion(
+        self,
+        message: str,
+        model: str,
+        temperature: float,
+        max_tokens: int,
+    ) -> ChatResponse:
+        """
+        Generate chat completion using AI model.
+
+        Args:
+            message: User message
+            model: AI model to use
+            temperature: Sampling temperature
+            max_tokens: Maximum tokens to generate
+
+        Returns:
+            ChatResponse: AI response with metadata
+
+        Raises:
+            AIServiceError: If AI service fails
+            CostLimitError: If cost limit exceeded
+            RateLimitError: If rate limit exceeded
+        """
+        start_time = time.time()
+
+        try:
+            # Check rate limit
+            if not self._check_rate_limit():
+                raise RateLimitError("Rate limit exceeded")
+
+            # Check cost limit
+            estimated_cost = self._estimate_cost(message, model, max_tokens)
+            if not self._check_cost_limit(estimated_cost):
+                raise CostLimitError("Cost limit would be exceeded")
+
+            # Make API call
+            response = await self.client.chat.completions.create(
+                model=model,
+                messages=[{"role": "user", "content": message}],
+                temperature=temperature,
+                max_tokens=max_tokens,
+            )
+
+            # Calculate metrics
+            tokens_used = response.usage.total_tokens
+            actual_cost = self._calculate_cost(tokens_used, model)
+            response_time_ms = int((time.time() - start_time) * 1000)
+
+            # Update tracking
+            self._update_tracking(actual_cost)
+
+            # Log the interaction
+            logger.info(
+                "ai_completion_success",
+                model=model,
+                tokens_used=tokens_used,
+                cost=actual_cost,
+                response_time_ms=response_time_ms,
+            )
+
+            return ChatResponse(
+                message=response.choices[0].message.content,
+                model=model,
+                tokens_used=tokens_used,
+                cost=actual_cost,
+                temperature=temperature,
+                response_time_ms=response_time_ms,
+            )
+
+        except openai.RateLimitError as e:
+            logger.error("ai_rate_limit_error", error=str(e))
+            raise RateLimitError("AI service rate limit exceeded")
+
+        except openai.AuthenticationError as e:
+            logger.error("ai_authentication_error", error=str(e))
+            raise AIServiceError("AI service authentication failed")
+
+        except openai.APIError as e:
+            logger.error("ai_api_error", error=str(e))
+            raise AIServiceError(f"AI service error: {str(e)}")
+
+        except Exception as e:
+            logger.error("ai_service_error", error=str(e))
+            raise AIServiceError(f"Unexpected AI service error: {str(e)}")
+
+    def _check_rate_limit(self) -> bool:
+        """Check if rate limit allows the request."""
+        current_time = time.time()
+
+        # Reset counter if minute has passed
+        if current_time - self._last_reset > 60:
+            self._request_count = 0
+            self._last_reset = current_time
+
+        return self._request_count < settings.RATE_LIMIT_PER_MINUTE
+
+    def _check_cost_limit(self, estimated_cost: float) -> bool:
+        """Check if cost limit allows the request."""
+        return (self._daily_cost + estimated_cost) <= settings.COST_BUDGET_PER_DAY
+
+    def _estimate_cost(self, message: str, model: str, max_tokens: int) -> float:
+        """Estimate cost for a request."""
+        # Rough estimation: ~4 characters per token
+        input_tokens = len(message) // 4
+        total_tokens = input_tokens + max_tokens
+
+        return self._calculate_cost(total_tokens, model)
+
+    def _calculate_cost(self, tokens: int, model: str) -> float:
+        """Calculate actual cost based on tokens and model."""
+        # Simplified cost calculation
+        costs = {
+            "gpt-3.5-turbo": 0.0000015,  # $0.0015 per 1K tokens
+            "gpt-4": 0.00003,          # $0.03 per 1K tokens
+        }
+
+        cost_per_token = costs.get(model, costs["gpt-3.5-turbo"])
+        return tokens * cost_per_token
+
+    def _update_tracking(self, cost: float) -> None:
+        """Update cost and request tracking."""
+        self._daily_cost += cost
+        self._request_count += 1
+
+        # Log cost warning if approaching limit
+        if self._daily_cost > settings.COST_BUDGET_PER_DAY * settings.COST_ALERT_THRESHOLD:
+            logger.warning(
+                "approaching_cost_limit",
+                current_cost=self._daily_cost,
+                budget=settings.COST_BUDGET_PER_DAY,
+                threshold=settings.COST_ALERT_THRESHOLD,
+            )
+
+    def get_usage_stats(self) -> dict:
+        """Get current usage statistics."""
+        return {
+            "daily_cost": self._daily_cost,
+            "daily_budget": settings.COST_BUDGET_PER_DAY,
+            "requests_this_minute": self._request_count,
+            "rate_limit_per_minute": settings.RATE_LIMIT_PER_MINUTE,
+        }

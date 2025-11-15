@@ -1,0 +1,47 @@
+{
+  "id": "IDEA-009",
+  "title": "Globale Vision für AI Lab Framework",
+  "description": "Entwicklung einer umfassenden Vision mit mehreren Statements, die in verschiedenen Dimensionen die grundlegende Ausrichtung für alle Projekte definiert - integriert mit der Homeserver Vision für Infrastruktur und Dokumentation. Fehlende strategische Klarheit führt zu inkonsistenten Entscheidungen und fehlender Priorisierung.",
+  "status": "implemented",
+  "priority": "high",
+  "category": "development",
+  "tags": [
+    "vision",
+    "strategy",
+    "governance",
+    "framework",
+    "homeserver"
+  ],
+  "created_date": "2025-11-07T00:00:00Z",
+  "updated_date": "2025-11-07T00:00:00Z",
+  "estimated_effort": "1-2 days",
+  "dependencies": [
+    "IDEA-007",
+    "IDEA-008"
+  ],
+  "acceptance_criteria": [
+    "Vision-Statements sind formuliert",
+    "Alignment-Metriken sind definiert",
+    "Integration in Framework ist erfolgt",
+    "Review-Prozess ist etabliert"
+  ],
+  "notes": "Homeserver Vision als zentraler Ankerpunkt für bessere praktische Relevanz. Mehrdimensionaler Ansatz für Abdeckung aller wichtigen Aspekte. Integration statt separater Dokumente für nahtlosen Workflow.",
+  "author": "jns",
+  "open_questions": [],
+  "next_steps": [
+    "Vision-Statements formulieren (integriert mit IDEA-007/008)",
+    "Alignment-Metriken definieren",
+    "In Framework integrieren"
+  ],
+  "target_audience": "Ich selbst (jns) als strategischer Entscheider, zukünftige Team-Mitglieder, Stakeholder",
+  "benefits": [
+    "Strategische Klarheit für alle technischen Entscheidungen",
+    "Konsistente Priorisierung basierend auf Vision-Alignment",
+    "Bessere Ressourcen-Allokation durch fokussierte Ausrichtung",
+    "Langfristige Nachhaltigkeit und Skalierbarkeit"
+  ],
+  "prerequisites": [
+    "Bestehendes Framework",
+    "Homeserver Vision (IDEA-007/008)"
+  ]
+}

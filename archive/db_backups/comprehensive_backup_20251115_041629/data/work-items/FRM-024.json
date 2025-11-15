@@ -1,0 +1,29 @@
+{
+  "id": "FRM-024",
+  "title": "Dokumentation und Training",
+  "description": "Erstelle umfassende Dokumentation für Framework/Instanz-Trennung",
+  "status": "todo",
+  "priority": "medium",
+  "type": "framework",
+  "assignee": "AI Lab Team",
+  "author": "AI Lab Framework",
+  "labels": ["documentation", "training", "guides"],
+  "created_date": "2025-11-14T10:00:00Z",
+  "updated_date": "2025-11-14T10:00:00Z",
+  "estimated_hours": 10,
+  "actual_hours": 0,
+  "dependencies": ["FRM-020", "FRM-021", "FRM-022", "FRM-023"],
+  "acceptance_criteria": [
+    "Deployment-Guide erstellt",
+    "API-Referenz vervollständigt",
+    "Developer-Training-Material",
+    "Troubleshooting-Guide",
+    "Video-Tutorials für关键-Workflows"
+  ],
+  "blockers": [],
+  "notes": "Dokumentation muss sowohl Framework-Entwickler als auch Instanz-Nutzer ansprechen",
+  "file_path": "docs/",
+  "repository_url": "https://github.com/ai-lab/ai-lab-framework",
+  "is_draft": false,
+  "archived": false
+}

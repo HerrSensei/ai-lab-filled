@@ -1,0 +1,120 @@
+{
+  "id": "ARCH-001",
+  "title": "Separate ai-lab from ai-lab-framework and Fix Database Infrastructure",
+  "description": "Critical architectural refactoring to properly separate framework from project management hub and fix all database issues",
+  "status": "todo",
+  "priority": "critical",
+  "category": "architecture",
+  "tags": ["architecture", "database", "separation", "critical"],
+  "created_at": "2025-11-14T03:00:00Z",
+  "updated_at": "2025-11-14T03:00:00Z",
+  "assignee": "ai-assistant",
+  "estimated_hours": 6,
+  "actual_hours": 0,
+  "definition_of_done": [
+    "Database infrastructure fully functional",
+    "ai-lab-framework separated and installable",
+    "ai-lab restructured as project management hub",
+    "Clear project structure established",
+    "All dependencies properly installed",
+    "Framework deployable to other repositories"
+  ],
+  "acceptance_criteria": [
+    "SQLAlchemy operations working correctly",
+    "ai-lab-framework installable as package",
+    "ai-lab uses framework as dependency",
+    "Projects have independent repositories",
+    "GitHub integration working in ai-lab",
+    "Backup system functional",
+    "All tests passing"
+  ],
+  "subtasks": [
+    {
+      "id": "ARCH-001-1",
+      "title": "Fix Database Infrastructure",
+      "description": "Install missing dependencies and fix SQLAlchemy connections",
+      "status": "todo",
+      "estimated_hours": 1
+    },
+    {
+      "id": "ARCH-001-2",
+      "title": "Separate ai-lab-framework",
+      "description": "Create clean, installable framework package",
+      "status": "todo",
+      "estimated_hours": 2
+    },
+    {
+      "id": "ARCH-001-3",
+      "title": "Restructure ai-lab",
+      "description": "Convert to project management hub with GitHub integration",
+      "status": "todo",
+      "estimated_hours": 2
+    },
+    {
+      "id": "ARCH-001-4",
+      "title": "Setup Project Structure",
+      "description": "Establish proper project folders and management",
+      "status": "todo",
+      "estimated_hours": 1
+    }
+  ],
+  "implementation_plan": {
+    "phase_1": {
+      "name": "Database Fix",
+      "duration": "1 hour",
+      "tasks": [
+        "Install sqlalchemy, PyGithub, structlog",
+        "Fix database imports and connections",
+        "Test all database operations",
+        "Migrate JSON work items to database"
+      ]
+    },
+    "phase_2": {
+      "name": "Framework Separation",
+      "duration": "2 hours", 
+      "tasks": [
+        "Create clean ai-lab-framework structure",
+        "Move framework code to proper location",
+        "Remove project-specific code",
+        "Make framework installable package",
+        "Test framework deployment"
+      ]
+    },
+    "phase_3": {
+      "name": "ai-lab Restructuring",
+      "duration": "2 hours",
+      "tasks": [
+        "Clean up ai-lab repository",
+        "Keep only project management tools",
+        "Implement GitHub integration",
+        "Add project orchestration",
+        "Set up backup system"
+      ]
+    },
+    "phase_4": {
+      "name": "Project Setup",
+      "duration": "1 hour",
+      "tasks": [
+        "Create proper project structure",
+        "Setup independent project repos",
+        "Configure framework integration",
+        "Test project management",
+        "Verify backup and orchestration"
+      ]
+    }
+  },
+  "success_metrics": {
+    "database": "SQLAlchemy operations fully functional",
+    "framework": "Installable package with no project dependencies",
+    "ai_lab": "Clean project management hub",
+    "projects": "Independent repos with framework integration",
+    "ci_cd": "All pipelines working correctly"
+  },
+  "blocking_issues": [
+    "Missing SQLAlchemy dependency",
+    "Mixed architecture between framework and project hub",
+    "Broken database connections",
+    "No clear separation of concerns",
+    "Project management tools mixed with framework code"
+  ]
+}

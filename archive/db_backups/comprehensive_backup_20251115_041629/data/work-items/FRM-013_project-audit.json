@@ -1,0 +1,23 @@
+{
+  "id": "FRM-013",
+  "title": "Project Vision Alignment Audit",
+  "description": "The analysis from 2025-11-12 showed that several projects are not aligned with the framework's vision. This task is to conduct a formal audit of all projects in the 'projects/' directory. Projects must be either brought into alignment, formally paused, or archived.",
+  "status": "open",
+  "priority": "medium",
+  "category": "project_management",
+  "tags": ["audit", "vision", "strategy", "cleanup"],
+  "created_date": "2025-11-12T00:00:00Z",
+  "updated_date": "2025-11-12T00:00:00Z",
+  "due_date": null,
+  "estimated_hours": 12.0,
+  "actual_hours": 0.0,
+  "dependencies": [],
+  "acceptance_criteria": [
+    "A report is created for each project, detailing its alignment status.",
+    "The 'homeserver-vision-documentation' project is either fixed or archived.",
+    "All active projects have a clear and documented alignment with the core vision."
+  ],
+  "sub_tasks": [],
+  "blockers": [],
+  "notes": "Ensures that development effort is focused on projects that provide strategic value."
+}

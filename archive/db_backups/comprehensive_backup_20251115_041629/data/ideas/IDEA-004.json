@@ -1,0 +1,56 @@
+{
+  "id": "IDEA-004",
+  "title": "VPS mit LLAMA und n8n für Homeserver-Management",
+  "description": "Einrichtung eines VPS mit LLAMA-Modell und n8n zur intelligenten Automatisierung und Verwaltung des Homeservers. Zentralisierte, KI-gestützte Verwaltung des Homeservers über einen externen VPS für bessere Verfügbarkeit und Automatisierung.",
+  "status": "backlog",
+  "priority": "medium",
+  "category": "automation",
+  "tags": [
+    "vps",
+    "llama",
+    "n8n",
+    "automation",
+    "ai",
+    "homeserver"
+  ],
+  "created_date": "2025-11-07T00:00:00Z",
+  "updated_date": "2025-11-09T06:14:13Z",
+  "estimated_effort": "2-3 weeks",
+  "dependencies": [
+    "IDEA-002",
+    "IDEA-005"
+  ],
+  "acceptance_criteria": [
+    "VPS ist eingerichtet und konfiguriert",
+    "LLAMA-Modell ist installiert und funktionsfähig",
+    "n8n-Workflows sind implementiert",
+    "API-Verbindungen zum Homeserver sind sicher"
+  ],
+  "notes": "Mögliche Workflows: Backup-Automatisierung, System-Updates, Monitoring-Alerts, Ressourcen-Optimierung. LLAMA für intelligente Entscheidungsfindung.",
+  "author": "jns",
+  "open_questions": [
+    "Welches LLAMA-Modell (Größe, Performance)?",
+    "Wie wird die Sicherheit der API-Verbindungen sichergestellt?",
+    "Welche n8n-Workflows sind prioritär?",
+    "Wie wird Monitoring des VPS implementiert?"
+  ],
+  "next_steps": [
+    "Idee mit KI-Assistent verfeinern",
+    "Offene Fragen klären",
+    "Machbarkeit prüfen",
+    "Priorisierung festlegen"
+  ],
+  "target_audience": "Ich selbst (jns) als Systemadministrator",
+  "benefits": [
+    "KI-gestützte Automatisierung",
+    "Zentrale Steuerung",
+    "24/7 Verfügbarkeit",
+    "Workflow-Management"
+  ],
+  "prerequisites": [
+    "VPS-Hosting",
+    "LLAMA-Modell",
+    "n8n-Installation",
+    "API-Verbindungen"
+  ]
+}

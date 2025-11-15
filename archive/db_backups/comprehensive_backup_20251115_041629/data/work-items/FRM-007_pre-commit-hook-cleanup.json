@@ -1,0 +1,24 @@
+{
+  "id": "FRM-007",
+  "title": "Pre-commit Hook Cleanup and Standardization",
+  "description": "Address and resolve all outstanding pre-commit hook failures, including 'fix end of files' issues, 'ruff' errors (E402, B904), and ensure consistent code quality across the entire repository. This task aims to re-enable and pass all pre-commit checks.",
+  "status": "in_progress",
+  "priority": "high",
+  "category": "maintenance",
+  "tags": ["pre-commit", "code-quality", "ruff", "black"],
+  "created_date": "2025-11-11T00:00:00Z",
+  "updated_date": "2025-11-11T13:00:00Z",
+  "due_date": null,
+  "estimated_hours": 8,
+  "actual_hours": 0,
+  "dependencies": [],
+  "acceptance_criteria": [
+    "All pre-commit hooks pass successfully on the entire repository.",
+    "No 'fix end of files' warnings or errors.",
+    "No 'ruff' errors (E402, B904, etc.) are reported.",
+    "Code formatting is consistent across the repository."
+  ],
+  "blockers": [],
+  "notes": "Created to track and resolve pre-commit hook failures that were bypassed during the implementation of the test data strategy.",
+  "file_path": "data/work-items/FRM-007_pre-commit-hook-cleanup.json"
+}
